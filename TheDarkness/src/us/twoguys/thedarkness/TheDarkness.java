@@ -1,5 +1,7 @@
 package us.twoguys.thedarkness;
 
-public class TheDarkness {
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class TheDarkness extends JavaPlugin{
 //test
 }
