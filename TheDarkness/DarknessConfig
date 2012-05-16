@@ -1,0 +1,34 @@
+Beacon:
+	Cost: (in beaconPoints)
+	ItemPointValues:
+		- SPIDER_EYE: 25
+		- BONES: 5
+		- 331: 10
+Darkness:
+	CheckFrequency: 20 (ticks)
+	Levels:
+		1:
+			Distance: 50 
+			Effects:
+				- message: String Example
+				- lifedrain: 2 1 
+				- torch consume: 10 (scheduled checks)
+			Mobspawns:
+				- zombie: 5
+			Mirages:
+				- house: 2
+				- diamond: 5	
+		2:
+			Distance: 100
+			Effects:
+				- kill: 10 (scheduled checks)
+			MobSpawns:
+			Mirages:
+			Inheritance:
+				- 1
+	MirageAttributes:
+		house:
+			mobTypes:
+				- zombie: 3
+
+		
