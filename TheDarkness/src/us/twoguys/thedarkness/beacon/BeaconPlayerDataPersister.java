@@ -39,6 +39,7 @@ TheDarkness plugin;
 			}
 				for(BeaconPlayerData beaconData : plugin.beaconPlayerDataHandler.getBeaconPlayerDataSet()){
 					oos.writeObject(beaconData);
+					plugin.log(beaconData.getPlayerName()+ " BeaconData was saved");
 				
 				}
 			oos.close();
@@ -70,6 +71,7 @@ TheDarkness plugin;
 				for(int i = 0; i < recordCount; i ++){
 					BeaconPlayerData beacon = (BeaconPlayerData)ois.readObject();
 					plugin.beaconPlayerDataHandler.addBeaconPlayerData(beacon);
+					plugin.log(beacon.getPlayerName()+" Beacon Data was loaded");
 				}
 				
 				plugin.log("BeaconPlayerData loaded!");

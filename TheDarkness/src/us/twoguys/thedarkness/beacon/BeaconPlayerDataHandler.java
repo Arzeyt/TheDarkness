@@ -10,40 +10,52 @@ public class BeaconPlayerDataHandler {
 
 	TheDarkness plugin;
 	
-	HashSet<BeaconPlayerData> beaconPlayerData = new HashSet<BeaconPlayerData>();
+	private HashSet<BeaconPlayerData> beaconPlayerData = new HashSet<BeaconPlayerData>();
 
 	public BeaconPlayerDataHandler(TheDarkness instance){
 		plugin=instance;
 	}
 	
-	public void addBeaconPlayerData(BeaconPlayerData data){
+	/**
+	 * 
+	 * @param data
+	 * @return True if the data was successfully added. False if the data already exists for that player.
+	 */
+	public boolean addBeaconPlayerData(BeaconPlayerData data){
+		for(BeaconPlayerData cData : getBeaconPlayerDataSet()){
+			if(data.getPlayerName().equals(cData.getPlayerName())){
+				return false;
+			}
+		}
+		
 		HashSet<BeaconPlayerData> temp = beaconPlayerData;
 		temp.add(data);
 		
 		beaconPlayerData = temp;
+		
+		return true;
 	}
 	
 	public HashSet<BeaconPlayerData> getBeaconPlayerDataSet(){
 		return beaconPlayerData;
 	}
 	
+	/**
+	 * 
+	 * @param player
+	 * If the player data does not exist, this method will instantiate a new data object. 
+	 */
 	public BeaconPlayerData getData(Player player){
-		BeaconPlayerData playerData = null;
-		if(playerDataExists(player)){
-			for(BeaconPlayerData data : getBeaconPlayerDataSet()){
-				if(data.getPlayerName() == player.getName()){
-					playerData = data;
-				}
-			}
-		}else{
-			BeaconPlayerData newData = new BeaconPlayerData(player.getName(), 0, 0);
-			plugin.log("BeaconData for "+player.getName()+" doesn't exist! Creating new save");
-			addBeaconPlayerData(newData);
-			playerData = newData;
+		for(BeaconPlayerData data : getBeaconPlayerDataSet()){
+			if(data.getPlayerName().equals(player.getName())) return data;
 		}
-		return playerData;
+		BeaconPlayerData newData = new BeaconPlayerData(player.getName(), 0, 0);
+		if(addBeaconPlayerData(newData)){
+			return newData;}
+		return null;
+		
 	}
-	
+		
 	public boolean playerDataExists(Player player){
 		for(BeaconPlayerData data : getBeaconPlayerDataSet()){
 			if(player.getName() == data.getPlayerName()){

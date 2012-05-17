@@ -6,8 +6,8 @@ public class BeaconPlayerData implements Serializable{
 
 	private static final long serialVersionUID = 6969900904950793821L;
 
-	String playerName;
-	int beaconPoints, beaconAmount;
+	private String playerName;
+	private int beaconPoints, beaconAmount;
 	
 	public BeaconPlayerData(String playerName, int beaconPoints, int beaconAmount){
 		this.playerName = playerName;

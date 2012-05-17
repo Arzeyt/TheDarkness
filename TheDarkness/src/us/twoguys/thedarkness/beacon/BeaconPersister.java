@@ -37,7 +37,7 @@ public class BeaconPersister {
 			}catch(Exception e){
 				plugin.log("No Beacons to save!");
 			}
-				for(BeaconObject beacon : plugin.beaconHandler.getBeaconSet()){
+				for(BeaconData beacon : plugin.beaconHandler.getBeaconSet()){
 					oos.writeObject(beacon);
 				
 				}
@@ -66,7 +66,7 @@ public class BeaconPersister {
 				Integer recordCount = ois.readInt();
 				
 				for(int i = 0; i < recordCount; i ++){
-					BeaconObject beacon = (BeaconObject)ois.readObject();
+					BeaconData beacon = (BeaconData)ois.readObject();
 					plugin.beaconHandler.addBeacon(beacon);
 				}
 				
