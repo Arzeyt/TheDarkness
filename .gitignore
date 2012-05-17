@@ -24,3 +24,13 @@ TheDarkness/bin/us/twoguys/thedarkness/commands/BeaconStats.class
 TheDarkness/bin/us/twoguys/thedarkness/commands/GiveBeacon.class
 
 TheDarkness/bin/us/twoguys/thedarkness/mechanics/BoundaryHandler.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconData.class
+
+TheDarkness/bin/us/twoguys/thedarkness/visualization/BeaconVis.class
+
+TheDarkness/bin/us/twoguys/thedarkness/visualization/PlayerBlock.class
+
+TheDarkness/bin/us/twoguys/thedarkness/visualization/VisualizerCore.class
+
+TheDarkness/runnable.jardesc
