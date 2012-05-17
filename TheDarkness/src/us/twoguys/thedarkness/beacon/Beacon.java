@@ -10,11 +10,11 @@ public class Beacon implements Serializable{
 	int x, y, z;
 	String worldName;
 	
-	public Beacon(String worldName, Location loc){
+	public Beacon(Location loc){
 		this.x = loc.getBlockX();
 		this.y = loc.getBlockY();
 		this.z = loc.getBlockZ();
 		
-		this.worldName = worldName;
+		this.worldName = loc.getWorld().getName();
 	}
 }
