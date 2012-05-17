@@ -10,6 +10,7 @@ import us.twoguys.thedarkness.beacon.BeaconPlayerDataHandler;
 import us.twoguys.thedarkness.beacon.BeaconPlayerDataPersister;
 import us.twoguys.thedarkness.commands.BeaconStats;
 import us.twoguys.thedarkness.commands.GiveBeacon;
+import us.twoguys.thedarkness.visualization.VisualizerCore;
 
 public class TheDarkness extends JavaPlugin{
 
@@ -22,6 +23,7 @@ public class TheDarkness extends JavaPlugin{
 	public BeaconPersister beaconPersister = new BeaconPersister(this);
 	public BeaconPlayerDataHandler beaconPlayerDataHandler = new BeaconPlayerDataHandler(this);
 	public BeaconPlayerDataPersister beaconPlayerDataPersister = new BeaconPlayerDataPersister(this);
+	public VisualizerCore visualizerCore = new VisualizerCore(this);
 	
 	//Listeners
 	

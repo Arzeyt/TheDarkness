@@ -2,47 +2,16 @@ package us.twoguys.thedarkness.visualization;
 
 import java.util.HashSet;
 
-import org.bukkit.Chunk;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import us.twoguys.thedarkness.TheDarkness;
-
-public class VisualizerCore {
+public class CopyOfVisualizerCore {
 
 	HashSet<PlayerBlock> blocks = new HashSet<PlayerBlock>();
-	HashSet<Chunk> chunks = new HashSet<Chunk>();
 	
-	TheDarkness plugin;
 	
-	public VisualizerCore(TheDarkness instance){
-		this.plugin = instance;
-	}
-	
-	public void visualizeBlock(Player player, Location loc, Material material){
-		saveChunk(loc.getChunk());
-		player.sendBlockChange(loc, material, (byte) 0);
-	}
-	
-	public void revertChunk(Chunk chunk){
-		chunk.getWorld().refreshChunk(chunk.getX(), chunk.getZ());
-	}
-	
-	private void saveChunk(Chunk chunk){
-		for(Chunk savedChunk : getChunkSet()){
-			if(savedChunk == chunk) return;
-		}
-		HashSet<Chunk> temp = new HashSet<Chunk>();
-		temp.add(chunk);
-		chunks = temp;
-	}
-	
-	private HashSet<Chunk> getChunkSet(){
-		return chunks;
-	}
-	
-	/*
 	public void revertBlock(Player player, Block block){
 		for(PlayerBlock pb : getPlayerData(player)){
 			player.sendBlockChange(pb.getBlock().getLocation(), block.getType(), (byte) 0);
@@ -76,5 +45,4 @@ public class VisualizerCore {
 	private HashSet<PlayerBlock> getBlocks(){
 		return blocks;
 	}
-	*/
 }

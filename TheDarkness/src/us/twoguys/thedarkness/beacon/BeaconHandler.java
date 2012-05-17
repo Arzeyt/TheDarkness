@@ -26,6 +26,10 @@ public class BeaconHandler {
 		beacons = temp;
 	}
 	
+	public void createBeacon(BeaconData beacon){
+		
+	}
+	
 	public void removeBeacon(BeaconData beacon){
 		HashSet<BeaconData> temp = beacons;
 		temp.remove(beacon);
