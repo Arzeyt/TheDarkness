@@ -2,3 +2,10 @@ name: TheDarkness
 version: 0.1
 authors: [Arzeyt, Malikk]
 main: us.twoguys.thedarkness.TheDarkness
+commands:
+    giveBeacon:
+        description: Gives beacons to a player
+        usage: /giveBeacon <playerName> <amount>
+    beaconStats:
+        description: Shows beacon stats
+        usage: /beaconStats

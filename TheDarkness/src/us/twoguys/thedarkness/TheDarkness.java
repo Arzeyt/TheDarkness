@@ -8,6 +8,8 @@ import us.twoguys.thedarkness.beacon.BeaconHandler;
 import us.twoguys.thedarkness.beacon.BeaconPersister;
 import us.twoguys.thedarkness.beacon.BeaconPlayerDataHandler;
 import us.twoguys.thedarkness.beacon.BeaconPlayerDataPersister;
+import us.twoguys.thedarkness.commands.BeaconStats;
+import us.twoguys.thedarkness.commands.GiveBeacon;
 
 public class TheDarkness extends JavaPlugin{
 
@@ -28,6 +30,8 @@ public class TheDarkness extends JavaPlugin{
 		beaconPersister.load();
 		beaconPlayerDataPersister.load();
 		
+		loadCommandExecutors();
+		
 		log("enabled");
 		
 	}
@@ -40,5 +44,14 @@ public class TheDarkness extends JavaPlugin{
 
 	public void log(String message){
 		logger.info("[TheDarkness] " + message);
+	}
+	
+	public void loadCommandExecutors(){
+		GiveBeacon giveBeacon = new GiveBeacon(this);
+		this.getCommand("giveBeacon").setExecutor(giveBeacon);
+		
+		BeaconStats beaconStats = new BeaconStats(this);
+		this.getCommand("beaconStats").setExecutor(beaconStats);
+		
 	}
 }

@@ -32,6 +32,8 @@ public class BeaconPlayerDataHandler {
 			if(data.getPlayerName() == player.getName());
 			return data;
 		}
-		return null;
+		BeaconPlayerData newData = new BeaconPlayerData(player.getName(), 0, 0);
+		return newData;
 	}
+	
 }
