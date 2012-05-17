@@ -6,3 +6,21 @@ TheDarkness/bin/us/twoguys/thedarkness/beacon/Beacon.class
 TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconPersister.class
 
 TheDarkness/bin/us/twoguys/thedarkness/visualization/Visualizer.class
+
+TheDarkness/bin/us/twoguys/thedarkness/Config.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconHandler.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconObject.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconPlayerData.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconPlayerDataHandler.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconPlayerDataPersister.class
+
+TheDarkness/bin/us/twoguys/thedarkness/commands/BeaconStats.class
+
+TheDarkness/bin/us/twoguys/thedarkness/commands/GiveBeacon.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/BoundaryHandler.class

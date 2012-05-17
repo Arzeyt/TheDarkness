@@ -47,6 +47,10 @@ public class TheDarkness extends JavaPlugin{
 		logger.info("[TheDarkness] " + message);
 	}
 	
+	public void logSevere(String message){
+		logger.severe("[TheDarkness] " + message);
+	}
+	
 	public void loadCommandExecutors(){
 		GiveBeacon giveBeacon = new GiveBeacon(this);
 		this.getCommand("giveBeacon").setExecutor(giveBeacon);
