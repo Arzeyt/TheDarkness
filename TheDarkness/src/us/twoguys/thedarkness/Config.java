@@ -111,4 +111,15 @@ public class Config {
 	public int getPlayerCheckFreq(){
 		return plugin.getConfig().getInt("Darkness.PlayerCheckFrequency");
 	}
+	
+	public ArrayList<Class<?>> getEffectClasses(int level){
+		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+		for (String s: plugin.getConfig().getStringList("Darkness.Levels." + level + ".Effects")){
+			String[] split = s.split(":");
+			//TODO add class locations for each effect.
+			
+		}
+		
+		return classes;
+	}
 }
