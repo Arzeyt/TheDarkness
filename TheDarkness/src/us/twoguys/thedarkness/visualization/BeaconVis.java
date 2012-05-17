@@ -39,7 +39,7 @@ public class BeaconVis {
 			z ++;
 		}
 		for(Block b : blocks){
-			plugin.visualizerCore.visualizeBlock(player, b. , Material.GLOWSTONE);
+			plugin.visualizerCore.visualizeBlock(player, b.getLocation() , Material.GLOWSTONE);
 		}
 		
 	}
