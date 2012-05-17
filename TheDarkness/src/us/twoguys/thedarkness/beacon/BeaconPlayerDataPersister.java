@@ -10,17 +10,16 @@ import java.io.ObjectOutputStream;
 
 import us.twoguys.thedarkness.TheDarkness;
 
-public class BeaconPersister {
-
-	TheDarkness plugin;
+public class BeaconPlayerDataPersister {
+TheDarkness plugin;
 	
-	public BeaconPersister(TheDarkness instance){
+	public BeaconPlayerDataPersister(TheDarkness instance){
 		this.plugin = instance;
 	}
 	
 	public void save(){
 		//create a new File
-		File saveFile = new File("plugins"+File.separator+"TheDarkness"+File.separator+"Beacons.dat");
+		File saveFile = new File("plugins"+File.separator+"TheDarkness"+File.separator+"BeaconPlayerData.dat");
 		
 		try {
 			saveFile.createNewFile();
@@ -29,23 +28,23 @@ public class BeaconPersister {
 		}
 		
 		try{
-			FileOutputStream fos = new FileOutputStream("plugins"+File.separator+"TheDarkness"+File.separator+"Beacons.dat");
+			FileOutputStream fos = new FileOutputStream("plugins"+File.separator+"TheDarkness"+File.separator+"BeaconPlayerData.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			try{
-				oos.writeInt(plugin.beaconHandler.getBeaconSet().size());
+				oos.writeInt(plugin.beaconPlayerDataHandler.getBeaconPlayerDataSet().size());
 			}catch(Exception e){
-				plugin.log("No Beacons to save!");
+				plugin.log("No PlayerData to save!");
 			}
-				for(BeaconObject beacon : plugin.beaconHandler.getBeaconSet()){
-					oos.writeObject(beacon);
+				for(BeaconPlayerData beaconData : plugin.beaconPlayerDataHandler.getBeaconPlayerDataSet()){
+					oos.writeObject(beaconData);
 				
 				}
 			oos.close();
-			plugin.log("Beacons Saved");
+			plugin.log("PlayerData Saved");
 		}catch(Exception e){
 			e.printStackTrace();
-			plugin.log("Beacons did not save!");
+			plugin.log("PlayerData did not save!");
 		}
 		
 				
@@ -53,7 +52,7 @@ public class BeaconPersister {
 	
 	public void load(){
 		
-		File saveFile = new File("plugins"+File.separator+"TheDarkness"+File.separator+"Beacons.dat");
+		File saveFile = new File("plugins"+File.separator+"TheDarkness"+File.separator+"BeaconPlayerData.dat");
 		
 		if(saveFile.exists()){
 			FileInputStream fis = null;
@@ -66,19 +65,21 @@ public class BeaconPersister {
 				Integer recordCount = ois.readInt();
 				
 				for(int i = 0; i < recordCount; i ++){
-					BeaconObject beacon = (BeaconObject)ois.readObject();
-					plugin.beaconHandler.addBeacon(beacon);
+					BeaconPlayerData beacon = (BeaconPlayerData)ois.readObject();
+					plugin.beaconPlayerDataHandler.addBeaconPlayerData(beacon);
 				}
 				
-				plugin.log("Beacons loaded!");
+				plugin.log("BeaconPlayerData loaded!");
 					
 			}catch(FileNotFoundException e){
 				plugin.log("Could not locate data file... ");
 				e.printStackTrace();
 			}catch(IOException e){
 				plugin.log("IOException while trying to read data file");
+				e.printStackTrace();
 			}catch(ClassNotFoundException e){
 				plugin.log("Could not find class to load");
+				e.printStackTrace();
 			}finally{
 				try{
 					ois.close();
@@ -89,5 +90,4 @@ public class BeaconPersister {
 		}
 	}
 }
-	
 

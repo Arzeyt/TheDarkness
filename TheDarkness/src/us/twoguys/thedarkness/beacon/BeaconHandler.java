@@ -8,7 +8,7 @@ public class BeaconHandler {
 
 	TheDarkness plugin;
 	
-	HashSet<Beacon> beacons = new HashSet<Beacon>();
+	HashSet<BeaconObject> beacons = new HashSet<BeaconObject>();
 	
 	public BeaconHandler(TheDarkness instance){
 		plugin=instance;
@@ -18,23 +18,24 @@ public class BeaconHandler {
 	 * 
 	 * @param loc - the location of the new beacon
 	 */
-	public void addBeacon(Beacon beacon){
+	public void addBeacon(BeaconObject beacon){
 		
-		HashSet<Beacon> temp = beacons;
+		HashSet<BeaconObject> temp = beacons;
 		
 		temp.add(beacon);
 		beacons = temp;
 	}
 	
-	public void removeBeacon(Beacon beacon){
-		HashSet<Beacon> temp = beacons;
+	public void removeBeacon(BeaconObject beacon){
+		HashSet<BeaconObject> temp = beacons;
 		temp.remove(beacon);
 		
 		beacons = temp;
 	}
 	
-	public HashSet<Beacon> getBeaconSet(){
+	public HashSet<BeaconObject> getBeaconSet(){
 		return beacons;
 	}
 	
+
 }
