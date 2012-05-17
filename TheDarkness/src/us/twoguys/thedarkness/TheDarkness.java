@@ -39,6 +39,7 @@ public class TheDarkness extends JavaPlugin{
 	public void onDisable(){
 		
 		beaconPersister.save();
+		beaconPlayerDataPersister.save();
 		log("disabled");
 	}
 

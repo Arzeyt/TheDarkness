@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.beacon.BeaconPlayerData;
 
@@ -27,12 +26,27 @@ public class GiveBeacon implements CommandExecutor{
 		String playerName = args[0];
 		int amount = Integer.parseInt(args[1]);
 		
-		BeaconPlayerData beaconPlayerData = plugin.beaconPlayerDataHandler.getData(Bukkit.getServer().getPlayer(playerName));
-		beaconPlayerData.addBeaconAmount(amount);
-		
-		sender.sendMessage(ChatColor.GREEN + "You have given " + playerName + " " + amount + " beacons");
+		if(plugin.beaconPlayerDataHandler.playerDataExists(Bukkit.getPlayer(playerName))){
+			BeaconPlayerData beaconPlayerData = plugin.beaconPlayerDataHandler.getData(Bukkit.getPlayer(playerName));
+			beaconPlayerData.addBeaconAmount(amount);
+			
+			sender.sendMessage(ChatColor.GREEN + "You have given " + playerName + " " + amount + " beacons");
+		}else{
+			BeaconPlayerData beaconPlayerData = new BeaconPlayerData(playerName, 0, amount);
+			plugin.beaconPlayerDataHandler.addBeaconPlayerData(beaconPlayerData);
+			
+			sender.sendMessage(ChatColor.GREEN+"You have given " +playerName+" " + amount + " beacons. This is his first time!");
+		}
+	
 		Bukkit.getServer().getPlayer(playerName).sendMessage(ChatColor.GREEN+"You have recieved "+amount+" beacons");
 		return true;
+
+		
+		
+		
+		
+		
+		
 	}
 
 }

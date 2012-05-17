@@ -28,12 +28,28 @@ public class BeaconPlayerDataHandler {
 	}
 	
 	public BeaconPlayerData getData(Player player){
-		for(BeaconPlayerData data : getBeaconPlayerDataSet()){
-			if(data.getPlayerName() == player.getName());
-			return data;
+		BeaconPlayerData playerData = null;
+		if(playerDataExists(player)){
+			for(BeaconPlayerData data : getBeaconPlayerDataSet()){
+				if(data.getPlayerName() == player.getName()){
+					playerData = data;
+				}
+			}
+		}else{
+			BeaconPlayerData newData = new BeaconPlayerData(player.getName(), 0, 0);
+			plugin.log("BeaconData for "+player.getName()+" doesn't exist! Creating new save");
+			addBeaconPlayerData(newData);
+			playerData = newData;
 		}
-		BeaconPlayerData newData = new BeaconPlayerData(player.getName(), 0, 0);
-		return newData;
+		return playerData;
 	}
 	
+	public boolean playerDataExists(Player player){
+		for(BeaconPlayerData data : getBeaconPlayerDataSet()){
+			if(player.getName() == data.getPlayerName()){
+				return true;
+			}
+		}
+		return false;
+	}
 }

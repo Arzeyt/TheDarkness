@@ -32,6 +32,7 @@ TheDarkness plugin;
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			try{
+				plugin.log("Items to save: "+plugin.beaconPlayerDataHandler.getBeaconPlayerDataSet().size());
 				oos.writeInt(plugin.beaconPlayerDataHandler.getBeaconPlayerDataSet().size());
 			}catch(Exception e){
 				plugin.log("No PlayerData to save!");
@@ -63,6 +64,8 @@ TheDarkness plugin;
 				ois = new ObjectInputStream(fis);
 				
 				Integer recordCount = ois.readInt();
+				plugin.log("Items to read: "+recordCount);
+				
 				
 				for(int i = 0; i < recordCount; i ++){
 					BeaconPlayerData beacon = (BeaconPlayerData)ois.readObject();

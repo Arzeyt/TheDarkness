@@ -25,7 +25,7 @@ public class BeaconStats implements CommandExecutor{
 			int beacons = plugin.beaconPlayerDataHandler.getData((Player)sender).getBeaconAmount();
 			int points = plugin.beaconPlayerDataHandler.getData((Player)sender).getBeaconPoints();
 			
-			sender.sendMessage("Beacons: "+ChatColor.GREEN+beacons +ChatColor.GRAY+ "\n Points: " +ChatColor.GREEN+points);
+			sender.sendMessage("Beacons: "+ChatColor.GREEN+beacons +ChatColor.WHITE+ " Points: " +ChatColor.GREEN+points);
 			
 			
 		}catch(NullPointerException e){
