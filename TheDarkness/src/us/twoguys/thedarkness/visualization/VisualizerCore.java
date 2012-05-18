@@ -43,8 +43,8 @@ public class VisualizerCore {
 		}
 		return playerChunkSet;
 	}
+	
 	/**
-	 * 
 	 * @param player - The player who's chunks will be reverted
 	 */
 	@SuppressWarnings("unchecked")
@@ -57,8 +57,9 @@ public class VisualizerCore {
 	         
 	}
 	/**
-	 * @Description - Forces a chunk update for every player within veiw distance of this chunk.
+	 * @Description - Forces a chunk update for every player within view distance of this chunk.
 	 */
+	@SuppressWarnings("unchecked")
 	public void revertChunk(Chunk chunk){
 				
         Chunk currentChunk = chunk;
@@ -75,16 +76,11 @@ public class VisualizerCore {
                 ep.chunkCoordIntPairQueue.add(new ChunkCoordIntPair(currentChunk.getX(), currentChunk.getZ()));
             }
         }       
-        
-		/*EntityPlayer ep = ((CraftPlayer) player).getHandle();
-		ep.chunkSendQueue.add(new ChunkCoordIntPair(x, z));
-		*/
-		
 	}
 	
 	private void saveChunk(Player player, Chunk chunk){
 		for(ChunkPlayer savedChunk : getChunkSet()){
-			if(savedChunk.getChunk() == chunk) return;
+			if(savedChunk.getChunk() == chunk && savedChunk.getPlayer().equals(player.getName())) return;
 		}
 		HashSet<ChunkPlayer> temp = new HashSet<ChunkPlayer>();
 		ChunkPlayer cp = new ChunkPlayer(player, chunk);

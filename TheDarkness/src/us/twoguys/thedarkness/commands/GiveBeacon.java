@@ -27,9 +27,9 @@ public class GiveBeacon implements CommandExecutor{
 		int amount = Integer.parseInt(args[1]);
 		
 		BeaconPlayerData beaconPlayerData = plugin.beaconPlayerDataHandler.getData(Bukkit.getPlayer(playerName));
-		beaconPlayerData.addBeaconAmount(amount);
+		beaconPlayerData.addPoints(amount);
 		
-		sender.sendMessage(ChatColor.GREEN + "You have given " + playerName + " " + amount + " beacons");
+		sender.sendMessage(ChatColor.GREEN + "You have given " + playerName + " " + amount + " beaconPoints");
 
 	
 		Bukkit.getServer().getPlayer(playerName).sendMessage(ChatColor.GREEN+"You have recieved "+amount+" beacons");
