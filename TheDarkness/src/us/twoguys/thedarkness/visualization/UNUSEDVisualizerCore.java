@@ -7,20 +7,20 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public class CopyOfVisualizerCore {
+public class UNUSEDVisualizerCore {
 
-	HashSet<PlayerBlock> blocks = new HashSet<PlayerBlock>();
+	HashSet<UNUSEDBlockPlayer> blocks = new HashSet<UNUSEDBlockPlayer>();
 	
 	
 	public void revertBlock(Player player, Block block){
-		for(PlayerBlock pb : getPlayerData(player)){
+		for(UNUSEDBlockPlayer pb : getPlayerData(player)){
 			player.sendBlockChange(pb.getBlock().getLocation(), block.getType(), (byte) 0);
 		}
 	}
 	
-	public HashSet<PlayerBlock> getPlayerData(Player player){
-		HashSet<PlayerBlock> playerBlocks = new HashSet<PlayerBlock>();
-		for(PlayerBlock pb : getBlocks()){
+	public HashSet<UNUSEDBlockPlayer> getPlayerData(Player player){
+		HashSet<UNUSEDBlockPlayer> playerBlocks = new HashSet<UNUSEDBlockPlayer>();
+		for(UNUSEDBlockPlayer pb : getBlocks()){
 			if(pb.getPlayer().getName().equals(player.getName())){
 				playerBlocks.add(pb);
 			}
@@ -29,8 +29,8 @@ public class CopyOfVisualizerCore {
 	}
 	
 	private void saveBlock(Player player, Block block){
-		PlayerBlock pbtemp = new PlayerBlock(player, block);
-		PlayerBlock pb = new PlayerBlock(player, block);
+		UNUSEDBlockPlayer pbtemp = new UNUSEDBlockPlayer(player, block);
+		UNUSEDBlockPlayer pb = new UNUSEDBlockPlayer(player, block);
 		
 		if(pbtemp.getBlock() == pb.getBlock() && pbtemp.getPlayer() == pb.getPlayer()){
 			return;
@@ -42,7 +42,7 @@ public class CopyOfVisualizerCore {
 		saveBlock(player, Bukkit.getWorld(loc.getWorld().getName()).getBlockAt(loc));
 	}
 	
-	private HashSet<PlayerBlock> getBlocks(){
+	private HashSet<UNUSEDBlockPlayer> getBlocks(){
 		return blocks;
 	}
 }

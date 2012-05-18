@@ -3,13 +3,13 @@ package us.twoguys.thedarkness.visualization;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public class PlayerBlock {
+public class UNUSEDBlockPlayer {
 
 	private Player player;
 	private Block block;
 	private boolean isDead;
 	
-	public PlayerBlock(Player player, Block block){
+	public UNUSEDBlockPlayer(Player player, Block block){
 		this.player = player;
 		this.block = block;
 

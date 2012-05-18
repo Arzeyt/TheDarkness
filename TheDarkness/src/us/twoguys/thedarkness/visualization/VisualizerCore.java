@@ -18,7 +18,6 @@ import us.twoguys.thedarkness.TheDarkness;
 
 public class VisualizerCore {
 
-	HashSet<PlayerBlock> blocks = new HashSet<PlayerBlock>();
 	HashSet<ChunkPlayer> chunks = new HashSet<ChunkPlayer>();
 	
 	TheDarkness plugin;
@@ -44,6 +43,16 @@ public class VisualizerCore {
 		return playerChunkSet;
 	}
 	
+	public ChunkPlayer getChunkPlayer(Chunk chunk, Player player){
+		for(ChunkPlayer cp : getChunkSet()){
+			if(cp.getChunk() == chunk && cp.getPlayer() == player){
+				return cp;
+			}
+		}
+		plugin.logSevere("getChunkPlayer returned NULL");
+		return null;
+	}
+	
 	/**
 	 * @param player - The player who's chunks will be reverted
 	 */
@@ -51,13 +60,15 @@ public class VisualizerCore {
 	public void revertChunks(Player player){
 		EntityPlayer ep = ((CraftPlayer)player).getHandle();
 		for(Chunk chunk : getPlayerChunkSet(player)){
-			
+			disableChunkPlayerItem(getChunkPlayer(chunk, player));
 			ep.chunkCoordIntPairQueue.add(new ChunkCoordIntPair(chunk.getX(), chunk.getZ()));
 		}
 	         
 	}
 	/**
 	 * @Description - Forces a chunk update for every player within view distance of this chunk.
+	 * @Warning - This method may caused visualization errors, because reloaded chunks are not scheduled
+	 * for cleanup.
 	 */
 	@SuppressWarnings("unchecked")
 	public void revertChunk(Chunk chunk){
@@ -92,4 +103,25 @@ public class VisualizerCore {
 		return chunks;
 	}
 	
+	/**
+	 * Cleans up disabled array elements. 
+	 */
+	public void cleanUp(){
+		HashSet<ChunkPlayer> temp = new HashSet<ChunkPlayer>();
+		for(ChunkPlayer cp : getChunkSet()){
+			if(cp.isDisabled() == true){
+				temp.remove(cp);
+			}
+		}
+		this.chunks = temp;
+		plugin.log("Cleaned up "+temp.size()+" ChunkPlayers");
+	}
+	
+	private void disableChunkPlayerItem(ChunkPlayer chunkPlayer){
+		for(ChunkPlayer cp : getChunkSet()){
+			if(chunkPlayer == cp){
+				cp.disable();
+			}
+		}
+	}
 }

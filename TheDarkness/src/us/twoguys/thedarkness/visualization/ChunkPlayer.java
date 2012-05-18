@@ -20,5 +20,5 @@ public class ChunkPlayer {
 	
 	public boolean isDisabled(){return isDisabled;}
 	
-	public void disable(boolean b){isDisabled = b;}
+	public void disable(){isDisabled = true;}
 }

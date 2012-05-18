@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="Library/bukkit-1.2.5-R1.3.jar"/>
 	<classpathentry kind="lib" path="Library/craftbukkit-1.2.5-R1.3.jar"/>
+	<classpathentry kind="lib" path="Library/jnbt-1.1.jar"/>
+	<classpathentry kind="lib" path="Library/WorldEdit.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
