@@ -2,6 +2,7 @@ package us.twoguys.thedarkness;
 
 import java.util.logging.Logger;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import us.twoguys.thedarkness.beacon.BeaconHandler;
@@ -10,6 +11,7 @@ import us.twoguys.thedarkness.beacon.BeaconPlayerDataHandler;
 import us.twoguys.thedarkness.beacon.BeaconPlayerDataPersister;
 import us.twoguys.thedarkness.commands.BeaconStats;
 import us.twoguys.thedarkness.commands.GiveBeacon;
+import us.twoguys.thedarkness.listeners.BeaconListener;
 import us.twoguys.thedarkness.visualization.VisualizerCore;
 
 public class TheDarkness extends JavaPlugin{
@@ -27,12 +29,14 @@ public class TheDarkness extends JavaPlugin{
 	
 	//Listeners
 	
+	
 	public void onEnable(){
 		config.loadConfiguration();
 		beaconPersister.load();
 		beaconPlayerDataPersister.load();
 		
 		loadCommandExecutors();
+		loadListeners();
 		
 		log("enabled");
 		
@@ -51,6 +55,15 @@ public class TheDarkness extends JavaPlugin{
 	
 	public void logSevere(String message){
 		logger.severe("[TheDarkness] " + message);
+	}
+	
+	public void loadListeners(){
+		PluginManager pm = this.getServer().getPluginManager();
+		
+		BeaconListener beaconListener = new BeaconListener(this);
+		pm.registerEvents(beaconListener, this);
+		
+		log("Listeners Loaded");
 	}
 	
 	public void loadCommandExecutors(){

@@ -31,6 +31,7 @@ public class BeaconStats implements CommandExecutor{
 		}catch(NullPointerException e){
 			sender.sendMessage(ChatColor.RED+"You have no beacons, or beacon points");
 		}
+		
 		return true;
 		
 	}
