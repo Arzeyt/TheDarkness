@@ -13,7 +13,8 @@ import us.twoguys.thedarkness.beacon.BeaconData;
 public class BeaconVis {
 
 	private Location loc;
-	private int height, interval;
+	private int height = 255;
+	private int interval = 0;
 	private Player player;
 	TheDarkness plugin;
 	
@@ -37,7 +38,7 @@ public class BeaconVis {
 		int y = 0;
 		Block block;
 		
-		while(y < 255){
+		while(y < height){
 			block = loc.getWorld().getBlockAt(x, y, z);
 			blocks.add(block);
 			y ++;
@@ -45,8 +46,6 @@ public class BeaconVis {
 		for(Block b : blocks){
 			plugin.visualizerCore.visualizeBlock(player, b.getLocation() , Material.GLOWSTONE);
 		}
-		
-		plugin.log("Visualize in beaconVis");
 	}
 	
 	public void visualize(BeaconData beacon){

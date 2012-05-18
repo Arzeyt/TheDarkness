@@ -27,8 +27,8 @@ public class BeaconListener implements Listener{
 		if(c == 1){
 			BeaconVis beaconVis = new BeaconVis(plugin, player, block.getLocation());
 			beaconVis.visualize();
-			
 			c = 2;
+			
 		}else if(c==2){
 			plugin.visualizerCore.revertChunks(player);
 			c = 1;
