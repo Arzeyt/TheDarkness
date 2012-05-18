@@ -29,26 +29,26 @@ public class Config {
 		plugin.getConfig().addDefault("Darkness.PlayerCheckFrequency", 20);
 		
 		//level1
-		String[] effects1 = {"Message:Yousenseanevilpresence", "TorchConsume:200"};
+		String[] effects1 = {"Message: You sense an evil presence", "TorchConsume: 200"};
 		String[] mobSpawns1 = {"ZOMBIE:10"};
 		String[] mirages1 = {"House:2", "Diamond:20"};
 		
-		plugin.getConfig().addDefault("Darkness.Level_1.DefaultEffectCheckFrequency", 20);
-		plugin.getConfig().addDefault("Darkness.Level_1.Distance", 25);
-		plugin.getConfig().addDefault("Darkness.Level_1.Effects", effects1);
-		plugin.getConfig().addDefault("Darkness.Level_1.MobSpawns", mobSpawns1);
-		plugin.getConfig().addDefault("Darkness.Level_1.Mirages", mirages1);
+		plugin.getConfig().addDefault("Darkness.Levels.1.DefaultEffectCheckFrequency", 20);
+		plugin.getConfig().addDefault("Darkness.Levels.1.Distance", 25);
+		plugin.getConfig().addDefault("Darkness.Levels.1.Effects", effects1);
+		plugin.getConfig().addDefault("Darkness.Levels.1.MobSpawns", mobSpawns1);
+		plugin.getConfig().addDefault("Darkness.Levels.1.Mirages", mirages1);
 		
 		//level2
 		String[] effects2 = {"Message: The Darkness grows stronger around you", "LifeDrain: 1 80", "TorchConsume: 100"};
 		String[] mobSpawns2 = {"ZOMBIE: 100", "SPIDER: 10"};
 		String[] mirages2 = {"House: 10", "Diamond: 50"};
 		
-		plugin.getConfig().addDefault("Darkness.Level_2.DefaultEffectCheckFrequency", 20);
-		plugin.getConfig().addDefault("Darkness.Level_2.Distance", 50);
-		plugin.getConfig().addDefault("Darkness.Level_2.Effects", effects2);
-		plugin.getConfig().addDefault("Darkness.Level_2.MobSpawns", mobSpawns2);
-		plugin.getConfig().addDefault("Darkness.Level_2.Mirages", mirages2);
+		plugin.getConfig().addDefault("Darkness.Levels.2.DefaultEffectCheckFrequency", 20);
+		plugin.getConfig().addDefault("Darkness.Levels.2.Distance", 50);
+		plugin.getConfig().addDefault("Darkness.Levels.2.Effects", effects2);
+		plugin.getConfig().addDefault("Darkness.Levels.2.MobSpawns", mobSpawns2);
+		plugin.getConfig().addDefault("Darkness.Levels.2.Mirages", mirages2);
 		
 		//mirage attributes
 		String[] houseMobTypes = {"ZOMBIE: 3"};
@@ -58,8 +58,10 @@ public class Config {
 		plugin.getConfig().options().copyDefaults(true);
 		plugin.saveConfig();
 		
-		//setLevels();
-		//setItemPointValues();
+		//Set Config Resources
+		setLevels();
+		setItemPointValues();
+		
 	}
 	
 	public void configError(String path){
@@ -67,40 +69,60 @@ public class Config {
 	}
 	
 	public void setLevels(){
+		
+		plugin.reloadConfig();
+		
+		plugin.debug("setting level arrays");
+		
 		int counter = 1;
 		
 		//Loop through levels
 		while (plugin.getConfig().contains("Darkness.Levels." + counter)){
 			
+			plugin.debug("Level " + counter + "_______________");
+			
 			//Set Distance Array
-			levelDistances.add(plugin.getConfig().getInt("Darkness.Levels." + counter));
+			levelDistances.add(plugin.getConfig().getInt("Darkness.Levels." + counter + ".Distance"));
 			
 			//Set Effects and Messages Arrays
 			HashMap<Class<?>, ArrayList<Integer>> effects = new HashMap<Class<?>, ArrayList<Integer>>();
 			ArrayList<Integer> ints = new ArrayList<Integer>();
 			boolean messageSet = false;
-			int pCounter = 1;
+			
+			plugin.debug("Check Effects");
 			
 			for (String s: plugin.getConfig().getStringList("Darkness.Levels." + counter + ".Effects")){
-				String[] split = s.split(":");
+				String[] split = s.split(": ");
 				String[] splitAll = s.split(" ");
 				
+				int pCounter = 1;
+				
+				plugin.debug("Effect Name: " + split[0]);
+				
 				//Set Messages Array
-				if (split[0].equalsIgnoreCase("Messages") && messageSet == false){
+				if (split[0].equalsIgnoreCase("Message") && messageSet == false){
 					levelMessages.add(split[1]);
 					messageSet = true;
+					plugin.debug("Added Message: " + split[1]);
 				//Set Effects Array
 				}else{
+					
 					try {
-						Class<?> c = Class.forName("us.twoguys.thedarkness.mechanics.effects." + s);
+						Class<?> c = Class.forName("us.twoguys.thedarkness.mechanics.effects." + split[0]);
 						
-						while (pCounter <= splitAll.length){
+						plugin.debug("Found Class: us.twoguys.thedarkness.mechanics.effects." + split[0]);
+						
+						while (pCounter < splitAll.length){
 							ints.add(Integer.parseInt(splitAll[pCounter]));
+							plugin.debug("Adding to Int array: " + splitAll[pCounter]);
+							pCounter++;
 						}
 						
 						effects.put(c, ints);
+						plugin.debug("Successully added Effect class and settings to hashMap");
 					} catch (ClassNotFoundException e) {
 						configError("Darkness.Levels." + counter + ".Effects." + split[0]);
+						continue;
 					}
 				}
 			}
@@ -111,16 +133,21 @@ public class Config {
 			}
 			
 			levelEffects.add(effects);
+			plugin.debug("Added all effects for this level");
 			
 			//Set Mirages Array
 			
 			//Set Mob Spawn Array
 			
 			counter++;
+			plugin.debug("Counter++");
 		}
 	}
 	
 	public void setItemPointValues(){
+		
+		plugin.reloadConfig();
+		
 		for (String s: plugin.getConfig().getStringList("Beacon.ItemPointValues")){
 			String[] split = s.split(": ");
 			

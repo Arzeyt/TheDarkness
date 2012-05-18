@@ -32,6 +32,7 @@ public class TheDarkness extends JavaPlugin{
 	
 	public void onEnable(){
 		config.loadConfiguration();
+		
 		beaconPersister.load();
 		beaconPlayerDataPersister.load();
 		
@@ -51,6 +52,10 @@ public class TheDarkness extends JavaPlugin{
 
 	public void log(String message){
 		logger.info("[TheDarkness] " + message);
+	}
+	
+	public void debug(String message){
+		logger.warning("[DEBUG] " + message);
 	}
 	
 	public void logSevere(String message){

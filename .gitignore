@@ -38,3 +38,11 @@ TheDarkness/runnable.jardesc
 TheDarkness/bin/us/twoguys/thedarkness/listeners/BeaconListener.class
 
 TheDarkness/bin/us/twoguys/thedarkness/visualization/CopyOfVisualizerCore.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Effect.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/LifeDrain.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/TorchConsume.class
+
+TheDarkness/bin/us/twoguys/thedarkness/visualization/ChunkPlayer.class
