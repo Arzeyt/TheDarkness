@@ -21,10 +21,13 @@ TheDarkness plugin;
 		//create a new File
 		File saveFile = new File("plugins"+File.separator+"TheDarkness"+File.separator+"BeaconPlayerData.dat");
 		
-		try {
-			saveFile.createNewFile();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if (!saveFile.exists()){
+			try {
+				new File("plugins" + File.separator + "TheDarkness").mkdir();
+				saveFile.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 		try{

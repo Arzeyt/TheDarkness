@@ -46,3 +46,17 @@ TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/LifeDrain.class
 TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/TorchConsume.class
 
 TheDarkness/bin/us/twoguys/thedarkness/visualization/ChunkPlayer.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/mirages/Diamond.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/mirages/House.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/mirages/Mirage.class
+
+TheDarkness/bin/us/twoguys/thedarkness/schematics/SchematicReader.class
+
+TheDarkness/bin/us/twoguys/thedarkness/schematics/SchematicReader2.class
+
+TheDarkness/bin/us/twoguys/thedarkness/visualization/UNUSEDBlockPlayer.class
+
+TheDarkness/bin/us/twoguys/thedarkness/visualization/UNUSEDVisualizerCore.class
