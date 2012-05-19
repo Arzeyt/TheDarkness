@@ -1,4 +1,10 @@
 
+TheDarkness/.classpath
+
+TheDarkness/.project
+
+TheDarkness/.settings/org.eclipse.jdt.core.prefs
+
 TheDarkness/bin/us/twoguys/thedarkness/TheDarkness.class
 
 TheDarkness/bin/us/twoguys/thedarkness/beacon/Beacon.class
@@ -60,9 +66,3 @@ TheDarkness/bin/us/twoguys/thedarkness/schematics/SchematicReader2.class
 TheDarkness/bin/us/twoguys/thedarkness/visualization/UNUSEDBlockPlayer.class
 
 TheDarkness/bin/us/twoguys/thedarkness/visualization/UNUSEDVisualizerCore.class
-
-TheDarkness/.settings/org.eclipse.jdt.core.prefs
-
-TheDarkness/.classpath
-
-TheDarkness/.project
