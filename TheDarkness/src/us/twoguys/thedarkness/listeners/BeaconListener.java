@@ -23,6 +23,7 @@ public class BeaconListener implements Listener{
 		Player player = event.getPlayer();
 		Block block = event.getClickedBlock();
 		
+		if (block == null){return;}
 		
 		if(c == 1){
 			BeaconVis beaconVis = new BeaconVis(plugin, player, block.getLocation());

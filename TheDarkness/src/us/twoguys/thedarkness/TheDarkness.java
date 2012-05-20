@@ -2,6 +2,9 @@ package us.twoguys.thedarkness;
 
 import java.util.logging.Logger;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,6 +14,7 @@ import us.twoguys.thedarkness.beacon.BeaconPlayerDataHandler;
 import us.twoguys.thedarkness.beacon.BeaconPlayerDataPersister;
 import us.twoguys.thedarkness.commands.BeaconStats;
 import us.twoguys.thedarkness.commands.GiveBeacon;
+import us.twoguys.thedarkness.commands.Reload;
 import us.twoguys.thedarkness.listeners.BeaconListener;
 import us.twoguys.thedarkness.visualization.VisualizerCore;
 
@@ -62,6 +66,14 @@ public class TheDarkness extends JavaPlugin{
 		logger.severe("[TheDarkness] " + message);
 	}
 	
+	public void sendMessage(CommandSender sender, String msg){
+		sender.sendMessage(ChatColor.GRAY + "[The Darkness] " + ChatColor.WHITE + msg);
+	}
+	
+	public void sendMessage(Player player, String msg){
+		player.sendMessage(ChatColor.GRAY + "[The Darkness] " + ChatColor.WHITE + msg);
+	}
+	
 	public void loadListeners(){
 		PluginManager pm = this.getServer().getPluginManager();
 		
@@ -78,5 +90,7 @@ public class TheDarkness extends JavaPlugin{
 		BeaconStats beaconStats = new BeaconStats(this);
 		this.getCommand("beaconStats").setExecutor(beaconStats);
 		
+		Reload reload = new Reload(this);
+		this.getCommand("darkreload").setExecutor(reload);
 	}
 }

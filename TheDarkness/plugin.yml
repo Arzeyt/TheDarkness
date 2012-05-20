@@ -9,3 +9,6 @@ commands:
     beaconStats:
         description: Shows beacon stats
         usage: /beaconStats
+    darkreload:
+        description: Reloads the config file
+        usage: /darkreload
