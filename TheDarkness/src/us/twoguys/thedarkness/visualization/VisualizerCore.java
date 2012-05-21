@@ -30,7 +30,7 @@ public class VisualizerCore {
 		saveChunk(player, loc.getChunk());
 		player.sendBlockChange(loc, material, (byte) 0);
 		
-		plugin.log("Visualized block");
+		plugin.debug("Visualized block");
 	}
 	
 	public HashSet<Chunk> getPlayerChunkSet(Player player){
