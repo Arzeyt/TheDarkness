@@ -68,3 +68,7 @@ TheDarkness/bin/us/twoguys/thedarkness/visualization/UNUSEDBlockPlayer.class
 TheDarkness/bin/us/twoguys/thedarkness/visualization/UNUSEDVisualizerCore.class
 
 TheDarkness/bin/us/twoguys/thedarkness/commands/Reload.class
+
+TheDarkness/.classpath
+
+TheDarkness/bin/us/twoguys/thedarkness/schematics/SchematicHandler.class
