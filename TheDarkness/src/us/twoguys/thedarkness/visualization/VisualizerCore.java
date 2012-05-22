@@ -29,8 +29,7 @@ public class VisualizerCore {
 	public void visualizeBlock(Player player, Location loc, Material material){
 		saveChunk(player, loc.getChunk());
 		player.sendBlockChange(loc, material, (byte) 0);
-		
-		plugin.debug("Visualized block");
+
 	}
 	
 	public HashSet<Chunk> getPlayerChunkSet(Player player){

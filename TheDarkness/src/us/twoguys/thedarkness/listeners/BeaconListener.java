@@ -26,12 +26,10 @@ public class BeaconListener implements Listener{
 		if (block == null){return;}
 		
 		if(c == 1){
-			BeaconVis beaconVis = new BeaconVis(plugin, player, block.getLocation());
-			beaconVis.visualize();
+			plugin.schematic.loadSchematic();
 			c = 2;
 			
 		}else if(c==2){
-			plugin.visualizerCore.revertChunks(player);
 			c = 1;
 		}
 	}
