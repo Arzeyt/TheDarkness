@@ -25,7 +25,10 @@ public class LocationCheckScheduler {
 			public void run(){
 				
 				for (Player player: Bukkit.getOnlinePlayers()){
-					
+					if(plugin.beaconMaster.getDarknessLevel(player)==-1){
+						plugin.debug("There are no beacons");
+						break;
+					}
 					int level = plugin.beaconMaster.getDarknessLevel(player);
 					
 					plugin.debug("Checking " + player.getName() + ": Level " + level);

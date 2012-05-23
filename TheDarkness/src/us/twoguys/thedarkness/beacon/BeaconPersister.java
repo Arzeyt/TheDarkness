@@ -67,13 +67,14 @@ public class BeaconPersister {
 				ois = new ObjectInputStream(fis);
 				
 				Integer recordCount = ois.readInt();
-				
+				int x = 0;
 				for(int i = 0; i < recordCount; i ++){
 					BeaconData beacon = (BeaconData)ois.readObject();
 					plugin.beaconMaster.addBeacon(beacon);
+					x = i;
 				}
 				
-				plugin.log("Beacons loaded!");
+				plugin.debug(x + " Beacons loaded!");
 					
 			}catch(FileNotFoundException e){
 				plugin.log("Could not locate data file... ");

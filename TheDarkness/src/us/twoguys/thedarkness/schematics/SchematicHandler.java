@@ -67,7 +67,7 @@ public class SchematicHandler {
              
              nbt.close();
              fis.close();
-             System.out.println(tileEntities);
+             System.out.println(tileEntities +" "+ width +" "+ height +" "+ length +" "+ blocks +" "+ data +" "+ entities);
          } catch (Exception e) {
              e.printStackTrace();
          }

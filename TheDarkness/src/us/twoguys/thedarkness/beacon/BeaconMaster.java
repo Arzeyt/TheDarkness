@@ -68,7 +68,7 @@ public class BeaconMaster {
 		
 	}
 	public int distanceFromNearestBeacon(Location loc){
-		int distance = 0;
+		int distance = -1;
 		
 		for(BeaconData beacon : plugin.beaconMaster.getBeacons()){
 			if(beacon.getWorldName().equals(loc.getWorld().getName())){

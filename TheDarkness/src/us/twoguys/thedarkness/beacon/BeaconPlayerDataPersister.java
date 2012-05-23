@@ -35,14 +35,13 @@ TheDarkness plugin;
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			try{
-				plugin.log("Items to save: "+plugin.beaconPlayerDataMaster.getBeaconPlayerDataSet().size());
 				oos.writeInt(plugin.beaconPlayerDataMaster.getBeaconPlayerDataSet().size());
 			}catch(Exception e){
 				plugin.log("No PlayerData to save!");
 			}
 				for(BeaconPlayerData beaconData : plugin.beaconPlayerDataMaster.getBeaconPlayerDataSet()){
 					oos.writeObject(beaconData);
-					plugin.log(beaconData.getPlayerName()+ " BeaconData was saved");
+					plugin.debug(beaconData.getPlayerName()+ " BeaconData was saved");
 				
 				}
 			oos.close();
@@ -68,17 +67,13 @@ TheDarkness plugin;
 				ois = new ObjectInputStream(fis);
 				
 				Integer recordCount = ois.readInt();
-				plugin.log("Items to read: "+recordCount);
-				
 				
 				for(int i = 0; i < recordCount; i ++){
 					BeaconPlayerData beacon = (BeaconPlayerData)ois.readObject();
 					plugin.beaconPlayerDataMaster.addBeaconPlayerData(beacon);
-					plugin.log(beacon.getPlayerName()+" Beacon Data was loaded");
+					plugin.debug(beacon.getPlayerName()+" Beacon Data was loaded");
 				}
 				
-				plugin.log("BeaconPlayerData loaded!");
-					
 			}catch(FileNotFoundException e){
 				plugin.log("Could not locate data file... ");
 				e.printStackTrace();

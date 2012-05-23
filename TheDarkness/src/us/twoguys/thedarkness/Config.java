@@ -77,13 +77,16 @@ public class Config {
 		
 	}
 	
-	public int getLevel(int dist){
-		if (dist < levelDistances.get(1)){
+	public int getLevel(int distance){
+		if(distance < 0){
+			return -1;
+		}
+		if (distance < levelDistances.get(1)){
 			return 0;
 		}
 		
 		for (int levDist: levelDistances){
-			if (dist < levDist){
+			if (distance < levDist){
 				return levelDistances.indexOf(levDist);
 			}
 		}
@@ -110,6 +113,9 @@ public class Config {
 	}
 	
 	public String getLevelMessage(int level){
+		if(level < 0){
+			return new String("There are no beacons in this world...");
+		}
 		return levelMessages.get(level);
 	}
 	
