@@ -33,6 +33,14 @@ public class Config {
 		//darkness
 		plugin.getConfig().addDefault("Darkness.PlayerCheckFrequency", 20);
 		
+		//level0
+		String[] effects0 = {"Message: You feel the warmth of the light."};
+		String[] mobSpawns0 = {};
+		String[] mirages0 = {};
+		
+		plugin.getConfig().addDefault("Darkness.Levels.0.DefaultEffectCheckFrequency", 20);
+		plugin.getConfig().addDefault("Darkness.Levels.0.Effects", effects0);
+		
 		//level1
 		String[] effects1 = {"Message: You sense an evil presence", "TorchConsume: 200"};
 		String[] mobSpawns1 = {"ZOMBIE: 10"};
@@ -70,6 +78,10 @@ public class Config {
 	}
 	
 	public int getLevel(int dist){
+		if (dist < levelDistances.get(1)){
+			return 0;
+		}
+		
 		for (int levDist: levelDistances){
 			if (dist < levDist){
 				return levelDistances.indexOf(levDist);
@@ -131,7 +143,7 @@ public class Config {
 		
 		plugin.debug("Setting level arrays");
 		
-		int counter = 1;
+		int counter = 0;
 		
 		//Loop through levels
 		while (plugin.getConfig().contains("Darkness.Levels." + counter)){
@@ -139,8 +151,12 @@ public class Config {
 			plugin.debug("Level " + counter + "_______________");
 			
 			//Set Distance Array
-			levelDistances.add(plugin.getConfig().getInt("Darkness.Levels." + counter + ".Distance"));
-			plugin.debug("Setting Distance: " + plugin.getConfig().getInt("Darkness.Levels." + counter + ".Distance"));
+			if (counter != 0){
+				levelDistances.add(plugin.getConfig().getInt("Darkness.Levels." + counter + ".Distance"));
+				plugin.debug("Setting Distance: " + plugin.getConfig().getInt("Darkness.Levels." + counter + ".Distance"));
+			}else{
+				levelDistances.add(0);
+			}
 			
 			//Set Default Effect Check Frequency Array
 			levelEffectFreq.add(plugin.getConfig().getInt("Darkness.Levels." + counter + ".DefaultEffectCheckFrequency"));

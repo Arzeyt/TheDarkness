@@ -80,6 +80,9 @@ public class BeaconMaster {
 				if(newDistance < distance) distance = newDistance;
 			}
 		}
+		
+		plugin.debug("Distance to nearest Beacon: " + distance);
+		
 		return distance;
 		
 	}

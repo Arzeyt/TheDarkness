@@ -72,3 +72,13 @@ TheDarkness/bin/us/twoguys/thedarkness/commands/Reload.class
 TheDarkness/.classpath
 
 TheDarkness/bin/us/twoguys/thedarkness/schematics/SchematicHandler.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconMaster.class
+
+TheDarkness/bin/us/twoguys/thedarkness/beacon/BeaconPlayerDataMaster.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/LocationCheckScheduler$1.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/LocationCheckScheduler.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/LifeDrain$1.class
