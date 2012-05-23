@@ -81,6 +81,7 @@ public class Config {
 		if(distance < 0){
 			return -1;
 		}
+		
 		if (distance < levelDistances.get(1)){
 			return 0;
 		}
@@ -183,6 +184,8 @@ public class Config {
 				int pCounter = 1;
 				
 				plugin.debug("Effect Name: " + split[0]);
+				
+				if (split[0].equalsIgnoreCase("TorchConsume")){continue;}
 				
 				//Set Messages Array
 				if (split[0].equalsIgnoreCase("Message") && messageSet == false){
