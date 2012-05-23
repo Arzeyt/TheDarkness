@@ -93,5 +93,11 @@ public class TheDarkness extends JavaPlugin{
 		
 		Reload reload = new Reload(this);
 		this.getCommand("darkreload").setExecutor(reload);
+		
+		BeaconSight beaconSight = new BeaconSight(this);
+		this.getCommand("beaconSight").setExecutor(beaconSight);
+		
+		CreateBeacon createBeacon = new CreateBeacon(this);
+		this.getCommand("createBeacon").setExecutor(createBeacon);
 	}
 }

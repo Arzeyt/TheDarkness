@@ -15,6 +15,7 @@ import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
+import us.twoguys.thedarkness.beacon.BeaconData;
 import us.twoguys.thedarkness.visualization.ChunkPlayer;
 
 public class VisualizerCore {
@@ -122,6 +123,13 @@ public class VisualizerCore {
 			if(chunkPlayer == cp){
 				cp.disable();
 			}
+		}
+	}
+	
+	public void visualizeBeacons(Player player){
+		for(BeaconData beacon :plugin.beaconMaster.getBeacons()){
+			BeaconVis bv = new BeaconVis(plugin, player, beacon.getLocation());
+			bv.visualize();
 		}
 	}
 	

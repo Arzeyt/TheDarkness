@@ -12,3 +12,9 @@ commands:
     darkreload:
         description: Reloads the config file
         usage: /darkreload
+    beaconSight:
+        description: allows you to see beacons
+        usage: /beaconSight
+    createBeacon:
+        description: creates a beacon at your location
+        usage: /creatBeacon

@@ -45,7 +45,6 @@ public class BeaconMaster {
 	 *
 	 */
 	public void createBeacon(Player player, BeaconData beacon){
-		addBeacon(beacon);
 		if(plugin.beaconPlayerDataMaster.subtractPoints(player, plugin.config.getBeaconCost())==false){
 			plugin.sendMessage(player, "Not enough points");
 			return;
@@ -56,6 +55,8 @@ public class BeaconMaster {
 				bv.visualize();
 			}
 		}
+		addBeacon(beacon);
+
 	}
 
 	public HashSet<BeaconData> getBeacons(){
@@ -63,21 +64,22 @@ public class BeaconMaster {
 	}
 	
 	private double getDistance(Location loc1, Location loc2){
-		double distance = Math.sqrt((loc1.getX()-loc2.getX())*(loc1.getX()-loc2.getX()) + (loc1.getZ()-loc2.getZ())*(loc1.getZ()-loc2.getZ()));
+		double distance = Math.sqrt(Math.pow(loc1.getX()-loc2.getX(), 2) + Math.pow(loc1.getZ()-loc2.getZ(), 2));
+
 		return distance;
 		
 	}
 	public int distanceFromNearestBeacon(Location loc){
-		int distance = -1;
+		int distance = 123456789;
 		
 		for(BeaconData beacon : plugin.beaconMaster.getBeacons()){
 			if(beacon.getWorldName().equals(loc.getWorld().getName())){
-				int locX = loc.getBlockX();
-				int locZ = loc.getBlockZ();
 				
-				int newDistance = (int) Math.sqrt((beacon.getX()-locX)*(beacon.getX()-locX) + (beacon.getZ()-locZ)*(beacon.getZ()-locZ));
+				int newDistance = (int) getDistance(loc, beacon.getLocation());
 				
-				if(newDistance < distance) distance = newDistance;
+				if(distance > newDistance) 
+					distance = newDistance;
+				
 			}
 		}
 		
