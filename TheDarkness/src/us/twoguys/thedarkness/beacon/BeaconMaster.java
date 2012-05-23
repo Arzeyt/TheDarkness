@@ -56,7 +56,6 @@ public class BeaconMaster {
 			}
 		}
 		addBeacon(beacon);
-
 	}
 
 	public HashSet<BeaconData> getBeacons(){

@@ -23,13 +23,13 @@ public class TheDarkness extends JavaPlugin{
 	//Classes
 	public Config config = new Config(this);
 	public BeaconMaster beaconMaster = new BeaconMaster(this);
-	public BeaconPersister beaconPersister = new BeaconPersister(this);
+	private BeaconPersister beaconPersister = new BeaconPersister(this);
 	public BeaconPlayerDataMaster beaconPlayerDataMaster = new BeaconPlayerDataMaster(this);
-	public BeaconPlayerDataPersister beaconPlayerDataPersister = new BeaconPlayerDataPersister(this);
+	private BeaconPlayerDataPersister beaconPlayerDataPersister = new BeaconPlayerDataPersister(this);
 	public VisualizerCore visualizerCore = new VisualizerCore(this);
 	public SchematicHandler schematic = new SchematicHandler(this);
 	public LocationCheckScheduler locCheck = new LocationCheckScheduler(this);
-	
+	public BeaconListenerMaster beaconListenerMaster = new BeaconListenerMaster(this);
 	//Listeners
 	
 	

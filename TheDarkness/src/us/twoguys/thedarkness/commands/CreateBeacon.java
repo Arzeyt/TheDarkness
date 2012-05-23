@@ -27,8 +27,8 @@ public class CreateBeacon implements CommandExecutor {
 			return false;
 		}
 		Player player = (Player)sender;
-		BeaconData bd = new BeaconData(player.getLocation());
-		plugin.beaconMaster.createBeacon(player, bd);
+		plugin.beaconListenerMaster.setString(player, "beaconPlace");
+		plugin.sendMessage(player, "Select a location to place the beacon");
 		return true;
 		
 		

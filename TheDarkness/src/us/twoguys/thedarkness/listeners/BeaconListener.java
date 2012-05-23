@@ -12,7 +12,7 @@ import us.twoguys.thedarkness.beacon.BeaconData;
 public class BeaconListener implements Listener{
 
 	TheDarkness plugin;
-	int c = 1;
+	int c = 0; //set to 0 to disable
 	
 	public BeaconListener(TheDarkness instance){
 		this.plugin = instance;
@@ -32,13 +32,17 @@ public class BeaconListener implements Listener{
 		}else if(c==2){
 			plugin.schematic.paste(player, block.getLocation());
 			c = 1;
+		}else if(plugin.beaconListenerMaster.getPlayerString(player).equalsIgnoreCase("beaconPlace")){
+			if(plugin.beaconPlayerDataMaster.canCreateBeacon(player, true)){
+				BeaconData bd = new BeaconData(block.getLocation());
+				plugin.beaconMaster.createBeacon(player, bd);
+				plugin.beaconListenerMaster.setString(player, "null");
+				plugin.sendMessage(player, "You have created a beacon");
+			}else{
+				plugin.sendMessage(player, "You dont have enough dark essence. You need at least "+plugin.config.getBeaconCost());
+			}
+			
 		}
 		
-		/*
-		if(plugin.beaconPlayerDataMaster.canCreateBeacon(player, true)){
-			BeaconData bd = new BeaconData(block.getLocation());
-			plugin.beaconMaster.createBeacon(player, bd);
-		}
-		*/
 	}
 }
