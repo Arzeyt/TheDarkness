@@ -18,7 +18,7 @@ public class BeaconPlayerData implements Serializable{
 		this.beaconPoints = points;
 	}
 	
-	public void addPoints(int points){
+	public void incrementPoints(int points){
 		this.beaconPoints = this.beaconPoints + points;
 	}
 	

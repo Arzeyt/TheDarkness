@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
 
-public class BeaconPlayerDataHandler {
+public class BeaconPlayerDataMaster {
 
 	TheDarkness plugin;
 	
 	private HashSet<BeaconPlayerData> beaconPlayerData = new HashSet<BeaconPlayerData>();
 
-	public BeaconPlayerDataHandler(TheDarkness instance){
+	public BeaconPlayerDataMaster(TheDarkness instance){
 		plugin=instance;
 	}
 	
@@ -63,5 +63,26 @@ public class BeaconPlayerDataHandler {
 			}
 		}
 		return false;
+	}
+	
+	public boolean subtractPoints(Player player, int amount){
+		BeaconPlayerData bpd = getData(player);
+		if(bpd.getBeaconPoints() < plugin.config.getBeaconCost()){
+			return false;
+		}else{
+			bpd.incrementPoints(-1*amount);
+			return true;
+		}
+	}
+	
+	public boolean canCreateBeacon(Player player, boolean sendErrorReason){
+		String error;
+		if(getData(player).getBeaconPoints() < plugin.config.getBeaconCost()){
+			error = "Not enough points";
+			return false;
+		}else{
+		
+			return true;
+		}
 	}
 }

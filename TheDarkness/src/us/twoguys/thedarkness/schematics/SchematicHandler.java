@@ -82,6 +82,7 @@ public class SchematicHandler {
     		int schY = te.y;
     		int schZ = te.z;
     		
+    		
     		//Bukkit Material
     		Material schMaterial = Material.getMaterial(te.q.material.toString());
     		

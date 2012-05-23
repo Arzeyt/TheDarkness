@@ -22,7 +22,7 @@ public class BeaconStats implements CommandExecutor{
 			return false;
 		}
 		try{
-			int points = plugin.beaconPlayerDataHandler.getData((Player)sender).getBeaconPoints();
+			int points = plugin.beaconPlayerDataMaster.getData((Player)sender).getBeaconPoints();
 			
 			sender.sendMessage("BeaconPoints: "+ChatColor.GREEN+points);
 			

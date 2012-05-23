@@ -36,11 +36,11 @@ public class BeaconPersister {
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			try{
-				oos.writeInt(plugin.beaconHandler.getBeaconSet().size());
+				oos.writeInt(plugin.beaconMaster.getBeacons().size());
 			}catch(Exception e){
 				plugin.log("No Beacons to save!");
 			}
-				for(BeaconData beacon : plugin.beaconHandler.getBeaconSet()){
+				for(BeaconData beacon : plugin.beaconMaster.getBeacons()){
 					oos.writeObject(beacon);
 				
 				}
@@ -70,7 +70,7 @@ public class BeaconPersister {
 				
 				for(int i = 0; i < recordCount; i ++){
 					BeaconData beacon = (BeaconData)ois.readObject();
-					plugin.beaconHandler.addBeacon(beacon);
+					plugin.beaconMaster.addBeacon(beacon);
 				}
 				
 				plugin.log("Beacons loaded!");

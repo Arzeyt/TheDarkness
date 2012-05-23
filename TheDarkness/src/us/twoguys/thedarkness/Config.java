@@ -78,6 +78,9 @@ public class Config {
 		return 0;
 	}
 	
+	public int getBeaconCost(){
+		return plugin.getConfig().getInt("Beacon.Cost");
+	}
 	public boolean isWorthBeaconPoints(Material mat){
 		return (itemPointValues.containsKey(mat.getId()) ? true : false);
 	}

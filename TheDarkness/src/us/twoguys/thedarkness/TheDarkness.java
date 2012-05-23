@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import us.twoguys.thedarkness.beacon.BeaconHandler;
+import us.twoguys.thedarkness.beacon.BeaconMaster;
 import us.twoguys.thedarkness.beacon.BeaconPersister;
-import us.twoguys.thedarkness.beacon.BeaconPlayerDataHandler;
+import us.twoguys.thedarkness.beacon.BeaconPlayerDataMaster;
 import us.twoguys.thedarkness.beacon.BeaconPlayerDataPersister;
 import us.twoguys.thedarkness.commands.BeaconStats;
 import us.twoguys.thedarkness.commands.GiveBeacon;
@@ -26,9 +26,9 @@ public class TheDarkness extends JavaPlugin{
 	
 	//Classes
 	public Config config = new Config(this);
-	public BeaconHandler beaconHandler = new BeaconHandler(this);
+	public BeaconMaster beaconMaster = new BeaconMaster(this);
 	public BeaconPersister beaconPersister = new BeaconPersister(this);
-	public BeaconPlayerDataHandler beaconPlayerDataHandler = new BeaconPlayerDataHandler(this);
+	public BeaconPlayerDataMaster beaconPlayerDataMaster = new BeaconPlayerDataMaster(this);
 	public BeaconPlayerDataPersister beaconPlayerDataPersister = new BeaconPlayerDataPersister(this);
 	public VisualizerCore visualizerCore = new VisualizerCore(this);
 	public SchematicHandler schematic = new SchematicHandler(this);
