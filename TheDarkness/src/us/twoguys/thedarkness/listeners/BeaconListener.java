@@ -24,19 +24,21 @@ public class BeaconListener implements Listener{
 		Block block = event.getClickedBlock();
 		
 		if (block == null){return;}
-		/*
+		
 		if(c == 1){
 			plugin.schematic.loadSchematic();
 			c = 2;
 			
 		}else if(c==2){
+			plugin.schematic.paste(player, block.getLocation());
 			c = 1;
 		}
-		*/
 		
+		/*
 		if(plugin.beaconPlayerDataMaster.canCreateBeacon(player, true)){
 			BeaconData bd = new BeaconData(block.getLocation());
 			plugin.beaconMaster.createBeacon(player, bd);
 		}
+		*/
 	}
 }
