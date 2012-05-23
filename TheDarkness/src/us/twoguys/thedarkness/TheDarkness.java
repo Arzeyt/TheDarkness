@@ -8,16 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import us.twoguys.thedarkness.beacon.BeaconMaster;
-import us.twoguys.thedarkness.beacon.BeaconPersister;
-import us.twoguys.thedarkness.beacon.BeaconPlayerDataMaster;
-import us.twoguys.thedarkness.beacon.BeaconPlayerDataPersister;
-import us.twoguys.thedarkness.commands.BeaconStats;
-import us.twoguys.thedarkness.commands.GiveBeacon;
-import us.twoguys.thedarkness.commands.Reload;
-import us.twoguys.thedarkness.listeners.BeaconListener;
-import us.twoguys.thedarkness.schematics.SchematicHandler;
-import us.twoguys.thedarkness.visualization.VisualizerCore;
+import us.twoguys.thedarkness.beacon.*;
+import us.twoguys.thedarkness.commands.*;
+import us.twoguys.thedarkness.listeners.*;
+import us.twoguys.thedarkness.schematics.*;
+import us.twoguys.thedarkness.visualization.*;
+import us.twoguys.thedarkness.mechanics.*;
 
 public class TheDarkness extends JavaPlugin{
 
@@ -32,6 +28,7 @@ public class TheDarkness extends JavaPlugin{
 	public BeaconPlayerDataPersister beaconPlayerDataPersister = new BeaconPlayerDataPersister(this);
 	public VisualizerCore visualizerCore = new VisualizerCore(this);
 	public SchematicHandler schematic = new SchematicHandler(this);
+	public LocationCheckScheduler locCheck = new LocationCheckScheduler(this);
 	
 	//Listeners
 	
@@ -44,6 +41,8 @@ public class TheDarkness extends JavaPlugin{
 		
 		loadCommandExecutors();
 		loadListeners();
+		
+		locCheck.checkPlayerLocations();
 		
 		log("enabled");
 		
@@ -61,7 +60,7 @@ public class TheDarkness extends JavaPlugin{
 	}
 	
 	public void debug(String message){
-		//logger.info("[DEBUG] " + message);
+		logger.info("[DEBUG] " + message);
 	}
 	
 	public void logSevere(String message){
