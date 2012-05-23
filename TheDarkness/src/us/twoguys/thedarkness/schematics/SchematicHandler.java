@@ -9,7 +9,11 @@ import net.minecraft.server.TileEntity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.jnbt.ByteArrayTag;
 import org.jnbt.CompoundTag;
 import org.jnbt.ListTag;
@@ -21,8 +25,15 @@ import us.twoguys.thedarkness.TheDarkness;
 
 public class SchematicHandler {
 
-	List<TileEntity> tileentities;
 	TheDarkness plugin;
+	
+	short width;
+	short height;
+	short length;
+	byte[] blocks;
+	byte[] data;
+	List<Entity> entities;
+	List<TileEntity> tileEntities;
 	
 	public SchematicHandler(TheDarkness instance){
 		this.plugin = instance;
@@ -32,7 +43,7 @@ public class SchematicHandler {
         return tag;
 	}
 	
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public void loadSchematic(){
     	 try {
              File f = new File("plugins"+File.separator+"TheDarkness"+File.separator+"Schematics"+File.separator+"testa.schematic");
@@ -41,15 +52,15 @@ public class SchematicHandler {
              CompoundTag backuptag = (CompoundTag) nbt.readTag();
              Map<String, Tag> tagCollection = backuptag.getValue();
 
-             short width = (Short) getChildTag(tagCollection, "Width", ShortTag.class).getValue();
-             short height = (Short) getChildTag(tagCollection, "Height", ShortTag.class).getValue();
-             short length = (Short) getChildTag(tagCollection, "Length", ShortTag.class).getValue();
+             width = (Short) getChildTag(tagCollection, "Width", ShortTag.class).getValue();
+             height = (Short) getChildTag(tagCollection, "Height", ShortTag.class).getValue();
+             length = (Short) getChildTag(tagCollection, "Length", ShortTag.class).getValue();
 
-             byte[] blocks = (byte[]) getChildTag(tagCollection, "Blocks", ByteArrayTag.class).getValue();
-             byte[] data = (byte[]) getChildTag(tagCollection, "Data", ByteArrayTag.class).getValue();
+             blocks = (byte[]) getChildTag(tagCollection, "Blocks", ByteArrayTag.class).getValue();
+             data = (byte[]) getChildTag(tagCollection, "Data", ByteArrayTag.class).getValue();
 
-             List entities = (List) getChildTag(tagCollection, "Entities", ListTag.class).getValue();
-             List<TileEntity> tileentities = (List<TileEntity>) getChildTag(tagCollection, "TileEntities", ListTag.class).getValue();
+             entities = (List<Entity>) getChildTag(tagCollection, "Entities", ListTag.class).getValue();
+             tileEntities = (List<TileEntity>) getChildTag(tagCollection, "TileEntities", ListTag.class).getValue();
              
              nbt.close();
              fis.close();
@@ -59,16 +70,25 @@ public class SchematicHandler {
          }
      }
 	
-    public void paste(Location loc){
+    public void paste(Player player, Location loc){
     	int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
 		
-    	for(TileEntity te : this.tileentities){
-    		Block b = (Block)te.q;
-    		loc.getBlock().setType(b.getType());
+    	for(TileEntity te : this.tileEntities){
+    		World world = te.world.getWorld();
     		
+    		int schX = te.x;
+    		int schY = te.y;
+    		int schZ = te.z;
     		
+    		//Bukkit Material
+    		Material schMaterial = Material.getMaterial(te.q.material.toString());
+    		
+    		//Bukkit block
+    		Block schBlock = world.getBlockAt(x+schX, y+schY, z+schZ);
+    		
+    		plugin.visualizerCore.visualizeBlock(player, schBlock.getLocation(), schMaterial);
     		
     		
         }
