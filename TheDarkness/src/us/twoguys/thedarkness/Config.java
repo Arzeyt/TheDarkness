@@ -111,6 +111,11 @@ public class Config {
 	}
 	
 	public int getItemBeaconPointValue(Material mat){
+		
+		for (int i: itemPointValues.keySet()){
+			plugin.debug(i + ": " + itemPointValues.get(i));
+		}
+		
 		return (itemPointValues.containsKey(mat.getId()) ? itemPointValues.get(mat.getId()) : 0);
 	}
 	
@@ -330,6 +335,8 @@ public class Config {
 				}
 			}
 		}
+		
+		getItemBeaconPointValue(Material.BONE);
 	}
 	
 	public void configError(String path){
