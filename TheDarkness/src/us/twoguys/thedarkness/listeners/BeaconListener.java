@@ -1,6 +1,7 @@
 package us.twoguys.thedarkness.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -71,15 +72,17 @@ public class BeaconListener implements Listener{
 			if(s.getLine(1).isEmpty() || s.getLine(1).equals(player.getName())){
 				int nox = 0;
 				
-				for(ItemStack item : is){
-					if(plugin.config.isWorthBeaconPoints(item.getType())){
+				for(int x = 0; x < is.length ; x ++){
+					if(is[x] != null){
+						ItemStack item = is[x];
 						int amount = plugin.config.getItemBeaconPointValue(item.getType());
 						int quantity = item.getAmount();
+						i.remove(item);
 						nox = nox + (amount * quantity);
 					}
 				}
 				plugin.beaconPlayerDataMaster.addPoints(player, nox);
-				plugin.sendMessage(player, "You have recieved "+nox+" nox extract");
+				plugin.sendMessage(player, "You have recieved "+ChatColor.GREEN+nox+ChatColor.WHITE+" nox extract");
 			}	
 		}
 		
