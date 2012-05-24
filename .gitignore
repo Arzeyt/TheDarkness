@@ -120,3 +120,5 @@ TheDarkness/bin/us/twoguys/thedarkness/commands/BeaconSight.class
 TheDarkness/bin/us/twoguys/thedarkness/commands/CreateBeacon.class
 
 TheDarkness/bin/us/twoguys/thedarkness/listeners/BeaconListenerMaster.class
+
+TheDarkness/bin/us/twoguys/thedarkness/commands/BeaconVision.class
