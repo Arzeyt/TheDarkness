@@ -20,15 +20,19 @@ public class BeaconListenerMaster {
 	}
 	
 	public String getPlayerString(Player player){
-		if(containsPlayer(player)){
-			return getPlayerSelection().get(player);
-		}else{
-			return getPlayerSelection().put(player, null);
+		try{
+			if(containsPlayer(player)){
+				return getPlayerSelection().get(player);
+			}else{
+				return getPlayerSelection().put(player, null);
+			}
+		}catch(Exception e){
+			return "null";
 		}
 	}
 	
 	public void setString(Player player, String string){
-		getPlayerSelection().put(player, string);
+			getPlayerSelection().put(player, string);
 	}
 	
 	public boolean containsPlayer(Player player){

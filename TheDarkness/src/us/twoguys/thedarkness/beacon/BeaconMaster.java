@@ -90,12 +90,7 @@ public class BeaconMaster {
 	}
 	
 	public int getDarknessLevel(Player player){
-		for(Player p : Bukkit.getServer().getOnlinePlayers()){
-			if(player.getName().equals(p.getName())){
-				return plugin.config.getLevel(distanceFromNearestBeacon(player.getLocation()));
-			}
-		}
-		return 0;
+		return plugin.config.getLevel(distanceFromNearestBeacon(player.getLocation()));
 	}
 	
 

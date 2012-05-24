@@ -27,7 +27,6 @@ public class BeaconPlayerDataMaster {
 				return false;
 			}
 		}
-		
 		HashSet<BeaconPlayerData> temp = beaconPlayerData;
 		temp.add(data);
 		
@@ -67,12 +66,18 @@ public class BeaconPlayerDataMaster {
 	
 	public boolean subtractPoints(Player player, int amount){
 		BeaconPlayerData bpd = getData(player);
+		amount = Math.abs(amount);
 		if(bpd.getBeaconPoints() < plugin.config.getBeaconCost()){
 			return false;
 		}else{
 			bpd.incrementPoints(-1*amount);
 			return true;
 		}
+	}
+	
+	public void addPoints(Player player, int amount){
+		amount=Math.abs(amount);
+		getData(player).incrementPoints(amount);
 	}
 	
 	public boolean canCreateBeacon(Player player, boolean sendErrorReason){
