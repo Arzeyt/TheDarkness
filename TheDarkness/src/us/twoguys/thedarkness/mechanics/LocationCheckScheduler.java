@@ -1,5 +1,7 @@
 package us.twoguys.thedarkness.mechanics;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
+import us.twoguys.thedarkness.mechanics.effects.*;
 
 public class LocationCheckScheduler {
 
@@ -43,10 +46,21 @@ public class LocationCheckScheduler {
 						ArrayList<Class<?>> effects = plugin.config.getLevelEffectClasses(level);
 						
 						for (Class<?> c: effects){
+							
+							Constructor<?> cons = null;
+							
 							try{
-								c.getConstructor(c).newInstance(plugin, player, level);
+								cons = c.getConstructor(TheDarkness.class, Player.class, int.class);
 							}catch(Exception e){
-								plugin.debug("Effect Class failed to instantiate: " + c.getSimpleName());
+								plugin.debug("Failed to get constructor: " + c.getSimpleName());
+								e.printStackTrace();
+							}
+							
+							try{
+								cons.newInstance(plugin, player, level);
+							}catch(Exception e){
+								plugin.debug("Failed to use constructor: " + c.getSimpleName());
+								e.printStackTrace();
 							}
 						}
 					}

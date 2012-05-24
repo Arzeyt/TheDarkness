@@ -24,6 +24,8 @@ public class LifeDrain extends Effect{
 		super(instance, player, level);
 		
 		this.setting = plugin.config.getEffectsSettings(this.getClass(), level);
+		
+		applyLifeDrain();
 	}
 
 	public void applyLifeDrain(){

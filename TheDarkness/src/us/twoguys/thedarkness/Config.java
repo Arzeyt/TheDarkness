@@ -78,17 +78,26 @@ public class Config {
 	}
 	
 	public int getLevel(int distance){
-		if(distance < 0){
+		if(distance == 123456789){
+			plugin.debug("distance is default");
 			return -1;
 		}
 		
 		if (distance < levelDistances.get(1)){
+			plugin.debug("Distance is less than lvl 1");
 			return 0;
 		}
 		
 		for (int levDist: levelDistances){
-			if (distance < levDist){
-				return levelDistances.indexOf(levDist);
+			
+			try{
+				if (distance > levDist && distance < levelDistances.get(levelDistances.indexOf(levDist) + 1)){
+					return levelDistances.indexOf(levDist);
+				}
+			}catch(Exception e){
+				if (distance > levDist){
+					return levelDistances.indexOf(levDist);
+				}
 			}
 		}
 		return 0;

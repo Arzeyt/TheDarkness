@@ -68,6 +68,7 @@ public class BeaconMaster {
 		return distance;
 		
 	}
+	
 	public int distanceFromNearestBeacon(Location loc){
 		int distance = 123456789;
 		

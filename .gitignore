@@ -118,3 +118,5 @@ TheDarkness/bin/us/twoguys/lib/jnbt/Tag.class
 TheDarkness/bin/us/twoguys/thedarkness/commands/BeaconSight.class
 
 TheDarkness/bin/us/twoguys/thedarkness/commands/CreateBeacon.class
+
+TheDarkness/bin/us/twoguys/thedarkness/listeners/BeaconListenerMaster.class
