@@ -7,11 +7,11 @@ import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
 
-public class BeaconSight implements CommandExecutor{
+public class BeaconVision implements CommandExecutor{
 
 	TheDarkness plugin;
 
-	public BeaconSight(TheDarkness instance){
+	public BeaconVision(TheDarkness instance){
 		plugin = instance;
 	}
 

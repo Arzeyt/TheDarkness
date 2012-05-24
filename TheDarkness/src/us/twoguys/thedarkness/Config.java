@@ -91,7 +91,7 @@ public class Config {
 		for (int levDist: levelDistances){
 			
 			try{
-				if (distance > levDist && distance < levelDistances.get(levelDistances.indexOf(levDist) + 1)){
+				if (distance > levDist && distance <= levelDistances.get(levelDistances.indexOf(levDist) + 1)){
 					return levelDistances.indexOf(levDist);
 				}
 			}catch(Exception e){
