@@ -19,7 +19,7 @@ public class CommandMaster implements CommandExecutor{
 	}
 	
 	public boolean onCommand(CommandSender sender, Command command, String arg2, String[] args) {
-		if(!(sender instanceof Player)){
+		if(!(sender instanceof Player) && (!args[0].equalsIgnoreCase("reload") || !args[0].equalsIgnoreCase("give"))){
 			sender.sendMessage("You must be logged in to do that");
 			return false;
 		}
@@ -39,15 +39,9 @@ public class CommandMaster implements CommandExecutor{
 			return createBeacon(player);
 			
 		}else if(args[0].equalsIgnoreCase("give")){
-			try{if(args[1]==null){return false;}
-			}catch(Exception e){
-					return giveEssenceUsage(player);
+			if (args.length == 3){
+				return giveEssence(args[1], args[2]);
 			}
-			try{if(args[2]==null){return false;}
-			}catch(Exception e){
-					return giveEssenceUsage(player);
-			}
-			return giveEssence(args[1], args[2]);
 			
 		}else if(args[0].equalsIgnoreCase("reload")){
 			reload(player);

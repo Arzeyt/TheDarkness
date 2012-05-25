@@ -91,7 +91,7 @@ public class TheDarkness extends JavaPlugin{
 	public void loadCommandExecutors(){
 		
 		CommandMaster commandMaster = new CommandMaster(this);
-		this.getCommand("theDarkness").setExecutor(commandMaster);
+		this.getCommand("theDarkness-cmd").setExecutor(commandMaster);
 		
 	}
 }
