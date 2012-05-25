@@ -24,11 +24,11 @@ public class BeaconStats implements CommandExecutor{
 		try{
 			int points = plugin.beaconPlayerDataMaster.getData((Player)sender).getBeaconPoints();
 			
-			sender.sendMessage("BeaconPoints: "+ChatColor.GREEN+points);
+			sender.sendMessage("Dark Essence: "+ChatColor.GREEN+points);
 			
 			
 		}catch(NullPointerException e){
-			sender.sendMessage(ChatColor.RED+"You have no beacons, or beacon points");
+			sender.sendMessage(ChatColor.RED+"You have no dark essence");
 		}
 		
 		return true;

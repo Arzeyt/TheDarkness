@@ -7,19 +7,19 @@ public class BeaconPlayerData implements Serializable{
 	private static final long serialVersionUID = 6969900904950793821L;
 
 	private String playerName;
-	private int beaconPoints;
+	private int darkEssence;
 	
 	public BeaconPlayerData(String playerName, int beaconPoints, int beaconAmount){
 		this.playerName = playerName;
-		this.beaconPoints = beaconPoints;
+		this.darkEssence = beaconPoints;
 	}
 	
 	public void setPoints(int points){
-		this.beaconPoints = points;
+		this.darkEssence = points;
 	}
 	
 	public void incrementPoints(int points){
-		this.beaconPoints = this.beaconPoints + points;
+		this.darkEssence = this.darkEssence + points;
 	}
 	
 	public String getPlayerName(){
@@ -27,7 +27,7 @@ public class BeaconPlayerData implements Serializable{
 	}
 	
 	public int getBeaconPoints(){
-		return this.beaconPoints;
+		return this.darkEssence;
 	}
 	
 }

@@ -73,7 +73,7 @@ public class BeaconListener implements Listener{
 				int nox = 0;
 				
 				for(int x = 0; x < is.length ; x ++){
-					if(is[x] != null){
+					if(is[x] != null && plugin.config.isWorthBeaconPoints(is[x].getType())){
 						ItemStack item = is[x];
 						int amount = plugin.config.getItemBeaconPointValue(item.getType());
 						int quantity = item.getAmount();
@@ -82,7 +82,7 @@ public class BeaconListener implements Listener{
 					}
 				}
 				plugin.beaconPlayerDataMaster.addPoints(player, nox);
-				plugin.sendMessage(player, "You have recieved "+ChatColor.GREEN+nox+ChatColor.WHITE+" nox extract");
+				plugin.sendMessage(player, "You have extracted "+ChatColor.GREEN+nox+ChatColor.WHITE+" Dark Essence");
 			}	
 		}
 		
@@ -92,7 +92,12 @@ public class BeaconListener implements Listener{
 			plugin.debug("Block is a sign");
 			s = (Sign)block.getState();
 			if(s.getLine(0).equals("[Nox Extractor]")){
-				return true;
+				if(plugin.beaconMaster.getDarknessLevel(player)==0){
+					return true;
+				}else{
+					plugin.sendMessage(player, "The darkness is too powerful here...");
+					return false;
+				}
 			}else{
 				return false;
 			}
