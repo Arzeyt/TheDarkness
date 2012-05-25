@@ -8,10 +8,11 @@ public class LifeDrain extends Effect{
 	
 	/**
 	 * 
-	 * Effect: Life Drain
-	 * Description: Damages the player
+	 * @Effect: Life Drain
+	 * @Description: Damages the player
 	 * 
-	 * Int Params:
+	 **/
+	/*Params:
 	 *     Mandatory:
 	 *         - setting[0]: damage (half hearts)
 	 *         - setting[1]: percent chance
@@ -32,7 +33,7 @@ public class LifeDrain extends Effect{
 		taskId = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			
 			public void run(){
-				int currentLevel = plugin.beaconMaster.getDarknessLevel(player);
+				int currentLevel = plugin.locCheck.getDarknessLevel(player);
 				
 				if (currentLevel != level){cancelTask(); return;}
 				

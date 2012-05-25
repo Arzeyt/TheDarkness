@@ -30,7 +30,7 @@ public class CommandMaster implements CommandExecutor{
 		Player player = (Player)sender;
 		
 		
-		try{if(args[0]==null){return false;}
+		try{if(args[0]==null){return false;} //if the player never entered in an arg, then args does not exist and throws an error.
 		}catch(Exception e){return generalUsage(player);}
 		
 		if(args[0].equalsIgnoreCase("stats")){
@@ -92,7 +92,7 @@ public class CommandMaster implements CommandExecutor{
 	}
 	
 	private boolean giveEssenceUsage(Player player){
-		plugin.sendMessage(player, "/theDarkness give <playerName> <DarkEssence quantit>");
+		plugin.sendMessage(player, "/theDarkness give <playerName> <DarkEssence quantity>");
 		return true;
 	}
 	

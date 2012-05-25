@@ -54,7 +54,8 @@ public class Config {
 		plugin.getConfig().addDefault("Darkness.Levels.1.Mirages", mirages1);
 		
 		//level2
-		String[] effects2 = {"Message: The Darkness grows stronger around you", "LifeDrain: 1 80", "TorchConsume: 100"};
+		String[] effects2 = {"Message: The Darkness grows stronger around you", "LifeDrain: 1 80", "TorchConsume: 100",
+				"Weakness: 5"};
 		String[] mobSpawns2 = {"ZOMBIE: 100", "SPIDER: 10"};
 		String[] mirages2 = {"House: 10", "Diamond: 50"};
 		

@@ -27,7 +27,11 @@ public class Effect {
 	public boolean passPercentChance(int i){
 		return (random.nextInt(100) + 1 <= i ? true : false);
 	}
-	
+	/**
+	 * 
+	 * @param i - position in the setting array of the frequency
+	 * @return frequency in ticks
+	 */
 	public int getFrequency(int i){
 		return (setting.size() >= i + 1 ? setting.get(i) : plugin.config.getDefaultEffectCheckFreq(level));
 	}

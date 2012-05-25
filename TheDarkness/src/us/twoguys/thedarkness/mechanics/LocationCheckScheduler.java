@@ -83,4 +83,8 @@ public class LocationCheckScheduler {
 			}
 		}
 	}
+	
+	public int getDarknessLevel(Player player){
+		return playerLevels.get(player);
+	}
 }
