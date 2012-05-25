@@ -16,8 +16,8 @@ public class Weakness extends Effect{
 	 * Params:
 	 * 		Mandatory:
 	 * 			- setting[0]: % chance
-	 * 			- setting[1]: strength
-	 * 			- setting[2]: duration
+	 * 			- setting[1]: duration
+	 * 			- setting[2]: strength
 	 * 		Optional:
 	 * 			- setting[3]: frequency (ticks)
 	 */
@@ -38,7 +38,7 @@ public class Weakness extends Effect{
 					cancelTask();
 				}
 				if(passPercentChance(setting.get(0))){
-					player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, setting.get(1), setting.get(2)*20));
+					player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, setting.get(1)*20, setting.get(2)));
 				}
 			}
 			
