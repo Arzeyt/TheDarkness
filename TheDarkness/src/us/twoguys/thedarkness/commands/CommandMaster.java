@@ -13,6 +13,7 @@ import us.twoguys.thedarkness.beacon.BeaconPlayerData;
 public class CommandMaster implements CommandExecutor{
 
 	TheDarkness plugin;
+	boolean isPlayer;
 
 	public CommandMaster(TheDarkness instance){
 		plugin = instance;
@@ -20,11 +21,11 @@ public class CommandMaster implements CommandExecutor{
 	
 	public boolean onCommand(CommandSender sender, Command command, String arg2, String[] args) {
 		if(!(sender instanceof Player)){
-			sender.sendMessage("You must be logged in to do that");
-			return false;
+			isPlayer = false;
 		}
 		
 		Player player = (Player)sender;
+		
 		
 		try{if(args[0]==null){return false;}
 		}catch(Exception e){return generalUsage(player);}
@@ -39,15 +40,11 @@ public class CommandMaster implements CommandExecutor{
 			return createBeacon(player);
 			
 		}else if(args[0].equalsIgnoreCase("give")){
-			try{if(args[1]==null){return false;}
-			}catch(Exception e){
-					return giveEssenceUsage(player);
+			if(args.length != 3){
+				return giveEssenceUsage(player);
+			}else{
+				return giveEssence(args[1], args[2]);
 			}
-			try{if(args[2]==null){return false;}
-			}catch(Exception e){
-					return giveEssenceUsage(player);
-			}
-			return giveEssence(args[1], args[2]);
 			
 		}else if(args[0].equalsIgnoreCase("reload")){
 			reload(player);
@@ -102,6 +99,11 @@ public class CommandMaster implements CommandExecutor{
 	private boolean reload(Player player){
 		plugin.config.loadConfiguration();
 		plugin.sendMessage(player, "Successfully reloaded config!");
+		return true;
+	}
+	
+	private boolean mustBeLoggedIn(){
+		plugin.log("You must be logged in to do that");
 		return true;
 	}
 	
