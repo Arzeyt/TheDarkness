@@ -34,11 +34,11 @@ public class BeaconListener implements Listener{
 		
 		if (block == null){return;}
 		if (block.getType()==Material.AIR){return;}
-		if(plugin.beaconListenerMaster.getPlayerString(player).equals("loadSchematic")){
+		if(loadSchematic(player)){
 			plugin.schematic.loadSchematic();
 			plugin.beaconListenerMaster.setString(player, "pasteSchematic");
 			
-		}else if(plugin.beaconListenerMaster.getPlayerString(player).equals("pasteSchematic")){
+		}else if(pasteSchematic(player)){
 			plugin.schematic.paste(player, block.getLocation());
 			plugin.beaconListenerMaster.setString(player, "null");
 			
@@ -112,5 +112,21 @@ public class BeaconListener implements Listener{
 		}catch(Exception e){
 			return false;
 		}	
+	}
+	
+	private boolean loadSchematic(Player player){
+		try{
+			return plugin.beaconListenerMaster.getPlayerString(player).equals("loadSchematic");
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	private boolean pasteSchematic(Player player){
+		try{
+			return plugin.beaconListenerMaster.getPlayerString(player).equals("pasteSchematic");
+		}catch(Exception e){
+			return false;
+		}
 	}
 }

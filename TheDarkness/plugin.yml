@@ -18,3 +18,7 @@ commands:
     createBeacon:
         description: creates a beacon at your location
         usage: /creatBeacon
+    theDarkness:
+        description: basic command
+        usage: /theDarkness 
+        aliases: [darkness, td, dark]

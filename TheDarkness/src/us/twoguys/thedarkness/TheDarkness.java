@@ -1,5 +1,6 @@
 package us.twoguys.thedarkness;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -85,19 +86,9 @@ public class TheDarkness extends JavaPlugin{
 	}
 	
 	public void loadCommandExecutors(){
-		GiveBeacon giveBeacon = new GiveBeacon(this);
-		this.getCommand("giveBeacon").setExecutor(giveBeacon);
 		
-		BeaconStats beaconStats = new BeaconStats(this);
-		this.getCommand("beaconStats").setExecutor(beaconStats);
+		CommandMaster commandMaster = new CommandMaster(this);
+		this.getCommand("theDarkness").setExecutor(commandMaster);
 		
-		Reload reload = new Reload(this);
-		this.getCommand("darkreload").setExecutor(reload);
-		
-		BeaconVision beaconSight = new BeaconVision(this);
-		this.getCommand("beaconSight").setExecutor(beaconSight);
-		
-		CreateBeacon createBeacon = new CreateBeacon(this);
-		this.getCommand("createBeacon").setExecutor(createBeacon);
 	}
 }
