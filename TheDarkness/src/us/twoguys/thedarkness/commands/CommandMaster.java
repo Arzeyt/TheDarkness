@@ -13,18 +13,25 @@ import us.twoguys.thedarkness.beacon.BeaconPlayerData;
 public class CommandMaster implements CommandExecutor{
 
 	TheDarkness plugin;
+	boolean isPlayer;
 
 	public CommandMaster(TheDarkness instance){
 		plugin = instance;
 	}
 	
 	public boolean onCommand(CommandSender sender, Command command, String arg2, String[] args) {
+<<<<<<< HEAD
 		if(!(sender instanceof Player) && (!args[0].equalsIgnoreCase("reload") || !args[0].equalsIgnoreCase("give"))){
 			sender.sendMessage("You must be logged in to do that");
 			return false;
+=======
+		if(!(sender instanceof Player)){
+			isPlayer = false;
+>>>>>>> branch 'master' of ssh://git@github.com/Arzeyt/TheDarkness.git
 		}
 		
 		Player player = (Player)sender;
+		
 		
 		try{if(args[0]==null){return false;}
 		}catch(Exception e){return generalUsage(player);}
@@ -39,7 +46,13 @@ public class CommandMaster implements CommandExecutor{
 			return createBeacon(player);
 			
 		}else if(args[0].equalsIgnoreCase("give")){
+<<<<<<< HEAD
 			if (args.length == 3){
+=======
+			if(args.length != 3){
+				return giveEssenceUsage(player);
+			}else{
+>>>>>>> branch 'master' of ssh://git@github.com/Arzeyt/TheDarkness.git
 				return giveEssence(args[1], args[2]);
 			}
 			
@@ -96,6 +109,11 @@ public class CommandMaster implements CommandExecutor{
 	private boolean reload(Player player){
 		plugin.config.loadConfiguration();
 		plugin.sendMessage(player, "Successfully reloaded config!");
+		return true;
+	}
+	
+	private boolean mustBeLoggedIn(){
+		plugin.log("You must be logged in to do that");
 		return true;
 	}
 	
