@@ -335,8 +335,6 @@ public class Config {
 				}
 			}
 		}
-		
-		getItemBeaconPointValue(Material.BONE);
 	}
 	
 	public void configError(String path){
