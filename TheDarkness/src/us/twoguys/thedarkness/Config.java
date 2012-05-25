@@ -12,6 +12,7 @@ public class Config {
 	
 	ArrayList<Integer> levelDistances = new ArrayList<Integer>();
 	ArrayList<String> levelMessages = new ArrayList<String>();
+	ArrayList<Integer> levelTorchConsume = new ArrayList<Integer>();
 	ArrayList<Integer> levelEffectFreq = new ArrayList<Integer>();
 	HashMap<Integer, Integer> itemPointValues = new HashMap<Integer, Integer>();
 	
@@ -134,6 +135,10 @@ public class Config {
 		return levelMessages.get(level);
 	}
 	
+	public int getLevelTorchConsumeTime(int level){
+		return levelTorchConsume.get(level);
+	}
+	
 	public ArrayList<Class<?>> getLevelEffectClasses(int level){
 		return new ArrayList<Class<?>>(levelEffects.get(level).keySet());
 	}
@@ -186,26 +191,36 @@ public class Config {
 			//Set Effects and Messages Arrays
 			HashMap<Class<?>, ArrayList<Integer>> effects = new HashMap<Class<?>, ArrayList<Integer>>();
 			boolean messageSet = false;
+			boolean tConsumeSet = false;
 			
 			plugin.debug("Checking Effects");
 			
 			for (String s: plugin.getConfig().getStringList("Darkness.Levels." + counter + ".Effects")){
 				ArrayList<Integer> ints = new ArrayList<Integer>();
 				
-				String[] split = s.split(":");
+				String[] split = s.split(": ");
 				String[] splitAll = s.split(" ");
 				
 				int pCounter = 1;
 				
 				plugin.debug("Effect Name: " + split[0]);
 				
-				if (split[0].equalsIgnoreCase("TorchConsume")){continue;}
-				
 				//Set Messages Array
 				if (split[0].equalsIgnoreCase("Message") && messageSet == false){
 					levelMessages.add(split[1]);
 					messageSet = true;
 					plugin.debug("Added Message: " + split[1]);
+				
+				//Set Torch Consume array
+				}else if (split[0].equalsIgnoreCase("TorchConsume")){
+					try{
+						levelTorchConsume.add(Integer.parseInt(split[1]));
+						tConsumeSet = true;
+					}catch(Exception e){
+						levelTorchConsume.add(123456789);
+						tConsumeSet = true;
+						configError("Darkness.Levels." + counter + "Effects.TorchConsume");
+					}
 					
 				//Set Effects Array
 				}else{
@@ -233,6 +248,10 @@ public class Config {
 			//If there was no message for the level
 			if (messageSet == false){
 				levelMessages.add("");
+			}
+			
+			if (tConsumeSet == false){
+				levelTorchConsume.add(123456789);
 			}
 			
 			levelEffects.add(effects);

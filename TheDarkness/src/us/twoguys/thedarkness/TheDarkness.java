@@ -15,6 +15,7 @@ import us.twoguys.thedarkness.listeners.*;
 import us.twoguys.thedarkness.schematics.*;
 import us.twoguys.thedarkness.visualization.*;
 import us.twoguys.thedarkness.mechanics.*;
+import us.twoguys.thedarkness.mechanics.effects.TorchConsume;
 
 public class TheDarkness extends JavaPlugin{
 
@@ -31,8 +32,9 @@ public class TheDarkness extends JavaPlugin{
 	public SchematicHandler schematic = new SchematicHandler(this);
 	public LocationCheckScheduler locCheck = new LocationCheckScheduler(this);
 	public BeaconListenerMaster beaconListenerMaster = new BeaconListenerMaster(this);
-	//Listeners
 	
+	//Listeners
+	public TorchConsume torchConsume = new TorchConsume(this);
 	
 	public void onEnable(){
 		config.loadConfiguration();
@@ -81,6 +83,7 @@ public class TheDarkness extends JavaPlugin{
 		
 		BeaconListener beaconListener = new BeaconListener(this);
 		pm.registerEvents(beaconListener, this);
+		pm.registerEvents(torchConsume, this);
 		
 		log("Listeners Loaded");
 	}

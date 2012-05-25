@@ -36,7 +36,7 @@ public class LifeDrain extends Effect{
 				
 				if (currentLevel != level){cancelTask(); return;}
 				
-				if (random.nextInt(100) + 1 <= setting.get(1)){
+				if (passPercentChance(setting.get(1))){
 					player.damage(setting.get(0));
 				}
 			}

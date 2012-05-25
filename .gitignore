@@ -122,3 +122,7 @@ TheDarkness/bin/us/twoguys/thedarkness/commands/CreateBeacon.class
 TheDarkness/bin/us/twoguys/thedarkness/listeners/BeaconListenerMaster.class
 
 TheDarkness/bin/us/twoguys/thedarkness/commands/BeaconVision.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/TorchConsume$1.class
+
+TheDarkness/bin/us/twoguys/thedarkness/commands/CommandMaster.class

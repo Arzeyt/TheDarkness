@@ -24,6 +24,10 @@ public class Effect {
 		this.level = level;
 	}
 	
+	public boolean passPercentChance(int i){
+		return (random.nextInt(100) + 1 <= i ? true : false);
+	}
+	
 	public int getFrequency(int i){
 		return (setting.size() >= i + 1 ? setting.get(i) : plugin.config.getDefaultEffectCheckFreq(level));
 	}
