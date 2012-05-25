@@ -14,7 +14,7 @@ public class BeaconVis {
 
 	private Location loc;
 	private int height = 255;
-	private int interval = 0;
+	private int interval = 3;
 	private Player player;
 	TheDarkness plugin;
 	
@@ -39,9 +39,10 @@ public class BeaconVis {
 		Block block;
 		
 		while(y < height){
-			block = loc.getWorld().getBlockAt(x, y, z);
-			blocks.add(block);
-			y ++;
+				block = loc.getWorld().getBlockAt(x, y, z);
+				blocks.add(block);
+				y = y + interval;
+			
 		}
 		for(Block b : blocks){
 			plugin.visualizerCore.visualizeBlock(player, b.getLocation() , Material.GLOWSTONE);

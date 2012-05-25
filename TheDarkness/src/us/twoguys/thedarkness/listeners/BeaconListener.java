@@ -21,7 +21,6 @@ import us.twoguys.thedarkness.beacon.BeaconData;
 public class BeaconListener implements Listener{
 
 	TheDarkness plugin;
-	int c = 0; //set to 0 to disable
 	Sign s;
 	
 	public BeaconListener(TheDarkness instance){
@@ -35,13 +34,14 @@ public class BeaconListener implements Listener{
 		
 		if (block == null){return;}
 		if (block.getType()==Material.AIR){return;}
-		if(c == 1){
+		if(plugin.beaconListenerMaster.getPlayerString(player).equals("loadSchematic")){
 			plugin.schematic.loadSchematic();
-			c = 2;
+			plugin.beaconListenerMaster.setString(player, "pasteSchematic");
 			
-		}else if(c==2){
+		}else if(plugin.beaconListenerMaster.getPlayerString(player).equals("pasteSchematic")){
 			plugin.schematic.paste(player, block.getLocation());
-			c = 1;
+			plugin.beaconListenerMaster.setString(player, "null");
+			
 		}else if(beaconPlace(player, block)){
 			if(plugin.beaconPlayerDataMaster.canCreateBeacon(player, true)){
 				BeaconData bd = new BeaconData(block.getLocation());
@@ -51,6 +51,7 @@ public class BeaconListener implements Listener{
 			}else{
 				plugin.sendMessage(player, "You dont have enough dark essence. You need at least "+plugin.config.getBeaconCost());
 			}
+			
 		}else if(extraction(player, block)){
 			plugin.debug("Extraction");
 
