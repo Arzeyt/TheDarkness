@@ -1,7 +1,6 @@
 package us.twoguys.thedarkness.mechanics;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
-import us.twoguys.thedarkness.mechanics.effects.*;
 
 public class LocationCheckScheduler {
 

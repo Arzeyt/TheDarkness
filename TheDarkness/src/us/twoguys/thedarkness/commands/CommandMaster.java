@@ -36,7 +36,7 @@ public class CommandMaster implements CommandExecutor{
 		if(args[0].equalsIgnoreCase("stats")){
 			return stats(player);
 			
-		}else if(args[0].equalsIgnoreCase("beaconvision")){
+		}else if(args[0].equalsIgnoreCase("beaconvision") || args[0].equalsIgnoreCase("vision")){
 			return beaconVision(player);
 			
 		}else if(args[0].equalsIgnoreCase("createbeacon") || args[0].equalsIgnoreCase("create")){
@@ -45,6 +45,8 @@ public class CommandMaster implements CommandExecutor{
 		}else if(args[0].equalsIgnoreCase("give")){
 			if (args.length == 3){
 				return giveEssence(args[1], args[2]);
+			}else{
+				return giveEssenceUsage(player);
 			}
 		}else if(args[0].equalsIgnoreCase("reload")){
 			reload(player);
@@ -84,10 +86,9 @@ public class CommandMaster implements CommandExecutor{
 		BeaconPlayerData beaconPlayerData = plugin.beaconPlayerDataMaster.getData(Bukkit.getPlayer(player));
 		beaconPlayerData.incrementPoints(amount);
 		
-		plugin.sendMessage(Bukkit.getPlayer(player), ChatColor.GREEN + "You have given " + player + " " + amount + " beaconPoints");
-
+		plugin.sendMessage(Bukkit.getPlayer(player), ChatColor.GREEN + "You have given " + player + " " + amount + " dark essence");
 	
-		Bukkit.getServer().getPlayer(player).sendMessage(ChatColor.GREEN+"You have recieved "+amount+" beacons");
+		Bukkit.getServer().getPlayer(player).sendMessage(ChatColor.GREEN+"You have recieved "+amount+" dark essence");
 		return true;
 	}
 	

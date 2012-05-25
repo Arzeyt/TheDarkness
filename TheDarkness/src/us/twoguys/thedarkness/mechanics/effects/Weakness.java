@@ -24,7 +24,7 @@ public class Weakness extends Effect{
 	
 	public Weakness(TheDarkness instance, Player player, int level){
 		super(instance, player, level);
-		this.setting = plugin.config.getEffectsSettings(this.getClass(), level);
+		this.setting = plugin.config.getEffectsSettings(this.getClass(), 2);
 		applyWeakness();
 	}
 	
