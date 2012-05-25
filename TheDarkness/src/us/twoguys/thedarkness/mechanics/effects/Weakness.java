@@ -16,15 +16,14 @@ public class Weakness extends Effect{
 	 * Params:
 	 * 		Mandatory:
 	 * 			- setting[0]: % chance
-	 * 			- setting[1]: duration
+	 * 			- setting[1]: strength
+	 * 			- setting[2]: duration
 	 * 		Optional:
-	 * 			- setting[2]: frequency (ticks)
+	 * 			- setting[3]: frequency (ticks)
 	 */
-	TheDarkness plugin;
-	
 	public Weakness(TheDarkness instance, Player player, int level){
 		super(instance, player, level);
-		this.setting = plugin.config.getEffectsSettings(this.getClass(), 2);
+		this.setting = plugin.config.getEffectsSettings(this.getClass(), level);
 		applyWeakness();
 	}
 	
@@ -39,7 +38,7 @@ public class Weakness extends Effect{
 					cancelTask();
 				}
 				if(passPercentChance(setting.get(0))){
-					player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, setting.get(1), 1));
+					player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, setting.get(1), setting.get(2)*20));
 				}
 			}
 			
