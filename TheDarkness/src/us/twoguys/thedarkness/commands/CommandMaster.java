@@ -20,14 +20,11 @@ public class CommandMaster implements CommandExecutor{
 	}
 	
 	public boolean onCommand(CommandSender sender, Command command, String arg2, String[] args) {
-<<<<<<< HEAD
 		if(!(sender instanceof Player) && (!args[0].equalsIgnoreCase("reload") || !args[0].equalsIgnoreCase("give"))){
 			sender.sendMessage("You must be logged in to do that");
 			return false;
-=======
-		if(!(sender instanceof Player)){
+		}else if(!(sender instanceof Player)){
 			isPlayer = false;
->>>>>>> branch 'master' of ssh://git@github.com/Arzeyt/TheDarkness.git
 		}
 		
 		Player player = (Player)sender;
@@ -46,16 +43,9 @@ public class CommandMaster implements CommandExecutor{
 			return createBeacon(player);
 			
 		}else if(args[0].equalsIgnoreCase("give")){
-<<<<<<< HEAD
 			if (args.length == 3){
-=======
-			if(args.length != 3){
-				return giveEssenceUsage(player);
-			}else{
->>>>>>> branch 'master' of ssh://git@github.com/Arzeyt/TheDarkness.git
 				return giveEssence(args[1], args[2]);
 			}
-			
 		}else if(args[0].equalsIgnoreCase("reload")){
 			reload(player);
 		}

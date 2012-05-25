@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -91,7 +92,8 @@ public class TheDarkness extends JavaPlugin{
 	public void loadCommandExecutors(){
 		
 		CommandMaster commandMaster = new CommandMaster(this);
-		this.getCommand("theDarkness-cmd").setExecutor(commandMaster);
+		this.getCommand("theDarkness").setExecutor(commandMaster);
 		
 	}
+	
 }
