@@ -33,6 +33,7 @@ public class TheDarkness extends JavaPlugin{
 	public SchematicHandler schematic = new SchematicHandler(this);
 	public LocationCheckScheduler locCheck = new LocationCheckScheduler(this);
 	public BeaconListenerMaster beaconListenerMaster = new BeaconListenerMaster(this);
+	public LocTools locTools = new LocTools(this);
 	
 	//Listeners
 	public TorchConsume torchConsume = new TorchConsume(this);

@@ -2,6 +2,8 @@ package us.twoguys.thedarkness.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -70,6 +72,12 @@ public class CommandMaster implements CommandExecutor{
 	}
 	private boolean beaconVision(Player player){
 		plugin.visualizerCore.visualizeBeacons(player);
+		for(int x = 0; x < 1; x ++){
+			Location loc = plugin.locTools.randomGround(player.getLocation(), 5);
+			plugin.visualizerCore.visualizeBlock(player, loc, Material.GLOWSTONE);
+			
+			plugin.debug("random block visualized " +plugin.beaconMaster.getDistance(loc, player.getLocation())+" blocks away");
+		}
 		return true;
 	}
 	
@@ -100,11 +108,6 @@ public class CommandMaster implements CommandExecutor{
 	private boolean reload(Player player){
 		plugin.config.loadConfiguration();
 		plugin.sendMessage(player, "Successfully reloaded config!");
-		return true;
-	}
-	
-	private boolean mustBeLoggedIn(){
-		plugin.log("You must be logged in to do that");
 		return true;
 	}
 	
