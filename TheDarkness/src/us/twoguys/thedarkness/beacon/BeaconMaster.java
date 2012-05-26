@@ -62,7 +62,7 @@ public class BeaconMaster {
 		return beacons;
 	}
 	
-	private double getDistance(Location loc1, Location loc2){
+	public double getDistance(Location loc1, Location loc2){
 		double distance = Math.sqrt(Math.pow(loc1.getX()-loc2.getX(), 2) + Math.pow(loc1.getZ()-loc2.getZ(), 2));
 
 		return distance;

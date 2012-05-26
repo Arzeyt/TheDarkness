@@ -47,6 +47,7 @@ public class BeaconVis {
 		for(Block b : blocks){
 			plugin.visualizerCore.visualizeBlock(player, b.getLocation() , Material.GLOWSTONE);
 		}
+		
 	}
 	
 	public void visualize(BeaconData beacon){
