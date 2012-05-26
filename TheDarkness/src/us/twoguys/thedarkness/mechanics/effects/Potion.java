@@ -1,33 +1,36 @@
 package us.twoguys.thedarkness.mechanics.effects;
 
+import java.util.ArrayList;
+
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import us.twoguys.thedarkness.TheDarkness;
 
-public class Weakness extends Effect{
+public class Potion extends Effect{
 
 	/**
-	 * @effect: LifeDrain
-	 * @Description: weakens the player
+	 * @effect: PotionEffect
+	 * @Description: Applys a potion effect to the player
 	 */
 	/*
 	 * Params:
 	 * 		Mandatory:
-	 * 			- setting[0]: % chance
-	 * 			- setting[1]: duration
-	 * 			- setting[2]: strength
+	 * 			- setting[0]: potion id
+	 * 			- setting[1]: % chance
+	 * 			- setting[2]: duration
+	 * 			- setting[3]: strength
 	 * 		Optional:
-	 * 			- setting[3]: frequency (ticks)
+	 * 			- setting[4]: frequency (ticks)
 	 */
-	public Weakness(TheDarkness instance, Player player, int level){
+	public Potion(TheDarkness instance, Player player, int level, ArrayList<Integer> settings){
 		super(instance, player, level);
-		this.setting = plugin.config.getEffectsSettings(this.getClass(), level);
-		applyWeakness();
+		this.setting = settings;
+		applyPotion();
 	}
 	
-	private void applyWeakness() {
+	private void applyPotion() {
 		
 		taskId = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 
@@ -35,13 +38,19 @@ public class Weakness extends Effect{
 				int currentLevel = plugin.locCheck.getDarknessLevel(player);
 				
 				if(currentLevel != level){
+					if (currentLevel == 0){
+						player.removePotionEffect(PotionEffectType.getById(setting.get(0)));
+					}
 					cancelTask();
+					return;
 				}
-				if(passPercentChance(setting.get(0))){
-					player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, setting.get(1)*20, setting.get(2)));
+				
+				if(passPercentChance(setting.get(1))){
+					if ((setting.get(0) == PotionEffectType.REGENERATION.getId() && player.getHealth() < 20) || setting.get(0) != PotionEffectType.REGENERATION.getId())
+					player.addPotionEffect(new PotionEffect(PotionEffectType.getById(setting.get(0)), setting.get(2)*20, setting.get(3) - 1));
 				}
 			}
 			
-		}, 0L, getFrequency(2));
+		}, 0L, getFrequency(4));
 	}
 }

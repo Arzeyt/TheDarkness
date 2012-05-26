@@ -126,3 +126,11 @@ TheDarkness/bin/us/twoguys/thedarkness/commands/BeaconVision.class
 TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/TorchConsume$1.class
 
 TheDarkness/bin/us/twoguys/thedarkness/commands/CommandMaster.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Weakness$1.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Weakness.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Potion$1.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Potion.class

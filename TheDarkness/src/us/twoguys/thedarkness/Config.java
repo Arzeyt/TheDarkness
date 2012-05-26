@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.potion.PotionEffectType;
 
 public class Config {
 
@@ -17,6 +18,7 @@ public class Config {
 	HashMap<Integer, Integer> itemPointValues = new HashMap<Integer, Integer>();
 	
 	ArrayList<HashMap<Class<?>, ArrayList<Integer>>> levelEffects = new ArrayList<HashMap<Class<?>, ArrayList<Integer>>>();
+	ArrayList<ArrayList<ArrayList<Integer>>> levelPotions = new ArrayList<ArrayList<ArrayList<Integer>>>();
 	ArrayList<HashMap<String, ArrayList<Integer>>> levelMobs = new ArrayList<HashMap<String, ArrayList<Integer>>>();
 	ArrayList<HashMap<Class<?>, ArrayList<Integer>>> levelMirages = new ArrayList<HashMap<Class<?>, ArrayList<Integer>>>();
 	
@@ -148,6 +150,10 @@ public class Config {
 		return levelEffects.get(level).get(effect);
 	}
 	
+	public ArrayList<ArrayList<Integer>> getLevelPotionEffects(int level){
+		return levelPotions.get(level);
+	}
+	
 	public ArrayList<String> getLevelMobTypes(int level){
 		return new ArrayList<String>(levelMobs.get(level).keySet());
 	}
@@ -191,6 +197,7 @@ public class Config {
 			
 			//Set Effects and Messages Arrays
 			HashMap<Class<?>, ArrayList<Integer>> effects = new HashMap<Class<?>, ArrayList<Integer>>();
+			ArrayList<ArrayList<Integer>> potions = new ArrayList<ArrayList<Integer>>();
 			boolean messageSet = false;
 			boolean tConsumeSet = false;
 			
@@ -205,43 +212,63 @@ public class Config {
 				int pCounter = 1;
 				
 				plugin.debug("Effect Name: " + split[0]);
-				
-				//Set Messages Array
-				if (split[0].equalsIgnoreCase("Message") && messageSet == false){
-					levelMessages.add(split[1]);
-					messageSet = true;
-					plugin.debug("Added Message: " + split[1]);
-				
-				//Set Torch Consume array
-				}else if (split[0].equalsIgnoreCase("TorchConsume")){
-					try{
-						levelTorchConsume.add(Integer.parseInt(split[1]));
-						tConsumeSet = true;
-					}catch(Exception e){
-						levelTorchConsume.add(123456789);
-						tConsumeSet = true;
-						configError("Darkness.Levels." + counter + "Effects.TorchConsume");
+
+				//Attempt to add potion Effect
+				try{
+					PotionEffectType pot = PotionEffectType.getByName(split[0].toUpperCase());
+					ints.add(pot.getId());
+					
+					plugin.debug("Found Potion: " + split[0].toUpperCase());
+					
+					while (pCounter < splitAll.length){
+						ints.add(Integer.parseInt(splitAll[pCounter]));
+						plugin.debug("Adding to Int array: " + splitAll[pCounter]);
+						pCounter++;
 					}
 					
-				//Set Effects Array
-				}else{
+					potions.add(ints);
 					
-					try {
-						Class<?> c = Class.forName("us.twoguys.thedarkness.mechanics.effects." + split[0]);
-						
-						plugin.debug("Found Class: us.twoguys.thedarkness.mechanics.effects." + split[0]);
-						
-						while (pCounter < splitAll.length){
-							ints.add(Integer.parseInt(splitAll[pCounter]));
-							plugin.debug("Adding to Int array: " + splitAll[pCounter]);
-							pCounter++;
+				}catch(Exception e){
+					//Set Messages Array
+					if (split[0].equalsIgnoreCase("Message") && messageSet == false){
+						levelMessages.add(split[1]);
+						messageSet = true;
+						plugin.debug("Added Message: " + split[1]);
+					
+					//Set Torch Consume array
+					}else if (split[0].equalsIgnoreCase("TorchConsume")){
+						try{
+							int i = Integer.parseInt(split[1]);
+							levelTorchConsume.add(i);
+							tConsumeSet = true;
+							
+							plugin.debug("Added Torch Consume time: " + i + " seconds");
+						}catch(Exception e1){
+							levelTorchConsume.add(123456789);
+							tConsumeSet = true;
+							configError("Darkness.Levels." + counter + "Effects.TorchConsume");
 						}
 						
-						effects.put(c, ints);
-						plugin.debug("Successully added Effect class and settings to hashMap");
-					} catch (ClassNotFoundException e) {
-						configError("Darkness.Levels." + counter + ".Effects." + split[0]);
-						continue;
+					//Set Effects Array
+					}else{
+						
+						try {
+							Class<?> c = Class.forName("us.twoguys.thedarkness.mechanics.effects." + split[0]);
+							
+							plugin.debug("Found Class: us.twoguys.thedarkness.mechanics.effects." + split[0]);
+							
+							while (pCounter < splitAll.length){
+								ints.add(Integer.parseInt(splitAll[pCounter]));
+								plugin.debug("Adding to Int array: " + splitAll[pCounter]);
+								pCounter++;
+							}
+							
+							effects.put(c, ints);
+							plugin.debug("Successully added Effect class and settings to hashMap");
+						} catch (ClassNotFoundException e2) {
+							configError("Darkness.Levels." + counter + ".Effects." + split[0]);
+							continue;
+						}
 					}
 				}
 			}
@@ -251,9 +278,13 @@ public class Config {
 				levelMessages.add("");
 			}
 			
+			//If no Torch consume for the level
 			if (tConsumeSet == false){
 				levelTorchConsume.add(123456789);
 			}
+			
+			levelPotions.add(potions);
+			plugin.debug("Added all Potions for this level");
 			
 			levelEffects.add(effects);
 			plugin.debug("Added all effects for this level");
