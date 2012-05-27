@@ -1,5 +1,7 @@
 package us.twoguys.thedarkness.commands;
 
+import java.util.HashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -11,11 +13,13 @@ import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.beacon.BeaconPlayerData;
+import us.twoguys.thedarkness.schematics.SchematicHandler;
 
 public class CommandMaster implements CommandExecutor{
 
 	TheDarkness plugin;
 	boolean isPlayer;
+	HashMap<Player, SchematicHandler> schematics = new HashMap<Player, SchematicHandler>();
 
 	public CommandMaster(TheDarkness instance){
 		plugin = instance;
@@ -50,8 +54,21 @@ public class CommandMaster implements CommandExecutor{
 			}else{
 				return giveEssenceUsage(player);
 			}
+			
 		}else if(args[0].equalsIgnoreCase("reload")){
 			reload(player);
+		/*
+		}else if(args[0].equalsIgnoreCase("load")){
+			if(args.length < 2){
+				return loadSchematicUsage(player);
+			}
+			loadSchematic(args[1]);
+			*/
+		}else if(args[0].equalsIgnoreCase("paste")){
+			if(args.length < 2){
+				return pasteSchematicUsage(player);
+			}
+			pasteSchematic(player, player.getLocation(), args[1]);
 		}
 		return true;
 	}
@@ -108,6 +125,16 @@ public class CommandMaster implements CommandExecutor{
 	private boolean reload(Player player){
 		plugin.config.loadConfiguration();
 		plugin.sendMessage(player, "Successfully reloaded config!");
+		return true;
+	}
+	
+	private boolean pasteSchematic(Player player, Location loc, String schematicName){
+		plugin.schematicHandler.paste(player, loc, schematicName);
+		return true;
+	}
+	
+	private boolean pasteSchematicUsage(Player player){
+		plugin.sendMessage(player, "/theDarkess paste <schematic name>");
 		return true;
 	}
 	

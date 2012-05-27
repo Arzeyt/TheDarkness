@@ -30,7 +30,7 @@ public class TheDarkness extends JavaPlugin{
 	public BeaconPlayerDataMaster beaconPlayerDataMaster = new BeaconPlayerDataMaster(this);
 	private BeaconPlayerDataPersister beaconPlayerDataPersister = new BeaconPlayerDataPersister(this);
 	public VisualizerCore visualizerCore = new VisualizerCore(this);
-	public SchematicHandler schematic = new SchematicHandler(this);
+	public SchematicHandler schematicHandler = new SchematicHandler(this);
 	public LocationCheckScheduler locCheck = new LocationCheckScheduler(this);
 	public BeaconListenerMaster beaconListenerMaster = new BeaconListenerMaster(this);
 	public LocTools locTools = new LocTools(this);
@@ -47,6 +47,7 @@ public class TheDarkness extends JavaPlugin{
 		loadCommandExecutors();
 		loadListeners();
 		
+		schematicHandler.loadAllSchematics();
 		locCheck.checkPlayerLocations();
 		
 		log("enabled");

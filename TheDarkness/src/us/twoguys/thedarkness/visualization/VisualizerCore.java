@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftChunk;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -34,6 +35,16 @@ public class VisualizerCore {
 
 	}
 	
+	public void visualizeBlock(Player player, Location loc, Block block){
+		saveChunk(player, loc.getChunk());
+		player.sendBlockChange(loc, block.getTypeId(), block.getData());
+	}
+	
+	public void visualizeBlock(Player player, Location loc, byte blockID, byte blockData) {
+		saveChunk(player, loc.getChunk());
+		player.sendBlockChange(loc, blockID, blockData);
+	}
+
 	public HashSet<Chunk> getPlayerChunkSet(Player player){
 		HashSet<Chunk> playerChunkSet = new HashSet<Chunk>();
 		for(ChunkPlayer chunk : getChunkSet()){

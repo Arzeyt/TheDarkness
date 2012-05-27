@@ -34,15 +34,8 @@ public class BeaconListener implements Listener{
 		
 		if (block == null){return;}
 		if (block.getType()==Material.AIR){return;}
-		if(loadSchematic(player)){
-			plugin.schematic.loadSchematic();
-			plugin.beaconListenerMaster.setString(player, "pasteSchematic");
 			
-		}else if(pasteSchematic(player)){
-			plugin.schematic.paste(player, block.getLocation());
-			plugin.beaconListenerMaster.setString(player, "null");
-			
-		}else if(beaconPlace(player, block)){
+		if(beaconPlace(player, block)){
 			if(plugin.beaconPlayerDataMaster.canCreateBeacon(player, true)){
 				BeaconData bd = new BeaconData(block.getLocation());
 				plugin.beaconMaster.createBeacon(player, bd);
