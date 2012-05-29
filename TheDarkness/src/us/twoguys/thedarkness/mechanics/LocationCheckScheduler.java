@@ -10,6 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.mechanics.effects.Potion;
+import us.twoguys.thedarkness.mechanics.mirages.Mirage;
 
 public class LocationCheckScheduler {
 
@@ -78,6 +79,7 @@ public class LocationCheckScheduler {
 							plugin.debug("Level potions was empty");
 							continue;
 						}
+						
 					}
 				}
 			}

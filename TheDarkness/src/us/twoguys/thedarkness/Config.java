@@ -167,7 +167,7 @@ public class Config {
 	}
 	
 	public ArrayList<Integer> getMirageSettings(Class<?> mirage, int level){
-		return levelEffects.get(level).get(mirage);
+		return levelMirages.get(level).get(mirage);
 	}
 	
 	public void setLevels(){
