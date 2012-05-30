@@ -88,7 +88,7 @@ public class Config {
 		}
 		
 		if (distance < levelDistances.get(1)){
-			plugin.debug("Distance is less than lvl 1");
+			//plugin.debug("Distance is less than lvl 1");
 			return 0;
 		}
 		

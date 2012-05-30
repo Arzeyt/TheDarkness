@@ -57,13 +57,7 @@ public class CommandMaster implements CommandExecutor{
 			
 		}else if(args[0].equalsIgnoreCase("reload")){
 			reload(player);
-		/*
-		}else if(args[0].equalsIgnoreCase("load")){
-			if(args.length < 2){
-				return loadSchematicUsage(player);
-			}
-			loadSchematic(args[1]);
-			*/
+	
 		}else if(args[0].equalsIgnoreCase("paste")){
 			if(args.length < 2){
 				return pasteSchematicUsage(player);
@@ -89,12 +83,6 @@ public class CommandMaster implements CommandExecutor{
 	}
 	private boolean beaconVision(Player player){
 		plugin.visualizerCore.visualizeBeacons(player);
-		for(int x = 0; x < 1; x ++){
-			Location loc = plugin.locTools.randomGround(player.getLocation(), 5);
-			plugin.visualizerCore.visualizeBlock(player, loc, Material.GLOWSTONE);
-			
-			plugin.debug("random block visualized " +plugin.beaconMaster.getDistance(loc, player.getLocation())+" blocks away");
-		}
 		return true;
 	}
 	

@@ -93,6 +93,9 @@ public class LocationCheckScheduler {
 		}else{
 			if (playerLevels.get(player) == level){
 				return false;
+			}else if(player.isOnline()==false){
+				playerLevels.remove(player);
+				return true;
 			}else{
 				playerLevels.remove(player);
 				playerLevels.put(player, level);
@@ -104,4 +107,5 @@ public class LocationCheckScheduler {
 	public int getDarknessLevel(Player player){
 		return playerLevels.get(player);
 	}
+	
 }

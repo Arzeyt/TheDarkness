@@ -2,9 +2,12 @@ package us.twoguys.thedarkness.visualization;
 
 import java.util.HashSet;
 
+import net.minecraft.server.Packet4UpdateTime;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
@@ -38,13 +41,13 @@ public class BeaconVis {
 		int y = 0;
 		Block block;
 		
-		while(y < height){
+		while(y < height){ //construct blocks list
 				block = loc.getWorld().getBlockAt(x, y, z);
 				blocks.add(block);
 				y = y + interval;
 			
 		}
-		for(Block b : blocks){
+		for(Block b : blocks){ // paste list
 			plugin.visualizerCore.visualizeBlock(player, b.getLocation() , Material.GLOWSTONE);
 		}
 		

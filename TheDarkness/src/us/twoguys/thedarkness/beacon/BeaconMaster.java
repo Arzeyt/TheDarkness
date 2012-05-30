@@ -11,7 +11,7 @@ import us.twoguys.thedarkness.visualization.BeaconVis;
 
 public class BeaconMaster {
 
-	TheDarkness plugin;
+	public TheDarkness plugin;
 	
 	HashSet<BeaconData> beacons = new HashSet<BeaconData>();
 	
@@ -50,7 +50,7 @@ public class BeaconMaster {
 			return;
 		}
 		for(Player p : Bukkit.getServer().getOnlinePlayers()){
-			if(getDistance(beacon.getLocation(), p.getLocation()) <= Bukkit.getViewDistance()){
+			if(plugin.locTools.getDistance(beacon.getLocation(), p.getLocation()) <= Bukkit.getViewDistance()){
 				BeaconVis bv = new BeaconVis(plugin, p, beacon.getLocation());
 				bv.visualize();
 			}
@@ -62,20 +62,13 @@ public class BeaconMaster {
 		return beacons;
 	}
 	
-	public double getDistance(Location loc1, Location loc2){
-		double distance = Math.sqrt(Math.pow(loc1.getX()-loc2.getX(), 2) + Math.pow(loc1.getZ()-loc2.getZ(), 2));
-
-		return distance;
-		
-	}
-	
 	public int distanceFromNearestBeacon(Location loc){
 		int distance = 123456789;
 		
 		for(BeaconData beacon : plugin.beaconMaster.getBeacons()){
 			if(beacon.getWorldName().equals(loc.getWorld().getName())){
 				
-				int newDistance = (int) getDistance(loc, beacon.getLocation());
+				int newDistance = (int) plugin.locTools.getDistance(loc, beacon.getLocation());
 				
 				if(distance > newDistance) 
 					distance = newDistance;

@@ -61,7 +61,7 @@ public class LocTools {
 	 * @param block
 	 * @return returns the y position of the ground block nearest to the passed in block, but above it.
 	 */
-	private int getHighGround(Block block){
+	public int getHighGround(Block block){
 		for( int y = block.getY(); y < 256; y++){
 			int ydif = y - block.getY();
 			Block b = block.getRelative(0, ydif, 0);
@@ -78,7 +78,7 @@ public class LocTools {
 	 * @param block
 	 * @return returns the y position of the ground block nearest to the passed in block, but below it.
 	 */
-	private int getLowGround(Block block){
+	public int getLowGround(Block block){
 		for(int y = block.getY(); 0 < y; y--){
 			int ydif = y-block.getY();
 			Block b = block.getRelative(0, ydif, 0);
@@ -89,5 +89,12 @@ public class LocTools {
 		}
 		plugin.debug("low ground returned -1");
 		return -1;
+	}
+
+	public double getDistance(Location loc1, Location loc2){
+		double distance = Math.sqrt(Math.pow(loc1.getX()-loc2.getX(), 2) + Math.pow(loc1.getZ()-loc2.getZ(), 2));
+	
+		return distance;
+		
 	}
 }
