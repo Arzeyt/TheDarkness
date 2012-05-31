@@ -140,7 +140,7 @@ public class Time extends Effect{
 
 			}
 			
-		}, 0L, 80);
+		}, 0L, 60);
 		
 	}
 }
