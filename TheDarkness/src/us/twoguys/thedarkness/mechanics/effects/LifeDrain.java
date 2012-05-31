@@ -33,6 +33,9 @@ public class LifeDrain extends Effect{
 		taskId = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			
 			public void run(){
+				if(player.isOnline()==false){
+					cancelTask();
+				}
 				int currentLevel = plugin.locCheck.getDarknessLevel(player);
 				
 				if (currentLevel != level){cancelTask(); return;}

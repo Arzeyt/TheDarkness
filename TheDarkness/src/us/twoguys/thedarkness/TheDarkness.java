@@ -16,6 +16,7 @@ import us.twoguys.thedarkness.listeners.*;
 import us.twoguys.thedarkness.schematics.*;
 import us.twoguys.thedarkness.visualization.*;
 import us.twoguys.thedarkness.mechanics.*;
+import us.twoguys.thedarkness.mechanics.effects.TimeMaster;
 import us.twoguys.thedarkness.mechanics.effects.TorchConsume;
 
 public class TheDarkness extends JavaPlugin{
@@ -34,6 +35,7 @@ public class TheDarkness extends JavaPlugin{
 	public LocationCheckScheduler locCheck = new LocationCheckScheduler(this);
 	public BeaconListenerMaster beaconListenerMaster = new BeaconListenerMaster(this);
 	public LocTools locTools = new LocTools(this);
+	public TimeMaster timeMaster = new TimeMaster(this);
 	
 	//Listeners
 	public TorchConsume torchConsume = new TorchConsume(this);
