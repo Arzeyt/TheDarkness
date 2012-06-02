@@ -134,3 +134,23 @@ TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Weakness.class
 TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Potion$1.class
 
 TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Potion.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Precipitation$1.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Precipitation.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Time$1.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Time$2.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Time$3.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/Time.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/effects/TimeMaster.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/mirages/Spread$1.class
+
+TheDarkness/bin/us/twoguys/thedarkness/mechanics/mirages/Spread.class
+
+TheDarkness/bin/us/twoguys/thedarkness/schematics/SchematicObject.class

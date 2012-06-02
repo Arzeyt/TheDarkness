@@ -77,14 +77,13 @@ public class LocationCheckScheduler {
 							}
 						}else{
 							plugin.debug("Level potions was empty");
-							continue;
 						}
 						
 						ArrayList<Class<?>> mirages = plugin.config.getLevelMirageClasses(level);
 						
+						//Mirages
 						if (!mirages.isEmpty()){
 							for (Class<?> c: mirages){
-								
 								Constructor<?> cons = null;
 								
 								try{
@@ -101,6 +100,8 @@ public class LocationCheckScheduler {
 									e.printStackTrace();
 								}
 							}
+						}else{
+							plugin.debug("Mirages was empty");
 						}
 					}
 				}
