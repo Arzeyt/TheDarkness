@@ -24,10 +24,11 @@ public class Spread extends Mirage{
 	public Spread(TheDarkness instance, Player player, int level) {
 		super(instance, player, level);
 		setting = plugin.config.getMirageSettings(this.getClass(), level);
-		spread();
+		applySpread();
+		plugin.debug("spread activated");
 	}
 
-	private void spread() {
+	private void applySpread() {
 		
 		taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 

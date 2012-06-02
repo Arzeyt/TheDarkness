@@ -11,15 +11,19 @@ import us.twoguys.thedarkness.TheDarkness;
 /*
  * Madatory:
  * 		setting[0] = weather true / false (1/2)
+ * 		setting[1] = rate
  * Optional:
- * 		setting[1] = frequency
+ * 		setting[2] = frequency
  */
 public class Precipitation extends Effect{
 
+	int rate;
+	int i;
+	
 	public Precipitation(TheDarkness instance, Player player, int level) {
 		super(instance, player, level);
-		
 		this.setting = plugin.config.getEffectsSettings(this.getClass(), level);
+		rate = setting.get(1);
 		
 		applyPercipitation();
 	}
@@ -38,8 +42,11 @@ public class Precipitation extends Effect{
 			@Override
 			public void run() {
 				if(continueCheck(player)){
-					plugin.debug("sent weather packet");
-					p.netServerHandler.sendPacket(weatherPacket);
+					if(i%rate == 0){
+						plugin.debug("sent weather packet");
+						p.netServerHandler.sendPacket(weatherPacket);
+					}
+					i++;
 				}else{
 					plugin.debug("Sent clear weather packet");
 					p.netServerHandler.sendPacket(clearWeatherPacket);
@@ -48,6 +55,6 @@ public class Precipitation extends Effect{
 				
 			}
 			
-		}, 0L, getFrequency(1));
+		}, 0L, getFrequency(2));
 	}
 }
