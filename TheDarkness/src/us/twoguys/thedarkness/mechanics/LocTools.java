@@ -18,16 +18,16 @@ public class LocTools {
 	}
 	
 	public Location getRandomGround(Location loc, int distance){
-		plugin.debug("ground loc check*********************");
+		//plugin.debug("ground loc check*********************");
 		Random rand = new Random();
 		
 		int x = (loc.getBlockX() - distance);
 		int xOffset=rand.nextInt(distance*2);
-		plugin.debug("x = "+x+", and xOffset = "+xOffset);
+		//plugin.debug("x = "+x+", and xOffset = "+xOffset);
 		
 		int z = (loc.getBlockZ() - distance);
 		int zOffset=rand.nextInt(distance*2);
-		plugin.debug("z = "+z+", and zOffset = "+zOffset);
+	//	plugin.debug("z = "+z+", and zOffset = "+zOffset);
 		
 		Location newLoc = new Location(loc.getWorld(), x+xOffset, loc.getBlockY(), z+zOffset);
 		Block block=newLoc.getBlock();
@@ -52,7 +52,7 @@ public class LocTools {
 		}else{
 			y = lowGround;
 		}
-		plugin.debug("ground block is at " + block.getX() +" "+y+" "+block.getZ());
+		//plugin.debug("ground block is at " + block.getX() +" "+y+" "+block.getZ());
 		return Bukkit.getServer().getWorld(block.getLocation().getWorld().getName()).getBlockAt(block.getX(), y, block.getZ());
 	}
 	
@@ -66,7 +66,7 @@ public class LocTools {
 			int ydif = y - block.getY();
 			Block b = block.getRelative(0, ydif, 0);
 			if(b.getType()!=Material.AIR && b.getRelative(0, 1, 0).getType() == Material.AIR && b.getRelative(0, 2, 0).getType() == Material.AIR){
-				plugin.debug("high ground block y position is "+y);
+			//	plugin.debug("high ground block y position is "+y);
 				return y;
 			}
 		}
@@ -83,7 +83,7 @@ public class LocTools {
 			int ydif = y-block.getY();
 			Block b = block.getRelative(0, ydif, 0);
 			if(b.getType()!=Material.AIR && b.getRelative(0, 1, 0).getType() == Material.AIR && b.getRelative(0, 2, 0).getType() == Material.AIR){
-					plugin.debug("low ground block y position is "+y);
+			//		plugin.debug("low ground block y position is "+y);
 					return y;
 			}
 		}

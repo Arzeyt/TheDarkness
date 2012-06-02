@@ -44,7 +44,9 @@ public class Spread extends Mirage{
 				}else{
 					for(Location loc : locs){
 						plugin.visualizerCore.revertChunk(player, loc);
+						
 					}
+					cancelTask();
 				}
 			}
 			
