@@ -11,13 +11,13 @@ import us.twoguys.thedarkness.TheDarkness;
 
 public class LocTools {
 
-	TheDarkness plugin;
+	public TheDarkness plugin;
 	
 	public LocTools(TheDarkness instance){
 		this.plugin = instance;
 	}
 	
-	public Location randomGround(Location loc, int distance){
+	public Location getRandomGround(Location loc, int distance){
 		plugin.debug("ground loc check*********************");
 		Random rand = new Random();
 		

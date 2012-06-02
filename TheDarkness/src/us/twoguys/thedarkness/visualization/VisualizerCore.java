@@ -75,7 +75,14 @@ public class VisualizerCore {
 			disableChunkPlayerItem(getChunkPlayer(chunk, player));
 			ep.chunkCoordIntPairQueue.add(new ChunkCoordIntPair(chunk.getX(), chunk.getZ()));
 		}
-	         
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void revertChunk(Player player, Location loc){
+		EntityPlayer ep = ((CraftPlayer)player).getHandle();
+		Chunk chunk = loc.getChunk();
+		disableChunkPlayerItem(getChunkPlayer(chunk, player));
+		ep.chunkCoordIntPairQueue.add(new ChunkCoordIntPair(chunk.getX(), chunk.getZ()));
 	}
 	/**
 	 * @Description - Forces a chunk update for every player within view distance of this chunk.
