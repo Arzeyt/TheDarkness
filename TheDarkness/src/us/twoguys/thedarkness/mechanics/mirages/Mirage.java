@@ -7,10 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
-/**
- * @effect: PotionEffect
- * @Description: Applys a potion effect to the player
- */
+
 /*
  * Params:
  * 		Mandatory:

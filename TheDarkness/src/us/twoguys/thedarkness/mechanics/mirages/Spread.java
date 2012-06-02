@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
@@ -11,11 +12,10 @@ import us.twoguys.thedarkness.TheDarkness;
 /*
  * Mandatory:
  * 		setting[0] = block Id
- * 		setting[1] = blockData
- * 		setting[2] = rate
- * 		setting[3] = radius
+ * 		setting[1] = number of blocks to visualize
+ * 		setting[2] = radius
  * Optional:
- * 		setting[4] = frequency
+ * 		setting[3] = frequency
 */
 public class Spread extends Mirage{
 
@@ -33,10 +33,13 @@ public class Spread extends Mirage{
 
 			public void run() {
 				if(continueCheck(player)){
-					Location loc = plugin.locTools.getRandomGround(player.getLocation(), setting.get(3));
-					locs.add(loc);
-					//plugin.visualizerCore.visualizeBlock(player, loc, setting.get(0), setting.get(1));
-					
+					for(int i = 0; i < setting.get(1); i ++){
+						plugin.debug("Spread");
+						Location loc = plugin.locTools.getRandomGround(player.getLocation(), setting.get(2));
+						locs.add(loc);
+						Material mat = Material.getMaterial(setting.get(0));
+						plugin.visualizerCore.visualizeBlock(player, loc, mat);
+					}
 				}else{
 					for(Location loc : locs){
 						plugin.visualizerCore.revertChunk(player, loc);
@@ -44,7 +47,7 @@ public class Spread extends Mirage{
 				}
 			}
 			
-		}, 0L, getFrequency(4));
+		}, 0L, getFrequency(3));
 	}
 	
 	

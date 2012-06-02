@@ -39,4 +39,17 @@ public class Effect {
 	public void cancelTask(){
 		plugin.getServer().getScheduler().cancelTask(taskId);
 	}
+	public boolean continueCheck(Player player){
+		
+		if(player.isOnline()==false){
+			return false;
+		}
+		int currentLevel = plugin.locCheck.getDarknessLevel(player);
+		
+		if(currentLevel != level){
+			return false;
+		}
+		return true;
+		
+	}
 }

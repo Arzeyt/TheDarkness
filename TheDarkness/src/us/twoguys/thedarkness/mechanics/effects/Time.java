@@ -30,10 +30,20 @@ public class Time extends Effect{
 	boolean transitionActive = false;
 	boolean setTimeActive = false;
 	
+	boolean transitionFromTimeLevel;
+	boolean transitionToTimeLevel;
+	
 	public Time(TheDarkness instance, Player player, int level) {
 		super(instance, player, level);
 		this.setting = plugin.config.getEffectsSettings(this.getClass(), level);
 		applyTime();
+		
+		if(!plugin.config.getLevelEffectClasses(level-1).contains("Time")){
+			transitionFromTimeLevel = false;
+		}else{
+			transitionFromTimeLevel = true;
+		}
+		
 	}
 
 	public void applyTime(){
@@ -43,6 +53,7 @@ public class Time extends Effect{
 		long delayTemp2 = (setting.get(0)-player.getWorld().getTime())/setting.get(1);
 		delay = delayTemp < 0 ? delayTemp2 : delayTemp;
 		*/
+		//time = transitionFromTimeLevel ? plugin.timeMaster.getTime(player) : player.getWorld().getTime(); 
 		time = plugin.timeMaster.getTime(player);
 		
 		tasks[0] = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
@@ -78,7 +89,9 @@ public class Time extends Effect{
 		
 		
 		transitionActive = true;
-		time=plugin.timeMaster.getTime(player);
+		
+		time = plugin.timeMaster.getTime(player); 
+		
 		plugin.debug("transitioning from "+time+" to "+setting.get(0));
 		
 		final boolean moveForward = time < setting.get(0) ? true : false;
@@ -131,6 +144,7 @@ public class Time extends Effect{
 				}
 				
 				if(currentLevel != level){
+					plugin.timeMaster.setTime(player, (int) player.getWorld().getTime());
 					player.setPlayerTime(player.getWorld().getTime(), true);
 					plugin.getServer().getScheduler().cancelTask(tasks[2]);
 					return;

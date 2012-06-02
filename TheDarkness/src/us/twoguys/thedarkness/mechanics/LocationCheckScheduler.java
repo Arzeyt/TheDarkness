@@ -80,6 +80,28 @@ public class LocationCheckScheduler {
 							continue;
 						}
 						
+						ArrayList<Class<?>> mirages = plugin.config.getLevelMirageClasses(level);
+						
+						if (!mirages.isEmpty()){
+							for (Class<?> c: mirages){
+								
+								Constructor<?> cons = null;
+								
+								try{
+									cons = c.getConstructor(TheDarkness.class, Player.class, int.class);
+								}catch(Exception e){
+									plugin.debug("Failed to get constructor: " + c.getSimpleName());
+									e.printStackTrace();
+								}
+								
+								try{
+									cons.newInstance(plugin, player, level);
+								}catch(Exception e){
+									plugin.debug("Failed to use constructor: " + c.getSimpleName());
+									e.printStackTrace();
+								}
+							}
+						}
 					}
 				}
 			}
