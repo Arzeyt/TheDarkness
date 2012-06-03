@@ -15,16 +15,18 @@ import us.twoguys.thedarkness.TheDarkness;
  * 		setting[1] = number of blocks to visualize
  * 		setting[2] = radius
  * Optional:
- * 		setting[3] = frequency
+ * 		setting[4] = frequency
 */
 public class Spread extends Mirage{
 
 	ArrayList<Location> locs = new ArrayList<Location>();
+	ArrayList<Integer> replaceBlocks = new ArrayList<Integer>();
 	
 	public Spread(TheDarkness instance, Player player, int level) {
 		super(instance, player, level);
 		setting = plugin.config.getMirageSettings(this.getClass(), level);
 		applySpread();
+		
 		plugin.debug("spread activated");
 	}
 
@@ -37,9 +39,12 @@ public class Spread extends Mirage{
 					for(int i = 0; i < setting.get(1); i ++){
 						plugin.debug("Spread");
 						Location loc = plugin.locTools.getRandomGround(player.getLocation(), setting.get(2));
-						locs.add(loc);
-						Material mat = Material.getMaterial(setting.get(0));
-						plugin.visualizerCore.visualizeBlock(player, loc, mat);
+						
+						if(loc.getWorld().getBlockAt(loc).getTypeId()==setting.get(3)){
+							locs.add(loc);
+							Material mat = Material.getMaterial(setting.get(0));
+							plugin.visualizerCore.visualizeBlock(player, loc, mat);
+						}
 					}
 				}else{
 					for(Location loc : locs){
@@ -50,7 +55,7 @@ public class Spread extends Mirage{
 				}
 			}
 			
-		}, 0L, getFrequency(3));
+		}, 0L, getFrequency(4));
 	}
 	
 	

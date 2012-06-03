@@ -7,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
 
+import us.twoguys.thedarkness.schematics.SchematicObject;
+
 public class Config {
 
 	TheDarkness plugin;
@@ -21,6 +23,7 @@ public class Config {
 	ArrayList<ArrayList<ArrayList<Integer>>> levelPotions = new ArrayList<ArrayList<ArrayList<Integer>>>();
 	ArrayList<HashMap<String, ArrayList<Integer>>> levelMobs = new ArrayList<HashMap<String, ArrayList<Integer>>>();
 	ArrayList<HashMap<Class<?>, ArrayList<Integer>>> levelMirages = new ArrayList<HashMap<Class<?>, ArrayList<Integer>>>();
+	ArrayList<HashMap<String, ArrayList<Integer>>> levelCustomMirages = new ArrayList<HashMap<String, ArrayList<Integer>>>();
 	
 	public Config(TheDarkness instance){
 		plugin = instance;
@@ -170,6 +173,15 @@ public class Config {
 		return levelMirages.get(level).get(mirage);
 	}
 	
+	public ArrayList<String> getLevelCustomMirages(int level){
+		return new ArrayList<String>(levelCustomMirages.get(level).keySet());
+		
+	}
+	
+	public ArrayList<Integer> getCustomMirageSettings(String mirage, int level){
+		return new ArrayList<Integer>(levelCustomMirages.get(level).get(mirage));
+	}
+	
 	public void setLevels(){
 		
 		plugin.reloadConfig();
@@ -181,7 +193,7 @@ public class Config {
 		//Loop through levels
 		while (plugin.getConfig().contains("Darkness.Levels." + counter)){
 			
-			plugin.debug("Level " + counter + "_______________");
+			plugin.debug("Level " + counter + "_____________________________________");
 			
 			//Set Distance Array
 			if (counter != 0){
@@ -358,6 +370,32 @@ public class Config {
 			
 			levelMirages.add(mirages);
 			plugin.debug("Added all Mirage settings for this level");
+			
+			//Set CustomMirages 
+			plugin.debug("Checking Custom Mirages");
+			
+			HashMap<String, ArrayList<Integer>> customMirages = new HashMap<String, ArrayList<Integer>>();
+			
+			for(String s : plugin.getConfig().getStringList("Darkness.Levels."+counter+".CustomMirages")){
+				ArrayList<Integer> mirageSettings = new ArrayList<Integer>();
+				String[] name = s.split(": ");
+				String[] params = name[1].split(" ");
+				
+				plugin.debug("checking "+name[0]);
+				for(String setting : params){
+					plugin.debug("adding to Int array "+setting);
+					mirageSettings.add(Integer.parseInt(setting));
+				}
+				
+				if(plugin.schematicHandler.schematicExists(name[0])){
+					plugin.debug("Loaded parameters for "+name[0]);
+					customMirages.put(name[0], mirageSettings);
+				}else{
+					plugin.logSevere("schematic "+name[0]+" does not exist!");
+				}
+			}
+			levelCustomMirages.add(customMirages);
+			plugin.debug("Added all Custom Mirages for this level");
 			
 			counter++;
 			plugin.debug("Level Counter++");

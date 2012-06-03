@@ -41,6 +41,8 @@ public class TheDarkness extends JavaPlugin{
 	public TorchConsume torchConsume = new TorchConsume(this);
 	
 	public void onEnable(){
+		
+		schematicHandler.loadAllSchematics();
 		config.loadConfiguration();
 		
 		beaconPersister.load();
@@ -48,8 +50,7 @@ public class TheDarkness extends JavaPlugin{
 		
 		loadCommandExecutors();
 		loadListeners();
-		
-		schematicHandler.loadAllSchematics();
+
 		locCheck.checkPlayerLocations();
 		
 		log("enabled");

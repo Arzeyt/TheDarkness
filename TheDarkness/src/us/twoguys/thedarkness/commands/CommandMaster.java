@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.beacon.BeaconPlayerData;
+import us.twoguys.thedarkness.schematics.InvalidSchematicException;
 import us.twoguys.thedarkness.schematics.SchematicHandler;
 
 public class CommandMaster implements CommandExecutor{
@@ -117,7 +118,12 @@ public class CommandMaster implements CommandExecutor{
 	}
 	
 	private boolean pasteSchematic(Player player, Location loc, String schematicName){
-		plugin.schematicHandler.paste(player, loc, schematicName);
+		try {
+			plugin.schematicHandler.paste(player, loc, schematicName);
+		} catch (InvalidSchematicException e) {
+			plugin.debug(schematicName+" is not a valid schematic");
+			e.printStackTrace();
+		}
 		return true;
 	}
 	

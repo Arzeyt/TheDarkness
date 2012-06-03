@@ -2,6 +2,7 @@ package us.twoguys.thedarkness.schematics;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.Map;
 
@@ -46,8 +47,8 @@ public class SchematicHandler {
 	}
 	
 	private void loadSchematic(String schematicName){
-		SchematicObject so = new SchematicObject();
 
+		SchematicObject so = new SchematicObject();
         so.name = schematicName;
 		
     	 try {
@@ -77,8 +78,12 @@ public class SchematicHandler {
          }
      }
 	 
-    public void paste(Player player, Location loc, String schematicName){
-		SchematicObject s = getSchematicObject(schematicName);
+    public void paste(Player player, Location loc, String schematicName) throws InvalidSchematicException{
+		if(!schematicExists(schematicName)){
+    		throw new InvalidSchematicException();
+    	}
+    	
+    	SchematicObject s = getSchematicObject(schematicName);
 		
 		for(int x = 0; x < s.width; x ++){
 			for(int y = 0; y < s.height; y ++){
@@ -105,6 +110,20 @@ public class SchematicHandler {
     	}
     	plugin.debug("getSchematicObjet returned null for "+schematicName);
 		return null;
+    }
+    
+    public boolean schematicExists(String schematicName){
+		boolean matches=false;
+    	for(SchematicObject so : schematics){
+			if(so.name.equals(schematicName+".schematic")){
+				matches = true;
+			}
+		}
+    	if(matches == false){
+    		return false;
+    	}else{
+    		return true;
+    	}
     }
     
 }
