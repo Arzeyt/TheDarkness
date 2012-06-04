@@ -97,6 +97,29 @@ public class SchematicHandler {
 		}
 		plugin.debug("Pasted schematic "+s.name+"; supposed to place "+schematicName);
     }
+    public void pasteNoAir(Player player, Location loc, String schematicName) throws InvalidSchematicException{
+		if(!schematicExists(schematicName)){
+    		throw new InvalidSchematicException();
+    	}
+    	
+    	SchematicObject s = getSchematicObject(schematicName);
+		
+		for(int x = 0; x < s.width; x ++){
+			for(int y = 0; y < s.height; y ++){
+				for( int z = 0; z < s.length; z ++){
+					
+					int index = y * s.width * s.length + z * s.width + x;
+					
+					if(s.blocks[index]!=0){
+						Location vloc = new Location(loc.getWorld(), loc.getX()+x, loc.getY()+y, loc.getZ()+z);
+						plugin.visualizerCore.visualizeBlock(player, vloc, s.blocks[index], s.data[index]);
+						//index ++;
+					}
+				}
+			}
+		}
+		plugin.debug("Pasted schematic "+s.name+"; supposed to place "+schematicName);
+    }
     
     public HashSet<SchematicObject> getSchematics(){
     	return schematics;

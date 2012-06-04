@@ -10,6 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.mechanics.effects.Potion;
+import us.twoguys.thedarkness.mechanics.mirages.CustomMirage;
 import us.twoguys.thedarkness.mechanics.mirages.Mirage;
 
 public class LocationCheckScheduler {
@@ -102,6 +103,23 @@ public class LocationCheckScheduler {
 							}
 						}else{
 							plugin.debug("Mirages was empty");
+						}
+						
+						//Custom Mirages
+						ArrayList<String> customMirages = plugin.config.getLevelCustomMirages(level);
+						
+						if(!customMirages.isEmpty()){
+							for(String mirage : customMirages){
+								try{
+									CustomMirage c = new CustomMirage(plugin, player, level, mirage);
+									plugin.debug("Activated "+mirage);
+								}catch(Exception e){
+									plugin.debug("Could not instantiate "+mirage);
+									e.printStackTrace();
+								}
+							}
+						}else{
+							plugin.debug("CustomMirages was empty");
 						}
 					}
 				}

@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
+import us.twoguys.thedarkness.schematics.SchematicObject;
 
 /*
  * Params:
@@ -33,6 +34,7 @@ public class Mirage {
 		plugin = instance;
 		this.player = player;
 		this.level = level;
+		
 	}
 	
 	public boolean passPercentChance(int i){
