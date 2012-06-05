@@ -106,20 +106,4 @@ public class BeaconListener implements Listener{
 			return false;
 		}	
 	}
-	
-	private boolean loadSchematic(Player player){
-		try{
-			return plugin.beaconListenerMaster.getPlayerString(player).equals("loadSchematic");
-		}catch(Exception e){
-			return false;
-		}
-	}
-	
-	private boolean pasteSchematic(Player player){
-		try{
-			return plugin.beaconListenerMaster.getPlayerString(player).equals("pasteSchematic");
-		}catch(Exception e){
-			return false;
-		}
-	}
 }

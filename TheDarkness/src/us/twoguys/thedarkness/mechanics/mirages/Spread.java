@@ -8,7 +8,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
-
+/**
+ * 
+ * @author Nick
+ * 
+ */
 /*
  * Mandatory:
  * 		setting[0] = block Id
@@ -40,11 +44,11 @@ public class Spread extends Mirage{
 						plugin.debug("Spread");
 						Location loc = plugin.locTools.getRandomGround(player.getLocation(), setting.get(2));
 						
-						//if(loc.getWorld().getBlockAt(loc).getTypeId()==setting.get(3)){
+						if(loc.getWorld().getBlockAt(loc).getType()!=Material.LEAVES){
 							locs.add(loc);
 							Material mat = Material.getMaterial(setting.get(0));
 							plugin.visualizerCore.visualizeBlock(player, loc, mat);
-						//}
+						}
 					}
 				}else{
 					for(Location loc : locs){
