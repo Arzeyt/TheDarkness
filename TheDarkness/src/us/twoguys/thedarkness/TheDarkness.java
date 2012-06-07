@@ -16,8 +16,10 @@ import us.twoguys.thedarkness.listeners.*;
 import us.twoguys.thedarkness.schematics.*;
 import us.twoguys.thedarkness.visualization.*;
 import us.twoguys.thedarkness.mechanics.*;
+import us.twoguys.thedarkness.mechanics.effects.Time;
 import us.twoguys.thedarkness.mechanics.effects.TimeMaster;
 import us.twoguys.thedarkness.mechanics.effects.TorchConsume;
+import us.twoguys.thedarkness.mechanics.mobs.MobListener;
 
 public class TheDarkness extends JavaPlugin{
 
@@ -38,7 +40,7 @@ public class TheDarkness extends JavaPlugin{
 	public TimeMaster timeMaster = new TimeMaster(this);
 	
 	//Listeners
-	public TorchConsume torchConsume = new TorchConsume(this);
+	
 	
 	public void onEnable(){
 		
@@ -89,7 +91,18 @@ public class TheDarkness extends JavaPlugin{
 		
 		BeaconListener beaconListener = new BeaconListener(this);
 		pm.registerEvents(beaconListener, this);
+		
+		TorchConsume torchConsume = new TorchConsume(this);
 		pm.registerEvents(torchConsume, this);
+		
+		MobListener mobListener = new MobListener(this);
+		pm.registerEvents(mobListener, this);
+		
+		Message message = new Message(this);
+		pm.registerEvents(message, this);
+		
+		Time time = new Time(this);
+		pm.registerEvents(time, this);
 		
 		log("Listeners Loaded");
 	}

@@ -32,6 +32,7 @@ public class BeaconMaster {
 		temp.add(beacon);
 		beacons = temp;
 	}
+	
 	public void removeBeacon(BeaconData beacon){
 		HashSet<BeaconData> temp = beacons;
 		temp.remove(beacon);
@@ -76,7 +77,7 @@ public class BeaconMaster {
 			}
 		}
 		
-		plugin.debug("Distance to nearest Beacon: " + distance);
+		//plugin.debug("Distance to nearest Beacon: " + distance);
 		
 		return distance;
 		

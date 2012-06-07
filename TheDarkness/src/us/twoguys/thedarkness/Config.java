@@ -14,7 +14,7 @@ public class Config {
 	TheDarkness plugin;
 	
 	ArrayList<Integer> levelDistances = new ArrayList<Integer>();
-	ArrayList<String> levelMessages = new ArrayList<String>();
+	HashMap<Integer, ArrayList<String>> levelMessages = new HashMap<Integer, ArrayList<String>>();
 	ArrayList<Integer> levelTorchConsume = new ArrayList<Integer>();
 	ArrayList<Integer> levelEffectFreq = new ArrayList<Integer>();
 	HashMap<Integer, Integer> itemPointValues = new HashMap<Integer, Integer>();
@@ -48,7 +48,7 @@ public class Config {
 		plugin.getConfig().addDefault("Darkness.Levels.0.Effects", effects0);
 		
 		//level1
-		String[] effects1 = {"Message: You sense an evil presence", "TorchConsume: 200"};
+		String[] effects1 = {"Message: You sense an evil presence: The evil presence weakens", "TorchConsume: 200"};
 		String[] mobSpawns1 = {"ZOMBIE: 10"};
 		String[] mirages1 = {"House: 2", "Diamond: 20"};
 		
@@ -134,9 +134,11 @@ public class Config {
 		return levelEffectFreq.get(level);
 	}
 	
-	public String getLevelMessage(int level){
+	public ArrayList<String> getLevelMessage(int level){
+		ArrayList<String> messages = new ArrayList<String>();
+		
 		if(level < 0){
-			return new String("There are no beacons in this world...");
+			messages.add("There are no beacons in this world...");
 		}
 		return levelMessages.get(level);
 	}
@@ -243,9 +245,16 @@ public class Config {
 				}catch(Exception e){
 					//Set Messages Array
 					if (split[0].equalsIgnoreCase("Message") && messageSet == false){
-						levelMessages.add(split[1]);
+						ArrayList<String> messages = new ArrayList<String>();
+						
+						messages.add(split[1]);
+						
+						if(split.length > 2){
+							messages.add(split[2]);
+						}
+						levelMessages.put(counter, messages);
 						messageSet = true;
-						plugin.debug("Added Message: " + split[1]);
+						plugin.debug("Added messages");
 					
 					//Set Torch Consume array
 					}else if (split[0].equalsIgnoreCase("TorchConsume")){
@@ -287,7 +296,11 @@ public class Config {
 			
 			//If there was no message for the level
 			if (messageSet == false){
-				levelMessages.add("");
+				HashMap<Integer, ArrayList<String>> temp = new HashMap<Integer, ArrayList<String>>();
+				ArrayList<String> t = new ArrayList<String>();
+				t.add("");
+				t.add("");
+				temp.put(counter, t);
 			}
 			
 			//If no Torch consume for the level

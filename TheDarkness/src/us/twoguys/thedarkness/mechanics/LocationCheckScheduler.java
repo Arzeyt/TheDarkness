@@ -11,13 +11,13 @@ import org.bukkit.potion.PotionEffectType;
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.mechanics.effects.Potion;
 import us.twoguys.thedarkness.mechanics.mirages.CustomMirage;
-import us.twoguys.thedarkness.mechanics.mirages.Mirage;
 
 public class LocationCheckScheduler {
 
 	TheDarkness plugin;
 	
 	int taskId;
+	private HashMap<String, Integer> tasks = new HashMap<String, Integer>();
 	HashMap<Player, Integer> playerLevels = new HashMap<Player, Integer>();
 	
 	public LocationCheckScheduler(TheDarkness instance){
@@ -38,11 +38,9 @@ public class LocationCheckScheduler {
 						break;
 					}
 					
-					plugin.debug("Checking " + player.getName() + ": Level " + level);
+					//plugin.debug("Checking " + player.getName() + ": Level " + level);
 					
 					if (hasChangedLevels(player, level)){
-						//Message
-						plugin.sendMessage(player, plugin.config.getLevelMessage(level));
 						
 						//Effects
 						ArrayList<Class<?>> effects = plugin.config.getLevelEffectClasses(level);
@@ -52,18 +50,22 @@ public class LocationCheckScheduler {
 								
 								Constructor<?> cons = null;
 								
-								try{
-									cons = c.getConstructor(TheDarkness.class, Player.class, int.class);
-								}catch(Exception e){
-									plugin.debug("Failed to get constructor: " + c.getSimpleName());
-									e.printStackTrace();
-								}
-								
-								try{
-									cons.newInstance(plugin, player, level);
-								}catch(Exception e){
-									plugin.debug("Failed to use constructor: " + c.getSimpleName());
-									e.printStackTrace();
+								if(c.getSimpleName().equalsIgnoreCase("Time")){
+									plugin.debug("Passed Time");
+								}else{
+									try{
+										cons = c.getConstructor(TheDarkness.class, Player.class, int.class);
+									}catch(Exception e){
+										plugin.debug("Failed to get constructor: " + c.getSimpleName());
+										e.printStackTrace();
+									}
+									
+									try{
+										cons.newInstance(plugin, player, level);
+									}catch(Exception e){
+										plugin.debug("Failed to use constructor: " + c.getSimpleName());
+										e.printStackTrace();
+									}
 								}
 							}
 						}
@@ -130,14 +132,20 @@ public class LocationCheckScheduler {
 	public boolean hasChangedLevels(Player player, int level){
 		if (!playerLevels.containsKey(player)){
 			playerLevels.put(player, level);
+			
+			PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(player, 0, level);
+			Bukkit.getServer().getPluginManager().callEvent(event);
 			return true;
 		}else{
-			if (playerLevels.get(player) == level){
+			if(playerLevels.get(player) == level){
 				return false;
 			}else if(player.isOnline()==false){
 				playerLevels.remove(player);
 				return true;
 			}else{
+				PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(player, playerLevels.get(player), level);
+				Bukkit.getServer().getPluginManager().callEvent(event);
+				
 				playerLevels.remove(player);
 				playerLevels.put(player, level);
 				return true;
@@ -147,6 +155,17 @@ public class LocationCheckScheduler {
 	
 	public int getDarknessLevel(Player player){
 		return playerLevels.get(player);
+	}
+	
+	public void addTask(String name, int taskID){
+		if(tasks.containsKey(name)){
+			Bukkit.getServer().getScheduler().cancelTask(tasks.get(name));
+		}
+		tasks.put(name, taskID);
+	}
+	
+	public void cancelTask(String name){
+		Bukkit.getServer().getScheduler().cancelTask(tasks.get(name));
 	}
 	
 }

@@ -70,7 +70,7 @@ public class LocTools {
 				return y;
 			}
 		}
-		plugin.debug("high ground returned -1");
+		//plugin.debug("high ground returned -1");
 		return -1;
 	}
 	/**
@@ -87,7 +87,7 @@ public class LocTools {
 					return y;
 			}
 		}
-		plugin.debug("low ground returned -1");
+		//plugin.debug("low ground returned -1");
 		return -1;
 	}
 

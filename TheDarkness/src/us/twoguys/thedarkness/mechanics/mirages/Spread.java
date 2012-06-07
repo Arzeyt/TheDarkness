@@ -31,7 +31,6 @@ public class Spread extends Mirage{
 		setting = plugin.config.getMirageSettings(this.getClass(), level);
 		applySpread();
 		
-		plugin.debug("spread activated");
 	}
 
 	private void applySpread() {
