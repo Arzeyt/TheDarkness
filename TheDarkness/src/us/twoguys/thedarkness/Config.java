@@ -7,8 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
 
-import us.twoguys.thedarkness.schematics.SchematicObject;
-
 public class Config {
 
 	TheDarkness plugin;
@@ -19,6 +17,7 @@ public class Config {
 	ArrayList<Integer> levelEffectFreq = new ArrayList<Integer>();
 	HashMap<Integer, Integer> itemPointValues = new HashMap<Integer, Integer>();
 	
+	ArrayList<HashMap<String, ArrayList<Integer>>> levelStrings = new ArrayList<HashMap<String, ArrayList<Integer>>>();
 	ArrayList<HashMap<Class<?>, ArrayList<Integer>>> levelEffects = new ArrayList<HashMap<Class<?>, ArrayList<Integer>>>();
 	ArrayList<ArrayList<ArrayList<Integer>>> levelPotions = new ArrayList<ArrayList<ArrayList<Integer>>>();
 	ArrayList<HashMap<String, ArrayList<Integer>>> levelMobs = new ArrayList<HashMap<String, ArrayList<Integer>>>();
@@ -325,6 +324,8 @@ public class Config {
 				String[] splitAll = s.split(" ");
 				String mob = null;
 				
+				mob = plugin.mobMaster.getMobName(split[0]);
+				/*
 				try{
 					mob = EntityType.fromName(split[0]).name();
 					plugin.debug("Mob: " + mob);
@@ -332,6 +333,7 @@ public class Config {
 					configError("Darkness.Levels." + counter + ".MobSpawns." + split[0]);
 					continue;
 				}
+				*/
 				
 				int pCounter = 1;
 				

@@ -2,5 +2,8 @@ ToDo:
 	Nick:
 		lightning storms are still noticeable in Precipitation
 		Time transitions from levels with no time setting causes transition bugs between levels.
+			suspect this has to do with long to int casting and visa versa. also noticed the server time and 
+			player time are offset after a player.setPlayerTime even though the parameter is the server time. 
 		custom event for level changing
 		flat terrain finder for placing mirages.
+		make mobs work.

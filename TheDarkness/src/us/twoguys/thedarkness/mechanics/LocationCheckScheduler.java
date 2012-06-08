@@ -133,7 +133,7 @@ public class LocationCheckScheduler {
 		if (!playerLevels.containsKey(player)){
 			playerLevels.put(player, level);
 			
-			PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(player, 0, level);
+			PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(player, level, level);
 			Bukkit.getServer().getPluginManager().callEvent(event);
 			return true;
 		}else{
@@ -165,7 +165,11 @@ public class LocationCheckScheduler {
 	}
 	
 	public void cancelTask(String name){
-		Bukkit.getServer().getScheduler().cancelTask(tasks.get(name));
+		try{
+			Bukkit.getServer().getScheduler().cancelTask(tasks.get(name));
+		}catch(Exception e){
+			plugin.debug("no task to cancel");
+		}
 	}
 	
 }

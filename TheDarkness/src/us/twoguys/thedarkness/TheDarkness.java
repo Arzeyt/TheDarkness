@@ -20,6 +20,7 @@ import us.twoguys.thedarkness.mechanics.effects.Time;
 import us.twoguys.thedarkness.mechanics.effects.TimeMaster;
 import us.twoguys.thedarkness.mechanics.effects.TorchConsume;
 import us.twoguys.thedarkness.mechanics.mobs.MobListener;
+import us.twoguys.thedarkness.mechanics.mobs.MobMaster;
 
 public class TheDarkness extends JavaPlugin{
 
@@ -38,6 +39,7 @@ public class TheDarkness extends JavaPlugin{
 	public BeaconListenerMaster beaconListenerMaster = new BeaconListenerMaster(this);
 	public LocTools locTools = new LocTools(this);
 	public TimeMaster timeMaster = new TimeMaster(this);
+	public MobMaster mobMaster = new MobMaster(this);
 	
 	//Listeners
 	
