@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.mechanics.effects.Potion;
 import us.twoguys.thedarkness.mechanics.mirages.CustomMirage;
+import us.twoguys.thedarkness.mechanics.mobs.Mob;
 
 public class LocationCheckScheduler {
 
@@ -123,7 +124,23 @@ public class LocationCheckScheduler {
 						}else{
 							plugin.debug("CustomMirages was empty");
 						}
+						
+						//Mobs
+						
+						ArrayList<String> mobTypes = plugin.config.getLevelMobTypes(level);
+						
+						if(!mobTypes.isEmpty()){
+							for(String mob : mobTypes){
+								try{
+									Mob m = new Mob(plugin, player, level, mob);
+								}catch(Exception e){
+									plugin.debug("Could not instantiate "+mob+" spawner");
+									e.printStackTrace();
+								}
+							}
+						}
 					}
+					
 				}
 			}
 		}, 0L, plugin.config.getPlayerCheckFreq());

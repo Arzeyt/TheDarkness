@@ -1,15 +1,36 @@
 package us.twoguys.thedarkness.mechanics.mobs;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+
 import us.twoguys.thedarkness.TheDarkness;
 
 public class MobMaster {
-
+	private HashMap<String, Integer> taskIds = new HashMap<String, Integer>();
 	TheDarkness plugin; 
 	
 	public MobMaster(TheDarkness instance){
 		plugin = instance;
 	}
-	 
+	
+	public Integer getTaskId(String name){
+		return taskIds.get(name);
+	}
+	
+	public void cancelTask(String name){
+		Bukkit.getServer().getScheduler().cancelTask(taskIds.get(name));
+	}
+	
+	public void addTask(String name, int taskId){
+		if(taskIds.containsKey(name)){
+			cancelTask(name);
+		}else{
+			taskIds.put(name, taskId);
+		}
+	}
 	public String getMobName(String mobName){
 		if(mobName.equalsIgnoreCase("all")){
 			return new String("ALL");
@@ -66,4 +87,6 @@ public class MobMaster {
 			return new String("Chicken");
 		}
 	}
+
+
 }

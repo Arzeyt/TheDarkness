@@ -19,8 +19,9 @@ import us.twoguys.thedarkness.mechanics.*;
 import us.twoguys.thedarkness.mechanics.effects.Time;
 import us.twoguys.thedarkness.mechanics.effects.TimeMaster;
 import us.twoguys.thedarkness.mechanics.effects.TorchConsume;
-import us.twoguys.thedarkness.mechanics.mobs.MobListener;
+import us.twoguys.thedarkness.mechanics.mobs.MobSpawnListener;
 import us.twoguys.thedarkness.mechanics.mobs.MobMaster;
+import us.twoguys.thedarkness.mechanics.mobs.MobTargetListener;
 
 public class TheDarkness extends JavaPlugin{
 
@@ -97,8 +98,11 @@ public class TheDarkness extends JavaPlugin{
 		TorchConsume torchConsume = new TorchConsume(this);
 		pm.registerEvents(torchConsume, this);
 		
-		MobListener mobListener = new MobListener(this);
-		pm.registerEvents(mobListener, this);
+		MobTargetListener mobTarget = new MobTargetListener(this);
+		pm.registerEvents(mobTarget, this);
+		
+		//MobSpawnListener mobListener = new MobSpawnListener(this);
+		//pm.registerEvents(mobListener, this);
 		
 		Message message = new Message(this);
 		pm.registerEvents(message, this);

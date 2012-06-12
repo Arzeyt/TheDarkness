@@ -31,6 +31,7 @@ public class Time implements Listener{
 	int time1, time2, delay, level, transition;
 	ArrayList<Integer> time1s, time2s;
 	Player player;
+	int c=0;
 	
 	public Time(TheDarkness instance) {
 		plugin = instance;
@@ -48,12 +49,12 @@ public class Time implements Listener{
 		
 		//plugin.debug("server time is "+player.getWorld().getFullTime());
 		//plugin.debug("player time is "+player.getPlayerTime());
-		
 		try{
 			time1s = plugin.config.getEffectsSettings(this.getClass(), event.getLevelFrom());
 			time1 = time1s.get(0);
 		}catch(Exception e){
 			time1 = (int)player.getWorld().getTime();
+			c++;
 		}
 		try{
 			time2s = plugin.config.getEffectsSettings(this.getClass(), event.getLevelTo());
@@ -63,6 +64,11 @@ public class Time implements Listener{
 			setTime();
 			plugin.debug("Reached setTime");
 		}catch(Exception e){
+			c++;
+			if(c==2){
+				plugin.debug("No time settings.");
+				return;
+			}
 			plugin.debug("began catch 2 in Time");
 			time2 = (int)player.getWorld().getTime();
 			transition = 150;
@@ -70,8 +76,6 @@ public class Time implements Listener{
 			player.setPlayerTime(player.getWorld().getTime(), true);
 			
 		}
-			
-		
 		
 	}
 	
