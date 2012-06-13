@@ -14,6 +14,8 @@ package us.twoguys.thedarkness.GUI;
 	    JPanel titlePanel, scorePanel, buttonPanel;
 	    JLabel redLabel, blueLabel, redScore, blueScore;
 	    JButton redButton, blueButton, resetButton;
+	    
+	    //commit test
 
 	    public JPanel createContentPane (){
 
