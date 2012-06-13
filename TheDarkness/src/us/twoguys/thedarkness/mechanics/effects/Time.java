@@ -106,8 +106,6 @@ public class Time implements Listener{
 						player.setPlayerTime(time1, hasSettings(level));
 						plugin.locCheck.cancelTask("transition");
 						
-						int timeTemp = (int) player.getPlayerTime();
-						//plugin.debug("Player time is "+timeTemp%24000);
 					}
 				}else{
 					if(time1 > time2){
