@@ -103,7 +103,13 @@ public class Time implements Listener{
 						
 					}else if(time1 >= time2){
 						plugin.debug("Transition forward complete-----------------");
-						player.setPlayerTime(time1, hasSettings(level));
+						if(hasSettings(level)){
+							player.resetPlayerTime();
+						}else{
+							player.setPlayerTime(time1, hasSettings(level));
+							int timeTemp = (int) player.getPlayerTime();
+							plugin.debug("Player time is "+timeTemp%24000);
+						}
 						plugin.locCheck.cancelTask("transition");
 						
 					}

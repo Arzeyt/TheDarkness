@@ -95,7 +95,7 @@ public class BeaconListener implements Listener{
 		if(block.getType()==Material.SIGN || block.getType()==Material.SIGN_POST){
 			plugin.debug("Block is a sign");
 			s = (Sign)block.getState();
-			if(s.getLine(0).equals(ChatColor.YELLOW+"Nox Extractor")){
+			if(s.getLine(0).contains("Nox Extractor")){
 				if(plugin.beaconMaster.getDarknessLevel(player)==0){
 					return true;
 				}else{
