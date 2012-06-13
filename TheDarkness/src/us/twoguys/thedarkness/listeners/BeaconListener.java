@@ -88,7 +88,7 @@ public class BeaconListener implements Listener{
 	@EventHandler
 	public void onSignChange(SignChangeEvent event){
 		if(event.getLine(0).equalsIgnoreCase("Nox Extractor")){
-			event.setLine(0,ChatColor.YELLOW+"Nox Extractor");
+			event.setLine(0, ChatColor.YELLOW+"Nox Extractor");
 		}
 	}
 	private boolean extraction(Player player, Block block){
