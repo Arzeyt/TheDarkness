@@ -92,7 +92,7 @@ public class BeaconListener implements Listener{
 		}
 	}
 	private boolean extraction(Player player, Block block){
-		if(block.getType()==Material.SIGN || block.getType()==Material.SIGN_POST){
+		if(block.getType()==Material.SIGN || block.getType()==Material.SIGN_POST || block.getType()==Material.WALL_SIGN){
 			plugin.debug("Block is a sign");
 			s = (Sign)block.getState();
 			if(s.getLine(0).contains("Nox Extractor")){
