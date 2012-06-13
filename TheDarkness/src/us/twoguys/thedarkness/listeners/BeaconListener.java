@@ -11,6 +11,7 @@ import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -57,6 +58,8 @@ public class BeaconListener implements Listener{
 				chest = block.getRelative(BlockFace.SOUTH);
 			}else if(block.getRelative(BlockFace.WEST).getType()== Material.CHEST){
 				chest = block.getRelative(BlockFace.WEST);
+			}else if(block.getRelative(BlockFace.DOWN).getType()==Material.CHEST){
+				chest = block.getRelative(BlockFace.DOWN);
 			}else{return;}
 			
 			Chest c = (Chest) chest.getState();
@@ -81,11 +84,18 @@ public class BeaconListener implements Listener{
 		}
 		
 	}
+	
+	@EventHandler
+	public void onSignChange(SignChangeEvent event){
+		if(event.getLine(0).equalsIgnoreCase("Nox Extractor")){
+			event.setLine(0,ChatColor.YELLOW+"Nox Extractor");
+		}
+	}
 	private boolean extraction(Player player, Block block){
 		if(block.getType()==Material.SIGN || block.getType()==Material.SIGN_POST){
 			plugin.debug("Block is a sign");
 			s = (Sign)block.getState();
-			if(s.getLine(0).equals("[Nox Extractor]")){
+			if(s.getLine(0).equals(ChatColor.YELLOW+"Nox Extractor")){
 				if(plugin.beaconMaster.getDarknessLevel(player)==0){
 					return true;
 				}else{

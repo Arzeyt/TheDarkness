@@ -11,8 +11,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.LazyMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 
 import us.twoguys.thedarkness.TheDarkness;
 
@@ -79,16 +77,10 @@ public class Mob implements Listener{
 						Location loc = plugin.locTools.getRandomGround(player.getLocation(), setting.get(2));
 						loc = loc.getBlock().getRelative(0, 1, 0).getLocation();
 						
-						player.getWorld().spawnCreature(loc, EntityType.fromName(mobName));
-						List<Entity> entities = player.getNearbyEntities(distance+5, distance+5, distance+5);
+						Entity entity = player.getWorld().spawnCreature(loc, EntityType.fromName(mobName));
 						
-						for(Entity entity : entities){
-							if(entity.getType()==EntityType.fromName(mobName)){
-								plugin.debug("Found entity to assign metadata to");
-								FixedMetadataValue md = new FixedMetadataValue(plugin, 1);
-								entity.setMetadata("Darkness", md);
-							}
-						}
+						FixedMetadataValue md = new FixedMetadataValue(plugin, 1);
+						entity.setMetadata("Darkness", md);
 					}
 				}
 			}

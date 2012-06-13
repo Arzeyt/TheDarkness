@@ -95,6 +95,7 @@ public class MobTargetListener implements Listener{
 	}
 	
 	public void despawn(Entity entity){
+		entity.removeMetadata("Darkness", plugin);
 		entity.remove();
 		Smoke smoke = new Smoke(plugin, entity.getLocation());
 		smoke.expandSpam(3, 0, 1);

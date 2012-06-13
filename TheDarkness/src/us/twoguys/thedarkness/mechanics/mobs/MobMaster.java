@@ -1,10 +1,8 @@
 package us.twoguys.thedarkness.mechanics.mobs;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 
 import us.twoguys.thedarkness.TheDarkness;
 

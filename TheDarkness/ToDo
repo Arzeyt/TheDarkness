@@ -5,7 +5,5 @@ ToDo:
 			suspect this has to do with long to int casting and visa versa. also noticed the server time and 
 			player time are offset after a player.setPlayerTime even though the parameter is the server time. 
 		flat terrain finder for placing mirages.
-		make mobs work.
-		Player login should trigger a playerlevelchange event. -- works i think
 		config options for server time set, and weather set. 
 		

@@ -11,7 +11,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.metadata.MetadataValue;
 
 import us.twoguys.thedarkness.TheDarkness;
-import us.twoguys.thedarkness.mechanics.PlayerLevelChangeEvent;
 
 public class MobSpawnListener implements Listener{
 

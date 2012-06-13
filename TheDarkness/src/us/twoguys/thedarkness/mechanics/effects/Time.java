@@ -43,17 +43,16 @@ public class Time implements Listener{
 		plugin.locCheck.cancelTask("setTime");
 		plugin.locCheck.cancelTask("transition");
 		
-		//plugin.debug("Activated Time");
+		plugin.debug("Activated Time");
 		player = event.getPlayer();
 		level = event.getLevelTo();
 		
-		//plugin.debug("server time is "+player.getWorld().getFullTime());
-		//plugin.debug("player time is "+player.getPlayerTime());
+		
 		try{
 			time1s = plugin.config.getEffectsSettings(this.getClass(), event.getLevelFrom());
 			time1 = time1s.get(0);
 		}catch(Exception e){
-			time1 = (int)player.getWorld().getTime();
+			time1 = ((int)player.getWorld().getTime())%24000;
 			c++;
 		}
 		try{
@@ -61,19 +60,21 @@ public class Time implements Listener{
 			time2 = time2s.get(0);
 			transition = time2s.get(1);
 			transition();
-			setTime();
+			//setTime();
 			plugin.debug("Reached setTime");
 		}catch(Exception e){
-			c++;
-			if(c==2){
+			c=c+2;
+			if(c==3){
+				player.resetPlayerTime();
 				plugin.debug("No time settings.");
 				return;
 			}
 			plugin.debug("began catch 2 in Time");
-			time2 = (int)player.getWorld().getTime();
-			transition = 150;
+			time2 = ((int)player.getWorld().getTime())%24000;
+			plugin.debug("time 1 is "+time1);
+			plugin.debug("time 2 is "+time2);
+			transition = 100;
 			transition();
-			player.setPlayerTime(player.getWorld().getTime(), true);
 			
 		}
 		
@@ -95,25 +96,38 @@ public class Time implements Listener{
 				
 				if(moveForward){
 					if(time1 < time2){
-						time1 = time1+transition;
 						player.setPlayerTime(time1, false);
 						Packet4UpdateTime packet = new Packet4UpdateTime(time1);
 						((CraftPlayer)player).getHandle().netServerHandler.sendPacket(packet);
+						time1 = time1+transition;
 						
 					}else if(time1 >= time2){
-						plugin.debug("Transition complete------------------------");
-						player.setPlayerTime(player.getWorld().getTime(), true);
+						plugin.debug("Transition forward complete-----------------");
+						player.setPlayerTime(time1, hasSettings(level));
 						plugin.locCheck.cancelTask("transition");
+						
+						int timeTemp = (int) player.getPlayerTime();
+						//plugin.debug("Player time is "+timeTemp%24000);
 					}
 				}else{
 					if(time1 > time2){
 						player.setPlayerTime(time1, false);
-						time1 = time1 - transition;
 						Packet4UpdateTime packet = new Packet4UpdateTime(time1);
 						((CraftPlayer)player).getHandle().netServerHandler.sendPacket(packet);
+						time1 = time1 - transition;
+						//plugin.debug("Trans time is "+time1);
+						
 					}else if(time1 <= time2){
-						plugin.debug("Transition complete------------------------");
-						player.setPlayerTime(player.getWorld().getTime(), true);
+						plugin.debug("Transition backwards complete---------------");
+						if(hasSettings(level)){
+							player.resetPlayerTime();
+						}else{
+							player.setPlayerTime(time1, hasSettings(level));
+							
+							
+							int timeTemp = (int) player.getPlayerTime();
+							plugin.debug("Player time is "+timeTemp%24000);
+						}
 						plugin.locCheck.cancelTask("transition");
 					}
 				}
@@ -122,7 +136,6 @@ public class Time implements Listener{
 		}, 0L, 1));
 	}
 	
-	
 	public void setTime(){
 		plugin.locCheck.addTask("setTime", plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 
@@ -130,7 +143,6 @@ public class Time implements Listener{
 				if(player.isOnline()==false){
 					plugin.locCheck.cancelTask("setTime");
 				}
-				
 				if(plugin.locCheck.getDarknessLevel(player) != level){
 					plugin.locCheck.cancelTask("setTime");
 					return;
@@ -138,9 +150,7 @@ public class Time implements Listener{
 					player.setPlayerTime(time1, false);
 					plugin.debug("set time");
 			}
-			
 		}, delay, getFrequency()));
-		
 	}
 	
 	private int getFrequency(){
@@ -148,6 +158,14 @@ public class Time implements Listener{
 			return time2s.size() < 3 ? plugin.config.getDefaultEffectCheckFreq(level) : time2s.get(2);
 		}catch(Exception e){
 			return plugin.config.getDefaultEffectCheckFreq(level);
+		}
+	}
+	
+	private boolean hasSettings(int level){
+		if(plugin.config.getLevelEffectClasses(level).contains(this.getClass())){
+			return false;
+		}else{
+			return true;
 		}
 	}
 }
