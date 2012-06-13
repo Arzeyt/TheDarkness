@@ -121,8 +121,6 @@ public class Time implements Listener{
 							player.resetPlayerTime();
 						}else{
 							player.setPlayerTime(time1, hasSettings(level));
-							
-							
 							int timeTemp = (int) player.getPlayerTime();
 							plugin.debug("Player time is "+timeTemp%24000);
 						}
