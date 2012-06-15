@@ -21,22 +21,19 @@ public class MainListSelectionListener extends TheDarknessGUI implements ListSel
 		
 		if(instance.mainList.getSelectedIndex() == 0){
 			subCategoryList = new JList(this.effects);
-			System.out.println("effects");
 			
 		}else if(instance.mainList.getSelectedIndex() == 1){
 			subCategoryList = new JList(this.mobs);
-			System.out.println("mobs clicked");
 			
 		}else if(instance.mainList.getSelectedIndex()==2){
 			subCategoryList = new JList(this.mirages);
-			System.out.println("Mirages Clicked");
 		}
 		
 		//subCategoryList.setLocation(160, 30);
 		//subCategoryList.setSize(150, 50);
 		subCategoryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		subCategoryList.setLayoutOrientation(JList.VERTICAL);
-		subCategoryList.addListSelectionListener(this);
+		subCategoryList.addListSelectionListener(new SubListSelectionListener());
 		
 		try{
 			instance.selectPanel.remove(instance.subScrollPane);

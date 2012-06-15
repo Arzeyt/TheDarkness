@@ -27,8 +27,8 @@ public class Message implements Listener{
 		}else{
 			try{
 				plugin.sendMessage(player, messages.get(1));
-			}catch(ArrayIndexOutOfBoundsException e){
-				return;
+			}catch(Exception e){
+				plugin.sendMessage(player, messages.get(0));
 			}
 		}
 	}

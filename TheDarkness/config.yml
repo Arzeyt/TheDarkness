@@ -1,0 +1,37 @@
+Beacon:
+  Cost: 100
+  ItemPointValues:
+  - 'BONE: 3'
+  - 'ROTTEN_FLESH: 1'
+  - 'SPIDER_EYE: 5'
+  - 'ENDER_PEARL: 25'
+Darkness:
+  PlayerCheckFrequency: 20
+  Levels:
+    '0':
+      DefaultEffectCheckFrequency: 20
+      Effects:
+      - 'Message: You feel the warmth of the light.'
+    '1':
+      DefaultEffectCheckFrequency: 20
+      Distance: 100
+      Effects:
+      - 'Message: You sense an evil presence: The evil presence weakens'
+      - 'TorchConsume: 200'
+      MobSpawns:
+      - 'Zombie: 1 25 7 1 200'
+      Mirages:
+    '2':
+      DefaultEffectCheckFrequency: 20
+      Distance: 150
+      Effects:
+      - 'Message: The Darkness grows stronger around you'
+      - 'TorchConsume: 100'
+      - 'Weakness: 25 10 1'
+      MobSpawns:
+      - 'Zombie: 1 50 7 1 200'
+      Mirages:
+  MirageAttributes:
+    House:
+      MobTypes:
+      - ''

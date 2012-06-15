@@ -15,9 +15,7 @@ import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.visualization.Smoke;
 
 /*
- * On monster target event, get target of monster. 
- * if target == player && monster.hasMetadata("Darkness") {despawn monster;}
- * else return
+ * 
  */
 public class MobTargetListener implements Listener{
 
@@ -43,7 +41,7 @@ public class MobTargetListener implements Listener{
 		mobLevel = plugin.config.getLevel(mobDistance);
 		mobs = plugin.config.getLevelMobTypes(mobLevel);
 		
-		if(mobs.contains("ALL")){
+		if((mobs.contains("ALL") || mobs.contains("All") || mobs.contains("all")) && !mobs.contains(mobName)){
 			mobSettings = plugin.config.getMobSettings("ALL", mobLevel);
 			chance = mobSettings.get(0);
 			if(passPercentChance(chance)){
@@ -62,32 +60,23 @@ public class MobTargetListener implements Listener{
 			mobLevel = plugin.config.getLevel(mobDistance);
 			mobs = plugin.config.getLevelMobTypes(mobLevel);
 			
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable(){
-
-				public void run() {
-					if(mobE.hasMetadata("Darkness")==false){
-						plugin.debug(mobName+" does not have metaData. Removing mob");
+			if(mobE.hasMetadata("Darkness")==true){
+				plugin.debug(mobName+" has metadata.");
+			}else{
+				plugin.debug(mobName+" does not have metadata!");
+				if(mobs.contains(mobName)){
+					if(passPercentChance(chance)){
+						plugin.debug(mobName+" did not pass percent chance - "+chance);
 						despawn(mobE);
 					}else{
-						plugin.debug(mobName+" has metadata!");
-						if(mobs.contains(mobName)){
-							if(passPercentChance(chance)){
-								plugin.debug(mobName+" did not pass percent chance - "+chance);
-								despawn(mobE);
-							}else{
-								plugin.debug(mobName+" was allowed to live! chance- "+ chance);
-								return;
-							}
-						}else{
-							plugin.debug(mobName+" is not in mobs list");
-						}
+						plugin.debug(mobName+" was allowed to live! chance- "+ chance);
+						return;
 					}
+				}else{
+					plugin.debug(mobName+" is not in mobs list");
 				}
-				
-				
-			}, 10);
+			}
 		}
-		
 	}
 	
 	public boolean passPercentChance(int i){

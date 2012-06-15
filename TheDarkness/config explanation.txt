@@ -1,0 +1,5 @@
+mobName: <chance to vanish on target> <chance to spawn> <max distance from player to spawn> <number of mobs to spawn> [frequency]
+Example
+	Spider: 10 50 7 1 200
+	In this example, anytime a spider targeted a player, it would have a 10% chance of vanishing when it targeted a player. Every 200 ticks (10 seconds)
+	there is a 50% chance that within 7 blocks of a player, 1 zombie would spawn.

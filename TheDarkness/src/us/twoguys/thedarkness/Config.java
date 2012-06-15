@@ -48,29 +48,29 @@ public class Config {
 		
 		//level1
 		String[] effects1 = {"Message: You sense an evil presence: The evil presence weakens", "TorchConsume: 200"};
-		String[] mobSpawns1 = {"ZOMBIE: 10"};
-		String[] mirages1 = {"House: 2", "Diamond: 20"};
+		String[] mobSpawns1 = {"Zombie: 1 25 7 1 200"};
+		String[] mirages1 = {""};
 		
 		plugin.getConfig().addDefault("Darkness.Levels.1.DefaultEffectCheckFrequency", 20);
-		plugin.getConfig().addDefault("Darkness.Levels.1.Distance", 25);
+		plugin.getConfig().addDefault("Darkness.Levels.1.Distance", 100);
 		plugin.getConfig().addDefault("Darkness.Levels.1.Effects", effects1);
 		plugin.getConfig().addDefault("Darkness.Levels.1.MobSpawns", mobSpawns1);
 		plugin.getConfig().addDefault("Darkness.Levels.1.Mirages", mirages1);
 		
 		//level2
-		String[] effects2 = {"Message: The Darkness grows stronger around you", "LifeDrain: 1 80", "TorchConsume: 100",
+		String[] effects2 = {"Message: The Darkness grows stronger around you", "TorchConsume: 100",
 				"Weakness: 25 10 1"};
-		String[] mobSpawns2 = {"ZOMBIE: 100", "SPIDER: 10"};
-		String[] mirages2 = {"House: 10", "Diamond: 50"};
+		String[] mobSpawns2 = {"Zombie: 1 50 7 1 200"};
+		String[] mirages2 = {""};
 		
 		plugin.getConfig().addDefault("Darkness.Levels.2.DefaultEffectCheckFrequency", 20);
-		plugin.getConfig().addDefault("Darkness.Levels.2.Distance", 50);
+		plugin.getConfig().addDefault("Darkness.Levels.2.Distance", 150);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Effects", effects2);
 		plugin.getConfig().addDefault("Darkness.Levels.2.MobSpawns", mobSpawns2);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Mirages", mirages2);
 		
 		//mirage attributes
-		String[] houseMobTypes = {"ZOMBIE: 3"};
+		String[] houseMobTypes = {""};
 		
 		plugin.getConfig().addDefault("Darkness.MirageAttributes.House.MobTypes", houseMobTypes);
 		
@@ -325,15 +325,6 @@ public class Config {
 				String mob = null;
 				
 				mob = plugin.mobMaster.getMobName(split[0]);
-				/*
-				try{
-					mob = EntityType.fromName(split[0]).name();
-					plugin.debug("Mob: " + mob);
-				}catch(Exception e){
-					configError("Darkness.Levels." + counter + ".MobSpawns." + split[0]);
-					continue;
-				}
-				*/
 				
 				int pCounter = 1;
 				
