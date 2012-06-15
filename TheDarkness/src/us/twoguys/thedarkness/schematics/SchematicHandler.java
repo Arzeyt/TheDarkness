@@ -36,6 +36,9 @@ public class SchematicHandler {
 	public void loadAllSchematics(){
 		try{
 			File f = new File("plugins"+File.separator+"TheDarkness"+File.separator+"Schematics");
+			if(f.exists()==false){
+				f.mkdir();
+			}
 			File[] schematics = f.listFiles();
 			for(File schematic : schematics){
 				loadSchematic(schematic.getName());
