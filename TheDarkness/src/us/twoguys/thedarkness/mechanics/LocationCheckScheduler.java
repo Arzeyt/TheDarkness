@@ -35,7 +35,7 @@ public class LocationCheckScheduler {
 					int level = plugin.beaconMaster.getDarknessLevel(player);
 
 					if(level==-1){
-						plugin.debug("There are no beacons");
+						//plugin.debug("There are no beacons");
 						break;
 					}
 					

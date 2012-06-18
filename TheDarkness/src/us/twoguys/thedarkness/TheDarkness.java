@@ -74,7 +74,7 @@ public class TheDarkness extends JavaPlugin{
 	}
 	
 	public void debug(String message){
-		logger.info("[TheDarkness DEBUG] " + message);
+		//logger.info("[TheDarkness DEBUG] " + message);
 	}
 	
 	public void logSevere(String message){

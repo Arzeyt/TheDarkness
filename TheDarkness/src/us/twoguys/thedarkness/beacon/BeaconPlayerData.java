@@ -18,8 +18,12 @@ public class BeaconPlayerData implements Serializable{
 		this.darkEssence = points;
 	}
 	
-	public void incrementPoints(int points){
+	public void incrementPoints(int points) throws InsufficientPointsException{
 		this.darkEssence = this.darkEssence + points;
+		if(darkEssence<0){
+			darkEssence=darkEssence+points;
+			throw new InsufficientPointsException(playerName+" does not have enough points");
+		}
 	}
 	
 	public String getPlayerName(){

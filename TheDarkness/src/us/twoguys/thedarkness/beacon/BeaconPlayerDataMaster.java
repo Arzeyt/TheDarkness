@@ -70,14 +70,22 @@ public class BeaconPlayerDataMaster {
 		if(bpd.getBeaconPoints() < plugin.config.getBeaconCost()){
 			return false;
 		}else{
-			bpd.incrementPoints(-1*amount);
+			try {
+				bpd.incrementPoints(-1*amount);
+			} catch (InsufficientPointsException e) {
+				e.printStackTrace();
+			}
 			return true;
 		}
 	}
 	
 	public void addPoints(Player player, int amount){
 		amount=Math.abs(amount);
-		getData(player).incrementPoints(amount);
+		try {
+			getData(player).incrementPoints(amount);
+		} catch (InsufficientPointsException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean canCreateBeacon(Player player, boolean sendErrorReason){

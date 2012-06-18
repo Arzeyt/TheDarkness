@@ -151,4 +151,9 @@ public class VisualizerCore {
 		}
 	}
 	
+	public void visualizeNearestBeacon(Player player){
+		BeaconVis bv = new BeaconVis(plugin, player, plugin.locTools.getNearestBeacon(player).getLocation());
+		bv.visualize();
+	}
+	
 }

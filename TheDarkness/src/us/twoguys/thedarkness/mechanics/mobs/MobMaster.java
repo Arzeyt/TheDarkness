@@ -32,15 +32,17 @@ public class MobMaster {
 	public String getMobName(String mobName){
 		if(mobName.equalsIgnoreCase("all")){
 			return new String("ALL");
-		}else if(mobName.equalsIgnoreCase("mooshroomcow") || mobName.equalsIgnoreCase("mooshroom")){
+		}else if(mobName.equalsIgnoreCase("mooshroomcow") || mobName.equalsIgnoreCase("mooshroom")
+				|| mobName.equalsIgnoreCase("mooshroom_cow")){
 			return new String("MooshroomCow");
 		}else if(mobName.equalsIgnoreCase("Chicken")){
 			return new String("Chicken");
-		}else if(mobName.equalsIgnoreCase("PigZombie") || mobName.equalsIgnoreCase("ZombiePigman")){
+		}else if(mobName.equalsIgnoreCase("PigZombie") || mobName.equalsIgnoreCase("ZombiePigman")
+				|| mobName.equalsIgnoreCase("Pig_Zombie") || mobName.equalsIgnoreCase("Zombie_Pigman")){
 			return new String("PigZombie");
-		}else if(mobName.equalsIgnoreCase("MagmaCube")){
+		}else if(mobName.equalsIgnoreCase("MagmaCube") || mobName.equalsIgnoreCase("Magma_Cube")){
 			return new String("MagmaCube");
-		}else if(mobName.equalsIgnoreCase("CaveSpider")){
+		}else if(mobName.equalsIgnoreCase("CaveSpider") || mobName.equalsIgnoreCase("Cave_Spider")){
 			return new String("CaveSpider");
 		}else if(mobName.equalsIgnoreCase("Creeper")){
 			return new String("Creeper");
@@ -56,7 +58,7 @@ public class MobMaster {
 			return new String("Ghast");
 		}else if(mobName.equalsIgnoreCase("Enderman")){
 			return new String("Enderman");
-		}else if(mobName.equalsIgnoreCase("Silverfish")){
+		}else if(mobName.equalsIgnoreCase("Silverfish") || mobName.equalsIgnoreCase("Silver_fish")){
 			return new String("Silverfish");
 		}else if(mobName.equalsIgnoreCase("Blaze")){
 			return new String("Blaze");
@@ -74,12 +76,14 @@ public class MobMaster {
 			return new String("Villager");
 		}else if(mobName.equalsIgnoreCase("Ocelot") || mobName.equalsIgnoreCase("Cat") || mobName.equalsIgnoreCase("Ozelot")){
 			return new String("Ocelot");
-		}else if(mobName.equalsIgnoreCase("IronGolem")){
+		}else if(mobName.equalsIgnoreCase("IronGolem") || mobName.equalsIgnoreCase("Iron_Golem")){
 			return new String("IronGolem");
-		}else if(mobName.equalsIgnoreCase("SnowGolem")){
+		}else if(mobName.equalsIgnoreCase("SnowGolem") || mobName.equalsIgnoreCase("Snow_Golem")){
 			return new String("SnowGolem");
-		}else if(mobName.equalsIgnoreCase("EnderDragon")){
+		}else if(mobName.equalsIgnoreCase("EnderDragon") || mobName.equalsIgnoreCase("Ender_Dragon")){
 			return new String("EnderDragon");
+		}else if(mobName.equalsIgnoreCase("Giant")){
+			return new String("Giant");
 		}else{
 			plugin.logSevere("Mob "+mobName+" does not exist. Defaulting to Chicken ");
 			return new String("Chicken");

@@ -6,8 +6,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
+import us.twoguys.thedarkness.beacon.BeaconData;
 
 public class LocTools {
 
@@ -96,5 +98,20 @@ public class LocTools {
 	
 		return distance;
 		
+	}
+	
+	public BeaconData getNearestBeacon(Player player){
+		BeaconData nearest=null;
+		for(BeaconData beacon : plugin.beaconMaster.getBeacons()){
+			if(beacon.getWorldName().equalsIgnoreCase(player.getWorld().getName())){
+				if(nearest == null){
+					nearest = beacon;
+				}else if(getDistance(player.getLocation(), beacon.getLocation()) 
+						< getDistance(player.getLocation(), nearest.getLocation())){
+					nearest=beacon;
+				}
+			}
+		}
+		return nearest;
 	}
 }
