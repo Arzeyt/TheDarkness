@@ -22,7 +22,7 @@ import us.twoguys.thedarkness.visualization.ChunkPlayer;
 public class VisualizerCore {
 
 	HashSet<ChunkPlayer> chunks = new HashSet<ChunkPlayer>();
-	
+
 	TheDarkness plugin;
 	
 	public VisualizerCore(TheDarkness instance){

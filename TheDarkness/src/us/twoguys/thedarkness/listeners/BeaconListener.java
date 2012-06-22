@@ -44,6 +44,7 @@ public class BeaconListener implements Listener{
 				plugin.sendMessage(player, "You have created a beacon");
 			}else{
 				plugin.sendMessage(player, "You dont have enough dark essence. You need at least "+plugin.config.getBeaconCost());
+				plugin.beaconListenerMaster.setString(player, "null");
 			}
 			
 		}else if(extraction(player, block)){

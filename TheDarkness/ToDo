@@ -3,4 +3,11 @@ ToDo:
 		lightning storms are still noticeable in Precipitation
 		flat terrain finder for placing mirages.
 		config options for server time set, and weather set. 
+		efficiency distance check
+		ghast spawn
+		delete beacons
+		td vision off
+		beacon creation distance limit
+		torches that change level
+		chunk player = null errors
 		

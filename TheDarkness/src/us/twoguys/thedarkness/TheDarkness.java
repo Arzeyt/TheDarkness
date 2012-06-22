@@ -41,6 +41,7 @@ public class TheDarkness extends JavaPlugin{
 	public LocTools locTools = new LocTools(this);
 	public TimeMaster timeMaster = new TimeMaster(this);
 	public MobMaster mobMaster = new MobMaster(this);
+	public CommandMaster comandMaster = new CommandMaster();
 	
 	//Listeners
 	
@@ -115,7 +116,7 @@ public class TheDarkness extends JavaPlugin{
 	
 	public void loadCommandExecutors(){
 		
-		CommandMaster commandMaster = new CommandMaster(this);
+		CommandHandler commandMaster = new CommandHandler(this);
 		this.getCommand("theDarkness").setExecutor(commandMaster);
 		
 	}
