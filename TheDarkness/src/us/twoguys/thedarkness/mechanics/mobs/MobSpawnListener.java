@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityCombustEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.metadata.MetadataValue;
 
 import us.twoguys.thedarkness.TheDarkness;
@@ -27,6 +31,7 @@ public class MobSpawnListener implements Listener{
 	
 	@EventHandler
 	public void onMonsterSpawn(CreatureSpawnEvent event){
+		if(event.isCancelled()==true){return;}
 		Entity mobE = event.getEntity();
 		String mobName = mobE.getType().getName();
 		mobName = plugin.mobMaster.getMobName(mobName);
@@ -77,6 +82,18 @@ public class MobSpawnListener implements Listener{
 			}
 		}else{
 			plugin.debug(mobName+" did not exist in mobs");
+		}
+	}
+	
+	@EventHandler
+	public void onMobFireTick(EntityDamageEvent event){
+		plugin.debug("entity damage event");
+		if(event.getCause()==DamageCause.FIRE_TICK){
+			plugin.debug("mob fire tick event");
+			if(event.getEntity().hasMetadata("Darkness")){
+				event.setCancelled(true);
+				plugin.debug("canceling fire event");
+			}
 		}
 	}
 	

@@ -18,14 +18,13 @@ public class Smoke {
 	}
 	
 	public void expandBasic(Location loc){
-		/*
+		
 	      loc.getWorld().playEffect(loc, Effect.SMOKE, 4);
 	      loc.getWorld().playEffect(loc, Effect.SMOKE, 1);
 	      loc.getWorld().playEffect(loc, Effect.SMOKE, 3);
 	      loc.getWorld().playEffect(loc, Effect.SMOKE, 5);
 	      loc.getWorld().playEffect(loc, Effect.SMOKE, 7);
-	      */
-	      loc.getWorld().playEffect(loc, Effect.STEP_SOUND, 1);
+
 	}
 	
 	public void expand(){

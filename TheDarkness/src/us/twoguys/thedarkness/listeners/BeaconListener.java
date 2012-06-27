@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -13,11 +12,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.beacon.BeaconData;
+import us.twoguys.thedarkness.mechanics.PlayerLevelChangeEvent;
 
 public class BeaconListener implements Listener{
 
@@ -90,6 +91,29 @@ public class BeaconListener implements Listener{
 	public void onSignChange(SignChangeEvent event){
 		if(event.getLine(0).equalsIgnoreCase("Nox Extractor")){
 			event.setLine(0, ChatColor.YELLOW+"Nox Extractor");
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent event){
+	
+		try{
+			levelChange(event.getPlayer());
+		}catch(Exception e){
+			levelChange(event.getPlayer());
+		}
+	}
+	
+	private void levelChange(Player player){
+		for(int i = 0; i <20 ; i++){
+			try{
+				int to = plugin.locCheck.getDarknessLevel(player);
+				int from = plugin.locCheck.getDarknessLevel(player)-1;
+				if(from < 0){return;}
+				plugin.debug("level changed from "+to+" to "+from);
+				PlayerLevelChangeEvent levelEvent = new PlayerLevelChangeEvent(player, to, from);
+				Bukkit.getServer().getPluginManager().callEvent(levelEvent);
+			}catch(Exception e){}
 		}
 	}
 	private boolean extraction(Player player, Block block){

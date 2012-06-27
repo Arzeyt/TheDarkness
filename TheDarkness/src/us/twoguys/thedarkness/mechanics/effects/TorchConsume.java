@@ -33,12 +33,11 @@ public class TorchConsume implements Listener{
 			
 			if (time != 123456789){
 				
-				plugin.debug("Torch will DIE in " + time + "seconds");
+				plugin.debug("Torch will be consumed in " + time + "seconds");
 				
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 					
 					public void run(){
-						plugin.debug("Delayed task begin");
 						if (loc.getBlock().getType().equals(Material.TORCH)){
 							loc.getBlock().setType(Material.AIR);
 							Smoke smoke = new Smoke(plugin, loc);

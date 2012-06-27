@@ -6,8 +6,8 @@ ToDo:
 		efficiency distance check
 		ghast spawn
 		delete beacons
-		td vision off
 		beacon creation distance limit
 		torches that change level
 		chunk player = null errors
-		
+		entity burning in light
+		potion effects negated on level change
