@@ -11,8 +11,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import us.twoguys.thedarkness.beacon.*;
+import us.twoguys.thedarkness.beacon.listeners.*;
 import us.twoguys.thedarkness.commands.*;
-import us.twoguys.thedarkness.listeners.*;
 import us.twoguys.thedarkness.schematics.*;
 import us.twoguys.thedarkness.visualization.*;
 import us.twoguys.thedarkness.mechanics.*;
@@ -32,8 +32,8 @@ public class TheDarkness extends JavaPlugin{
 	public Config config = new Config(this);
 	public BeaconMaster beaconMaster = new BeaconMaster(this);
 	private BeaconPersister beaconPersister = new BeaconPersister(this);
-	public BeaconPlayerDataMaster beaconPlayerDataMaster = new BeaconPlayerDataMaster(this);
-	private BeaconPlayerDataPersister beaconPlayerDataPersister = new BeaconPlayerDataPersister(this);
+	public PlayerDataMaster beaconPlayerDataMaster = new PlayerDataMaster(this);
+	private PlayerDataPersister beaconPlayerDataPersister = new PlayerDataPersister(this);
 	public VisualizerCore visualizerCore = new VisualizerCore(this);
 	public SchematicHandler schematicHandler = new SchematicHandler(this);
 	public LocationCheckScheduler locCheck = new LocationCheckScheduler(this);

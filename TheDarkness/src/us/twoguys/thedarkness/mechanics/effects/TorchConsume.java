@@ -36,18 +36,20 @@ public class TorchConsume implements Listener{
 				plugin.debug("Torch will be consumed in " + time + "seconds");
 				
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-					
 					public void run(){
-						if (loc.getBlock().getType().equals(Material.TORCH)){
-							loc.getBlock().setType(Material.AIR);
-							Smoke smoke = new Smoke(plugin, loc);
-							smoke.expand();
-							plugin.debug("Set torch to AIR");
-						}
+						consumeTorch(loc);
 					}
-					
 				}, time*20);
 			}
+		}
+	}
+	
+	public void consumeTorch(Location loc){
+		if (loc.getBlock().getType().equals(Material.TORCH)){
+			loc.getBlock().setType(Material.AIR);
+			Smoke smoke = new Smoke(plugin, loc);
+			smoke.expand();
+			plugin.debug("Set torch to AIR");
 		}
 	}
 }

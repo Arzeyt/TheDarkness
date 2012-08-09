@@ -86,14 +86,11 @@ public class MobSpawnListener implements Listener{
 	}
 	
 	@EventHandler
-	public void onMobFireTick(EntityDamageEvent event){
-		plugin.debug("entity damage event");
-		if(event.getCause()==DamageCause.FIRE_TICK){
-			plugin.debug("mob fire tick event");
-			if(event.getEntity().hasMetadata("Darkness")){
-				event.setCancelled(true);
-				plugin.debug("canceling fire event");
-			}
+	public void onMobFireTick(EntityCombustEvent event){
+		plugin.debug("entity combust event");
+		if(event.getEntity().hasMetadata("Darkness")){
+			event.setCancelled(true);
+			plugin.debug("canceling fire event");
 		}
 	}
 	
