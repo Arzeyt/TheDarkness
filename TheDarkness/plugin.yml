@@ -2,6 +2,7 @@ name: TheDarkness
 version: 0.1
 authors: [Arzeyt, Malikk]
 main: us.twoguys.thedarkness.TheDarkness
+softdepend: [Shield]
 commands:
     giveBeacon:
         description: Gives beacons to a player

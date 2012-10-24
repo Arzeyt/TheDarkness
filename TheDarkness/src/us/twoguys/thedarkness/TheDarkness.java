@@ -7,8 +7,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.malikk.shield.Shield;
+import com.malikk.shield.ShieldAPI;
 
 import us.twoguys.thedarkness.beacon.*;
 import us.twoguys.thedarkness.beacon.listeners.*;
@@ -43,8 +47,9 @@ public class TheDarkness extends JavaPlugin{
 	public MobMaster mobMaster = new MobMaster(this);
 	public CommandMaster comandMaster = new CommandMaster();
 	
-	//Listeners
-	
+	//Shield
+	public Shield shield = null;
+	public ShieldAPI shieldAPI = null;
 	
 	public void onEnable(){
 		
@@ -56,6 +61,7 @@ public class TheDarkness extends JavaPlugin{
 		
 		loadCommandExecutors();
 		loadListeners();
+		loadShield();
 
 		locCheck.checkPlayerLocations();
 		
@@ -119,6 +125,17 @@ public class TheDarkness extends JavaPlugin{
 		CommandHandler commandMaster = new CommandHandler(this);
 		this.getCommand("theDarkness").setExecutor(commandMaster);
 		
+	}
+	
+	public void loadShield(){
+		Plugin x = getServer().getPluginManager().getPlugin("Shield");
+		if (x != null && x instanceof Shield){
+			shield = (Shield) x;
+			shieldAPI = shield.getAPI();
+			log(String.format("Hooked Shield %s", shield.getDescription().getVersion()));
+		}else{
+			log("Shield was not found.");
+		}
 	}
 	
 }

@@ -109,6 +109,9 @@ public class BeaconMaster {
 	}
 	
 	public int getDarknessLevel(Player player){
+		if(plugin.shield!=null && plugin.shieldAPI.isInRegion(player)){
+			return 0;
+		}
 		return plugin.config.getLevel(distanceFromNearestBeacon(player.getLocation()));
 	}
 	
