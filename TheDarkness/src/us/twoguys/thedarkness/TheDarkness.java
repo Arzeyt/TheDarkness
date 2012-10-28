@@ -27,6 +27,7 @@ import us.twoguys.thedarkness.mechanics.mobs.MobSpawnListener;
 import us.twoguys.thedarkness.mechanics.mobs.MobMaster;
 import us.twoguys.thedarkness.mechanics.mobs.MobTargetListener;
 
+//lets see if this works : )
 public class TheDarkness extends JavaPlugin{
 
 	//logger
