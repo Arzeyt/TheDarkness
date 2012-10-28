@@ -1,12 +1,10 @@
 package us.twoguys.thedarkness;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,11 +23,9 @@ import us.twoguys.thedarkness.mechanics.*;
 import us.twoguys.thedarkness.mechanics.effects.Time;
 import us.twoguys.thedarkness.mechanics.effects.TimeMaster;
 import us.twoguys.thedarkness.mechanics.effects.TorchConsume;
-import us.twoguys.thedarkness.mechanics.mobs.MobSpawnListener;
 import us.twoguys.thedarkness.mechanics.mobs.MobMaster;
 import us.twoguys.thedarkness.mechanics.mobs.MobTargetListener;
 
-//lets see if this works : )
 public class TheDarkness extends JavaPlugin{
 
 	//logger
