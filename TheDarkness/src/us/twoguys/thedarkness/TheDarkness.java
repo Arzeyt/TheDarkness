@@ -17,6 +17,8 @@ import com.malikk.shield.ShieldAPI;
 import us.twoguys.thedarkness.beacon.*;
 import us.twoguys.thedarkness.beacon.listeners.*;
 import us.twoguys.thedarkness.commands.*;
+import us.twoguys.thedarkness.player.PlayerDataMaster;
+import us.twoguys.thedarkness.player.PlayerDataPersister;
 import us.twoguys.thedarkness.schematics.*;
 import us.twoguys.thedarkness.visualization.*;
 import us.twoguys.thedarkness.mechanics.*;
