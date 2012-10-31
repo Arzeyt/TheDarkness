@@ -4,7 +4,7 @@ import java.util.HashMap;
 /**
  * 
  * @author Nick
- * Holds strings and string arrays of a general effect line in the config file. 
+ * Holds strings and string arrays of a settings line in the config file.
  */
 public class ConfigSetting {
 
@@ -21,7 +21,7 @@ public class ConfigSetting {
 		
 	}
 	
-	public void splitRawString(){
+	public void splitRawString(){ //I'll list some examples to help 
 		String[] split1 = rawString.split(": "); //tochconsume: blah:2 poop:20
 		this.settingName = split1[0]; //torchconsume
 		this.settingsStringRaw = split1[1]; //blah:2 poop:20

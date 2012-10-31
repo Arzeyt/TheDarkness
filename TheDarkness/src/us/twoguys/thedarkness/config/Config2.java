@@ -439,14 +439,20 @@ public class Config2 {
 		
 		
 	}
-	
-	private HashMap<String, String> constructEffects(int level, String currentPath){
+	/**
+	 * 
+	 * @param level
+	 * @param currentPath
+	 * @return a HashMap with the name of each string associated with its config settings
+	 */
+	private HashMap<String, ConfigSetting> constructEffects(int level, String currentPath){
 		
-		HashMap<String, String> effects = new HashMap<String, String>();
+		HashMap<String, ConfigSetting> effects = new HashMap<String, ConfigSetting>();
 		List<String> effectList = plugin.getConfig().getStringList(currentPath+"Effects");
+		
 		for(String effect : effectList){
 			ConfigSetting setting = new ConfigSetting(currentPath);
-			
+			effects.put(setting.settingName, setting);
 		}
 	}
 	public void setItemPointValues(){
