@@ -11,3 +11,7 @@ ToDo:
 		chunk player = null errors
 		entity burning in light
 		potion effects negated on level change
+		
+		2.0
+		playerData is probably still used for beacon point stuff in various places (modifying a player's points)
+		

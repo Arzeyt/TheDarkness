@@ -11,14 +11,14 @@ Darkness:
     '0':
       DefaultEffectCheckFrequency: 20
       Effects:
-      - 'Message: You feel the warmth of the light.'
+      - 'Message: Entry:You feel the warmth of the light.'
     '1':
       DefaultEffectCheckFrequency: 20
       Distance: 100
       Effects:
       - 'Message: You sense an evil presence: The evil presence weakens'
       - 'TorchConsume: 200'
-      MobSpawns:
+      Mobs:
       - 'Zombie: 1 25 7 1 200'
       Mirages:
     '2':
@@ -28,7 +28,7 @@ Darkness:
       - 'Message: The Darkness grows stronger around you'
       - 'TorchConsume: 100'
       - 'Weakness: 25 10 1'
-      MobSpawns:
+      Mobs:
       - 'Zombie: 1 50 7 1 200'
       Mirages:
   MirageAttributes:

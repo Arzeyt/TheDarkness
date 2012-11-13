@@ -11,11 +11,11 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.visualization.Smoke;
 
-public class TorchConsume implements Listener{
+public class TorchConsume2 implements Listener{
 	
 	TheDarkness plugin;
 	
-	public TorchConsume(TheDarkness instance){
+	public TorchConsume2(TheDarkness instance){
 		plugin = instance;
 	}
 

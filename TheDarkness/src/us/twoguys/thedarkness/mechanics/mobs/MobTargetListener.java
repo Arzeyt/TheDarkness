@@ -37,7 +37,7 @@ public class MobTargetListener implements Listener{
 		this.mobName = plugin.mobMaster.getMobName(mobE.getType().getName());
 		mobMD = mobE.getMetadata("Darkness");
 		
-		mobDistance = plugin.beaconMaster.distanceFromNearestBeacon(mobE.getLocation());
+		mobDistance = plugin.beaconMaster.getDistanceFromNearestBeacon(mobE.getLocation());
 		mobLevel = plugin.config.getLevel(mobDistance);
 		mobs = plugin.config.getLevelMobTypes(mobLevel);
 		
@@ -56,7 +56,7 @@ public class MobTargetListener implements Listener{
 				chance = 100;
 			}
 			
-			mobDistance = plugin.beaconMaster.distanceFromNearestBeacon(mobE.getLocation());
+			mobDistance = plugin.beaconMaster.getDistanceFromNearestBeacon(mobE.getLocation());
 			mobLevel = plugin.config.getLevel(mobDistance);
 			mobs = plugin.config.getLevelMobTypes(mobLevel);
 			

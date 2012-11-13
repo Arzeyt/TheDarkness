@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
@@ -45,22 +46,25 @@ public class Config2 {
 		plugin.getConfig().addDefault("Darkness.PlayerCheckFrequency", 20);
 		
 		//level0
-		String[] effects0 = {"Message: You feel the warmth of the light."};
+		String[] message0 = {"Enter:You feel the warmth of the light."};
+		String[] effects0 = {};
 		String[] mobSpawns0 = {};
 		String[] mirages0 = {};
 		
+		plugin.getConfig().addDefault("Darkness.Levels.0.Message", message0);
 		plugin.getConfig().addDefault("Darkness.Levels.0.DefaultEffectCheckFrequency", 20);
-		plugin.getConfig().addDefault("Darkness.Levels.0.Effects", effects0);
 		
 		//level1
-		String[] effects1 = {"Message: You sense an evil presence: The evil presence weakens", "TorchConsume: 200"};
+		String[] message1 = {"Enter:You sense an evil presence", "Exit:The evil presence weakens"};
+		String[] effects1 = {"TorchConsume: duration:200"};
 		String[] mobSpawns1 = {"Zombie: 1 25 7 1 200"};
 		String[] mirages1 = {""};
 		
+		plugin.getConfig().addDefault("Darkness.Levels.1.Message", message1);
 		plugin.getConfig().addDefault("Darkness.Levels.1.DefaultEffectCheckFrequency", 20);
 		plugin.getConfig().addDefault("Darkness.Levels.1.Distance", 100);
 		plugin.getConfig().addDefault("Darkness.Levels.1.Effects", effects1);
-		plugin.getConfig().addDefault("Darkness.Levels.1.MobSpawns", mobSpawns1);
+		plugin.getConfig().addDefault("Darkness.Levels.1.Mobs", mobSpawns1);
 		plugin.getConfig().addDefault("Darkness.Levels.1.Mirages", mirages1);
 		
 		//level2
@@ -72,7 +76,7 @@ public class Config2 {
 		plugin.getConfig().addDefault("Darkness.Levels.2.DefaultEffectCheckFrequency", 20);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Distance", 150);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Effects", effects2);
-		plugin.getConfig().addDefault("Darkness.Levels.2.MobSpawns", mobSpawns2);
+		plugin.getConfig().addDefault("Darkness.Levels.2.Mobs", mobSpawns2);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Mirages", mirages2);
 		
 		//mirage attributes
@@ -325,7 +329,7 @@ public class Config2 {
 			
 			plugin.debug("Checking Mob Spawns");
 			
-			for (String s: plugin.getConfig().getStringList("Darkness.Levels." + counter + ".MobSpawns")){
+			for (String s: plugin.getConfig().getStringList("Darkness.Levels." + counter + ".Mobs")){
 				ArrayList<Integer> ints = new ArrayList<Integer>();
 				String[] split = s.split(":");
 				String[] splitAll = s.split(" ");
@@ -423,18 +427,33 @@ public class Config2 {
 		
 		plugin.reloadConfig();
 		
+		plugin.debug("-----------------------------------NEW----------------------------------");
 		plugin.debug("Setting DarkLevels Map");
 		
 		int counter = 0;
 		
-		while(plugin.getConfig().contains("Darkness.Levels."+counter)){
+		while(plugin.getConfig().contains("Darkness.Levels."+counter)){	
 			String currentPath = new String("Darkness.Levels."+counter+".");
+
 			int level = counter;
-			int defaultCheckFrequency = 0;
+			int defaultCheckFrequency = plugin.getConfig().getInt(currentPath+"DefaultEffectCheckFrequency");
 			int distance = plugin.getConfig().getInt(currentPath+"Distance");
 				if(counter==0)distance=0;
-			HashMap<String, String> effects = constructEffects(level, currentPath);
-			DarkLevel dl = new DarkLevel(level, defaultCheckFrequency, distance, effects, mobSpawns, mirages);
+				
+				plugin.debug("setDarkLevels on "+currentPath+" level="+level+" defaultCheckFrequency="+defaultCheckFrequency
+						+" distance="+distance);
+				plugin.debug("constructEffects...");
+			HashMap<String, ConfigSetting> effects = constructEffects(level, currentPath);
+				plugin.debug("effects contains vaules for "+effects.keySet());
+			HashMap<String, ConfigSetting> mobs = constructMobs(level, currentPath);
+				plugin.debug("mobs contains values for "+mobs.keySet());
+			HashMap<String, ConfigSetting> mirages = constructMirages(level, currentPath);
+				plugin.debug("mirages contains values for "+mirages);
+			
+			DarkLevel dl = new DarkLevel(level, defaultCheckFrequency, distance, effects, mobs, mirages);
+			darkLevels.put(level, dl);
+			
+			counter++;
 		}
 		
 		
@@ -451,10 +470,39 @@ public class Config2 {
 		List<String> effectList = plugin.getConfig().getStringList(currentPath+"Effects");
 		
 		for(String effect : effectList){
-			ConfigSetting setting = new ConfigSetting(currentPath);
+			ConfigSetting setting = new ConfigSetting(effect);
 			effects.put(setting.settingName, setting);
 		}
+		
+		return effects;
 	}
+	
+	private HashMap<String, ConfigSetting> constructMobs(int level, String currentPath){
+		
+		HashMap<String, ConfigSetting> mobs = new HashMap<String, ConfigSetting>();
+		List<String> mobList = plugin.getConfig().getStringList(currentPath+"Mobs");
+		
+		for(String mob : mobList){
+			ConfigSetting setting = new ConfigSetting(mob);
+			mobs.put(setting.settingName, setting);
+		}
+		
+		return mobs;
+	}
+
+	private HashMap<String, ConfigSetting> constructMirages(int level, String currentPath){
+	
+		HashMap<String, ConfigSetting> mirages = new HashMap<String, ConfigSetting>();
+		List<String> mirageList = plugin.getConfig().getStringList(currentPath+"Mirages");
+		
+		for(String mirage : mirageList){
+			ConfigSetting setting = new ConfigSetting(mirage);
+			mirages.put(setting.settingName, setting);
+		}
+		
+		return mirages;
+	}
+	
 	public void setItemPointValues(){
 		
 		plugin.reloadConfig();

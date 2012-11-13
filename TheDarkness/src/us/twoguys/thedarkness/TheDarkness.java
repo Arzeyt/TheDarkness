@@ -15,8 +15,10 @@ import com.malikk.shield.ShieldAPI;
 import us.twoguys.thedarkness.beacon.*;
 import us.twoguys.thedarkness.beacon.listeners.*;
 import us.twoguys.thedarkness.commands.*;
+import us.twoguys.thedarkness.config.Config2;
 import us.twoguys.thedarkness.player.PlayerDataMaster;
 import us.twoguys.thedarkness.player.PlayerDataPersister;
+import us.twoguys.thedarkness.player.PlayerMaster;
 import us.twoguys.thedarkness.schematics.*;
 import us.twoguys.thedarkness.visualization.*;
 import us.twoguys.thedarkness.mechanics.*;
@@ -32,7 +34,7 @@ public class TheDarkness extends JavaPlugin{
 	private Logger logger = Logger.getLogger("Minecraft");
 	
 	//Classes
-	public Config config = new Config(this);
+	public Config2 config = new Config2(this);
 	public BeaconMaster beaconMaster = new BeaconMaster(this);
 	private BeaconPersister beaconPersister = new BeaconPersister(this);
 	public PlayerDataMaster beaconPlayerDataMaster = new PlayerDataMaster(this);
@@ -45,6 +47,7 @@ public class TheDarkness extends JavaPlugin{
 	public TimeMaster timeMaster = new TimeMaster(this);
 	public MobMaster mobMaster = new MobMaster(this);
 	public CommandMaster comandMaster = new CommandMaster();
+	public PlayerMaster playerMaster = new PlayerMaster(this);
 	
 	//Shield
 	public Shield shield = null;
@@ -54,6 +57,7 @@ public class TheDarkness extends JavaPlugin{
 		
 		schematicHandler.loadAllSchematics();
 		config.loadConfiguration();
+		config.setDarkLevels();
 		
 		beaconPersister.load();
 		beaconPlayerDataPersister.load();

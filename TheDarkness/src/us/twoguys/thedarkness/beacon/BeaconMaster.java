@@ -91,7 +91,7 @@ public class BeaconMaster {
 		return beacons;
 	}
 	
-	public int distanceFromNearestBeacon(Location loc){
+	public int getDistanceFromNearestBeacon(Location loc){
 		int distance = 123456789;
 		
 		for(BeaconData beacon : plugin.beaconMaster.getBeacons()){
@@ -112,7 +112,7 @@ public class BeaconMaster {
 		if(plugin.shield!=null && plugin.shieldAPI.isInRegion(player)){
 			return 0;
 		}
-		return plugin.config.getLevel(distanceFromNearestBeacon(player.getLocation()));
+		return plugin.config.getLevel(getDistanceFromNearestBeacon(player.getLocation()));
 	}
 	
 	public boolean worldHasBeacon(World world){

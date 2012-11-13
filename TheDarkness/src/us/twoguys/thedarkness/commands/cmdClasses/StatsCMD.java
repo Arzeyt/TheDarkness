@@ -14,7 +14,7 @@ public class StatsCMD {
 	}
 	public boolean stats(Player player){
 		int level = p.locCheck.getDarknessLevel(player);
-		int distance = p.beaconMaster.distanceFromNearestBeacon(player.getLocation());
+		int distance = p.beaconMaster.getDistanceFromNearestBeacon(player.getLocation());
 		try{
 			int points = p.beaconPlayerDataMaster.getData((Player)player).getBeaconPoints();
 			player.sendMessage("Dark Essence: "+ChatColor.GREEN+points+ChatColor.WHITE+
