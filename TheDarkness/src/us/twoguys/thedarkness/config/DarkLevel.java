@@ -10,20 +10,24 @@ public class DarkLevel {
 	/**
 	 * Contains the Name of the effect, and the settings of the effect
 	 */
+	private HashMap<String, String> messages = new HashMap<String, String>();
 	private HashMap<String, ConfigSetting> effects = new HashMap<String, ConfigSetting>();
 	private HashMap<String, ConfigSetting> mobs = new HashMap<String, ConfigSetting>();
 	private HashMap<String, ConfigSetting> mirages = new HashMap<String, ConfigSetting>();
 	
-	public DarkLevel(int level, int defaultCheckFrequency, int distance, HashMap<String, ConfigSetting> effects, 
-			HashMap<String, ConfigSetting> mobSpawns, HashMap<String, ConfigSetting> mirages){
+	public DarkLevel(int level, int defaultCheckFrequency, int distance, HashMap<String, String> messages, 
+			HashMap<String, ConfigSetting> effects, HashMap<String, ConfigSetting> mobSpawns, 
+			HashMap<String, ConfigSetting> mirages){
 		this.level = level;
 		this.defaultCheckFrequency = defaultCheckFrequency;
 		this.distance = distance;
+		this.messages = messages;
 		this.effects = effects;
 		this.mobs = mobSpawns;
 		this.mirages = mirages;
+		
 	}
-	
+
 	public int getDefaultCheckFrequency(){
 		return defaultCheckFrequency;
 	}

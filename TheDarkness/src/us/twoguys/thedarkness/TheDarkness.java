@@ -57,7 +57,6 @@ public class TheDarkness extends JavaPlugin{
 		
 		schematicHandler.loadAllSchematics();
 		config.loadConfiguration();
-		config.setDarkLevels();
 		
 		beaconPersister.load();
 		beaconPlayerDataPersister.load();

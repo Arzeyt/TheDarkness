@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
 
+import com.mysql.jdbc.Messages;
+
 import us.twoguys.thedarkness.TheDarkness;
 import us.twoguys.thedarkness.player.DarkPlayer;
 
@@ -46,21 +48,21 @@ public class Config2 {
 		plugin.getConfig().addDefault("Darkness.PlayerCheckFrequency", 20);
 		
 		//level0
-		String[] message0 = {"Enter:You feel the warmth of the light."};
+		String[] messages0 = {"Entering:You feel the warmth of the light."};
 		String[] effects0 = {};
 		String[] mobSpawns0 = {};
 		String[] mirages0 = {};
 		
-		plugin.getConfig().addDefault("Darkness.Levels.0.Message", message0);
+		plugin.getConfig().addDefault("Darkness.Levels.0.Messages", messages0);
 		plugin.getConfig().addDefault("Darkness.Levels.0.DefaultEffectCheckFrequency", 20);
 		
 		//level1
-		String[] message1 = {"Enter:You sense an evil presence", "Exit:The evil presence weakens"};
+		String[] messages1 = {"Entering:You sense an evil presence", "Exiting:The evil presence weakens"};
 		String[] effects1 = {"TorchConsume: duration:200"};
 		String[] mobSpawns1 = {"Zombie: 1 25 7 1 200"};
 		String[] mirages1 = {""};
 		
-		plugin.getConfig().addDefault("Darkness.Levels.1.Message", message1);
+		plugin.getConfig().addDefault("Darkness.Levels.1.Messages", messages1);
 		plugin.getConfig().addDefault("Darkness.Levels.1.DefaultEffectCheckFrequency", 20);
 		plugin.getConfig().addDefault("Darkness.Levels.1.Distance", 100);
 		plugin.getConfig().addDefault("Darkness.Levels.1.Effects", effects1);
@@ -68,13 +70,15 @@ public class Config2 {
 		plugin.getConfig().addDefault("Darkness.Levels.1.Mirages", mirages1);
 		
 		//level2
-		String[] effects2 = {"Message: The Darkness grows stronger around you", "TorchConsume: 100",
+		String[] messages2 = {"Entry:The Darkness grows stronger around you"};
+		String[] effects2 = {"TorchConsume: 100",
 				"Weakness: 25 10 1"};
 		String[] mobSpawns2 = {"Zombie: 1 50 7 1 200"};
 		String[] mirages2 = {""};
 		
 		plugin.getConfig().addDefault("Darkness.Levels.2.DefaultEffectCheckFrequency", 20);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Distance", 150);
+		plugin.getConfig().addDefault("Darkness.Levels.2.Messages", messages2);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Effects", effects2);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Mobs", mobSpawns2);
 		plugin.getConfig().addDefault("Darkness.Levels.2.Mirages", mirages2);
@@ -89,7 +93,8 @@ public class Config2 {
 		
 		//Set Config Resources
 		setItemPointValues();
-		setLevels();
+		//setLevels();
+		setDarkLevels();
 		
 	}
 	
@@ -423,6 +428,7 @@ public class Config2 {
 	}
 	
 	public void setDarkLevels(){
+		plugin.reloadConfig();
 		HashMap<Integer, DarkLevel> darkLevels = new HashMap<Integer, DarkLevel>();
 		
 		plugin.reloadConfig();
@@ -442,15 +448,22 @@ public class Config2 {
 				
 				plugin.debug("setDarkLevels on "+currentPath+" level="+level+" defaultCheckFrequency="+defaultCheckFrequency
 						+" distance="+distance);
+				
+				plugin.debug("constructMessages...");
+			HashMap<String, String> message = constructMessages(plugin.getConfig().getStringList(currentPath+"Messages"));
+				plugin.debug("Entering message= "+message.get("Entering")+" Exiting message= "+ message.get("Exiting"));
+				
 				plugin.debug("constructEffects...");
 			HashMap<String, ConfigSetting> effects = constructEffects(level, currentPath);
 				plugin.debug("effects contains vaules for "+effects.keySet());
+				
 			HashMap<String, ConfigSetting> mobs = constructMobs(level, currentPath);
 				plugin.debug("mobs contains values for "+mobs.keySet());
+				
 			HashMap<String, ConfigSetting> mirages = constructMirages(level, currentPath);
 				plugin.debug("mirages contains values for "+mirages);
 			
-			DarkLevel dl = new DarkLevel(level, defaultCheckFrequency, distance, effects, mobs, mirages);
+			DarkLevel dl = new DarkLevel(level, defaultCheckFrequency, distance, message, effects, mobs, mirages);
 			darkLevels.put(level, dl);
 			
 			counter++;
@@ -458,6 +471,7 @@ public class Config2 {
 		
 		
 	}
+
 	/**
 	 * 
 	 * @param level
@@ -501,6 +515,59 @@ public class Config2 {
 		}
 		
 		return mirages;
+	}
+	/**
+	 * 
+	 * @param rawMessage
+	 * @return HashMap where key is either "Entering" or "Exiting" and object is the respective message string
+	 */
+	private HashMap<String, String> constructMessages(List<String> rawMessage){
+		plugin.debug("rawMessage is "+rawMessage);
+		if(rawMessage.isEmpty()){
+			plugin.debug("message for this level is empty!");
+		}
+		HashMap<String, String> messages = new HashMap<String, String>();
+		String temp1;
+		String temp2 = null;
+		String entering;
+		String exiting;
+		
+		if(rawMessage.isEmpty()){
+			messages.put("null:null", "null:null");
+			messages.put("null1:null", "null1:null");
+		}else if(rawMessage.size()==1){
+			temp2 = "null:null";
+		}else if(rawMessage.size()>2){
+			plugin.logSevere("Too many messages! Check your config to make sure there is only two messages per level");
+		}
+		
+		temp1 = rawMessage.get(0);
+		try{
+			temp2 = rawMessage.get(1);
+		}catch(Exception e){
+			plugin.debug("Messages has only one message");
+			if(temp1.split(":")[0].contains("Entering")){
+				entering = temp1.split(":")[1];
+				exiting = "null:null";
+				messages.put("Entering", entering);
+			}else{
+				exiting = temp1.split(":")[1];
+				entering = "null:null";
+				messages.put("Exiting", exiting);
+			}
+		}
+		if(temp1.split(":")[0].contains("Entering")){
+			entering = temp1.split(":")[1];
+			exiting = temp2.split(":")[1];			
+			
+		}else{
+			entering = temp2.split(":")[1];
+			exiting = temp1.split(":")[1];
+		}
+		messages.put("Entering", entering);
+		messages.put("Exiting", exiting);
+		
+		return messages;
 	}
 	
 	public void setItemPointValues(){

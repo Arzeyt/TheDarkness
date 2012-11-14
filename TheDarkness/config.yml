@@ -11,7 +11,6 @@ Darkness:
     '0':
       DefaultEffectCheckFrequency: 20
       Effects:
-      - 'Message: Entry:You feel the warmth of the light.'
     '1':
       DefaultEffectCheckFrequency: 20
       Distance: 100
