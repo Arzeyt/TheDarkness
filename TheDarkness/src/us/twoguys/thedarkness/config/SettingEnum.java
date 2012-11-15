@@ -5,7 +5,15 @@ import java.util.List;
 
 public enum SettingEnum {
  
-DURATION("duration","d");
+DURATION("duration","d"),
+CHANCE("chance","c"),
+MOBSPAWNCHANCE("mobspawnchance","msc"),
+MOBDESPAWNONTARGETCHANCE("mobdespawnontargetchance","despawnontarget","mobdespawn","mobdespawnchace"),
+DISTANCE("range","distance","rng","r","dist"),
+FREQUENCY("frequency","freq","f"),
+AMOUNT("amount","amnt","amt","a"),
+
+;
 
  
  private List<String> aliases;
@@ -23,9 +31,9 @@ DURATION("duration","d");
  }
  
  public static SettingEnum find(String input){
-  for (SettingEnum mob : SettingEnum.values()) {
-         if (mob.getAliases().contains(input.toLowerCase())) {
-             return mob;
+  for (SettingEnum setting : SettingEnum.values()) {
+         if (setting.getAliases().contains(input.toLowerCase())) {
+             return setting;
          }
      }
      return null;

@@ -52,7 +52,6 @@ public class LocationCheckScheduler {
 								Constructor<?> cons = null;
 								
 								if(c.getSimpleName().equalsIgnoreCase("Time")){
-									plugin.debug("Passed Time");
 								}else{
 									try{
 										cons = c.getConstructor(TheDarkness.class, Player.class, int.class);

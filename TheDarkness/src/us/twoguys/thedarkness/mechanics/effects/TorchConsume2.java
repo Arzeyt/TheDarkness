@@ -17,6 +17,7 @@ public class TorchConsume2 implements Listener{
 	
 	public TorchConsume2(TheDarkness instance){
 		plugin = instance;
+
 	}
 
 	@EventHandler

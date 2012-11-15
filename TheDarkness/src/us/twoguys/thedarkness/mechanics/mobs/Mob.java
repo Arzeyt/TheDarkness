@@ -13,6 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import us.twoguys.thedarkness.TheDarkness;
+import us.twoguys.thedarkness.config.ConfigSetting;
+import us.twoguys.thedarkness.config.SettingEnum;
 
 /**
  * 
@@ -35,12 +37,14 @@ public class Mob implements Listener{
 	int taskID;
 	Player player;
 	Random random = new Random();
-	private ArrayList<Integer> setting;
+	//private ArrayList<Integer> setting;
+	private ConfigSetting setting;
 	int frequency;
 	int chance;
 	int distance;
 	int amount;
 	
+	/*
 	public Mob(TheDarkness instance, Player player, int level, String mob){
 		this.plugin = instance;
 		this.mobName = plugin.mobMaster.getMobName(mob);
@@ -57,7 +61,20 @@ public class Mob implements Listener{
 			applyMob();
 		}
 	}
+	*/
 	
+	public Mob(TheDarkness instance, Player player, int level, String mob){
+		this.plugin= instance;
+		this.mobName = mob;
+		this.player = player;
+		this.level = level;
+		setting = plugin.config.getDarkLevel(level).getMobs().get(mob);
+		int frequency = setting.getIntSetting(SettingEnum.FREQUENCY.getPreferredName());
+		int chance = setting.getIntSetting(SettingEnum.MOBSPAWNCHANCE.getPreferredName());
+		int distance = setting.getIntSetting(SettingEnum.DISTANCE.getPreferredName());
+		int amount = setting.getIntSetting(SettingEnum.AMOUNT.getPreferredName());
+		
+	}
 	public void applyMob(){
 		taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 

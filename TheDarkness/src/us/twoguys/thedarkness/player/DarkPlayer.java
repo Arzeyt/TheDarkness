@@ -1,5 +1,7 @@
 package us.twoguys.thedarkness.player;
 
+import java.util.HashSet;
+
 import us.twoguys.thedarkness.beacon.InsufficientPointsException;
 
 public class DarkPlayer {
@@ -9,6 +11,10 @@ public class DarkPlayer {
 	int level;
 	int levelOverride=-1;
 	
+	HashSet<Class<?>> effects = new HashSet<Class<?>>();
+	HashSet<Class<?>> mobs = new HashSet<Class<?>>();
+	HashSet<Class<?>> mirages = new HashSet<Class<?>>();
+
 	
 	public String getName(){
 		return name;

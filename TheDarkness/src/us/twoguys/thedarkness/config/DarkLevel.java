@@ -28,6 +28,9 @@ public class DarkLevel {
 		
 	}
 
+	public int getLevel(){
+		return level;
+	}
 	public int getDefaultCheckFrequency(){
 		return defaultCheckFrequency;
 	}

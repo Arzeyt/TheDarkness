@@ -2,6 +2,7 @@ package us.twoguys.thedarkness.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -31,7 +32,7 @@ public class Config2 {
 	ArrayList<HashMap<Class<?>, ArrayList<Integer>>> levelMirages = new ArrayList<HashMap<Class<?>, ArrayList<Integer>>>();
 	ArrayList<HashMap<String, ArrayList<Integer>>> levelCustomMirages = new ArrayList<HashMap<String, ArrayList<Integer>>>();
 	
-	ArrayList<DarkLevel> darkLevels = new ArrayList<DarkLevel>();
+	HashMap<Integer, DarkLevel> darkLevels = new HashMap<Integer, DarkLevel>();
 	
 	public Config2(TheDarkness instance){
 		plugin = instance;
@@ -199,6 +200,14 @@ public class Config2 {
 		return new ArrayList<Integer>(levelCustomMirages.get(level).get(mirage));
 	}
 	
+	public HashMap<Integer, DarkLevel> getDarkLevels(){
+		return darkLevels;
+	}
+	
+	public DarkLevel getDarkLevel(int level){
+		return getDarkLevels().get(level);
+	}
+
 	public void setLevels(){
 		
 		plugin.reloadConfig();
@@ -433,7 +442,7 @@ public class Config2 {
 		
 		plugin.reloadConfig();
 		
-		plugin.debug("-----------------------------------NEW----------------------------------");
+		plugin.debug("------------------------NEW---------------------------");
 		plugin.debug("Setting DarkLevels Map");
 		
 		int counter = 0;
@@ -466,12 +475,12 @@ public class Config2 {
 			DarkLevel dl = new DarkLevel(level, defaultCheckFrequency, distance, message, effects, mobs, mirages);
 			darkLevels.put(level, dl);
 			
+				plugin.debug("---------------------SET LEVEL "+level+"  ---------------------");
 			counter++;
 		}
-		
-		
+	
 	}
-
+	
 	/**
 	 * 
 	 * @param level
