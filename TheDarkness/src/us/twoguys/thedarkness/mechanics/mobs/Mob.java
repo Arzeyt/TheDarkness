@@ -75,6 +75,7 @@ public class Mob implements Listener{
 		int amount = setting.getIntSetting(SettingEnum.AMOUNT.getPreferredName());
 		
 	}
+	
 	public void applyMob(){
 		taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 
@@ -91,7 +92,7 @@ public class Mob implements Listener{
 						
 						plugin.debug("attempting to spawn mob");
 						
-						Location loc = plugin.locTools.getRandomGround(player.getLocation(), setting.get(2));
+						Location loc = plugin.locTools.getRandomGround(player.getLocation(), distance);
 						loc = loc.getBlock().getRelative(0, 1, 0).getLocation();
 						
 						Entity entity = player.getWorld().spawnCreature(loc, EntityType.fromName(mobName));
@@ -111,11 +112,12 @@ public class Mob implements Listener{
 	}
 	
 	public int getFrequency(int i){
-		return (setting.size() >= i + 1 ? setting.get(i) : plugin.config.getDefaultEffectCheckFreq(level));
+		return (setting.size() >= i + 1 ? frequency : plugin.config.getDefaultEffectCheckFreq(level));
 	}
+	
 	public boolean continueCheck(Player player){
 		
-		if(player.isOnline()==false){
+		if(player.isOnline()== false){
 			return false;
 		}
 		int currentLevel = plugin.locCheck.getDarknessLevel(player);

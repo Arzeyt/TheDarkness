@@ -2,9 +2,9 @@ package us.twoguys.thedarkness.mechanics.effects;
 
 import java.util.ArrayList;
 
-import net.minecraft.server.Packet4UpdateTime;
+import net.minecraft.server.v1_4_6.Packet4UpdateTime;
 
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -97,8 +97,8 @@ public class Time implements Listener{
 				if(moveForward){
 					if(time1 < time2){
 						player.setPlayerTime(time1, false);
-						Packet4UpdateTime packet = new Packet4UpdateTime(time1);
-						((CraftPlayer)player).getHandle().netServerHandler.sendPacket(packet);
+						Packet4UpdateTime packet = new Packet4UpdateTime(time1, 0);
+						((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
 						time1 = time1+transition;
 						
 					}else if(time1 >= time2){
@@ -116,8 +116,8 @@ public class Time implements Listener{
 				}else{
 					if(time1 > time2){
 						player.setPlayerTime(time1, false);
-						Packet4UpdateTime packet = new Packet4UpdateTime(time1);
-						((CraftPlayer)player).getHandle().netServerHandler.sendPacket(packet);
+						Packet4UpdateTime packet = new Packet4UpdateTime(time1,0);
+						((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
 						time1 = time1 - transition;
 						//plugin.debug("Trans time is "+time1);
 						

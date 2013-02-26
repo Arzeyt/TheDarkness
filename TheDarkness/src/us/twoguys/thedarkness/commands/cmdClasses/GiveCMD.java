@@ -5,8 +5,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
-import us.twoguys.thedarkness.beacon.PlayerData;
 import us.twoguys.thedarkness.beacon.InsufficientPointsException;
+import us.twoguys.thedarkness.player.DarkPlayer;
 
 public class GiveCMD {
 
@@ -19,8 +19,8 @@ public class GiveCMD {
 		Player reciever = Bukkit.getPlayer(target);
 		int amount = Integer.parseInt(quantity);
 		
-		PlayerData giverData = plugin.beaconPlayerDataMaster.getData(giver);
-		PlayerData recieverData = plugin.beaconPlayerDataMaster.getData(reciever);
+		DarkPlayer giverData = plugin.playerMaster.getDarkPlayer(giver.getName());
+		DarkPlayer recieverData = plugin.playerMaster.getDarkPlayer(reciever.getName());
 		
 		try{
 			giverData.incrementPoints(-amount);

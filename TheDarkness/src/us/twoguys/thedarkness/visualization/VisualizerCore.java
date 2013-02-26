@@ -3,8 +3,8 @@ package us.twoguys.thedarkness.visualization;
 import java.util.HashSet;
 import java.util.List;
 
-import net.minecraft.server.ChunkCoordIntPair;
-import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.v1_4_6.ChunkCoordIntPair;
+import net.minecraft.server.v1_4_6.EntityPlayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;

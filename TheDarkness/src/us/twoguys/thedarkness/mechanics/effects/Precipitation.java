@@ -1,15 +1,14 @@
 package us.twoguys.thedarkness.mechanics.effects;
 
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.Packet70Bed;
+import net.minecraft.server.v1_4_6.Packet70Bed;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import us.twoguys.thedarkness.TheDarkness;
 
 /*
- * Madatory:
+ * Mandatory:
  * 		setting[0] = weather true / false (1/2)
  * 		setting[1] = rate
  * Optional:
@@ -29,28 +28,25 @@ public class Precipitation extends Effect{
 	}
 
 	public void applyPercipitation(){
-	    final Packet70Bed weatherPacket = new Packet70Bed();
-	    weatherPacket.b = (setting.get(0));
-	    
-	    final Packet70Bed clearWeatherPacket = new Packet70Bed();
-	    clearWeatherPacket.b = (2);
 	
-	    final EntityPlayer p = ((CraftPlayer)player).getHandle();
-	    
+	    final CraftPlayer p = ((CraftPlayer)player);
+	   
 		taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
-
+		
+			
 			@Override
 			public void run() {
 				if(continueCheck(player)){
 					if(i%rate == 0){
-						plugin.debug("sent weather packet");
-						p.netServerHandler.sendPacket(weatherPacket);
+						plugin.debug("sending rainy weather packet");
+						p.getHandle().playerConnection.sendPacket(new Packet70Bed(1, 0));
 					}
 					i++;
 				}else{
-					plugin.debug("Sent clear weather packet");
-					p.netServerHandler.sendPacket(clearWeatherPacket);
+					plugin.debug("Sending clear weather packet");
+					p.getHandle().playerConnection.sendPacket(new Packet70Bed(2, 0));
 					cancelTask();
+					
 				}
 				
 			}

@@ -1,29 +1,33 @@
 package us.twoguys.thedarkness.mechanics.mobs;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Fireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityCombustEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.metadata.MetadataValue;
 
 import us.twoguys.thedarkness.TheDarkness;
+import us.twoguys.thedarkness.config.ConfigSetting;
+import us.twoguys.thedarkness.config.DarkLevel;
+import us.twoguys.thedarkness.config.SettingEnum;
 
 public class MobSpawnListener implements Listener{
 
 	TheDarkness plugin;
-	ArrayList<String> mobs;
-	ArrayList<Integer> mobSettings;
-	int mobDistance, mobLevel, chance;
+	int mobLevel, 
+	chance;
+	HashSet<String> mobs;
 	Random random = new Random();
 	List<MetadataValue> mobMD;
+	DarkLevel darkLevel;
+	
+	ConfigSetting mobSettings; 
+	
 	
 	public MobSpawnListener(TheDarkness instance){
 		plugin = instance;
@@ -32,18 +36,26 @@ public class MobSpawnListener implements Listener{
 	@EventHandler
 	public void onMonsterSpawn(CreatureSpawnEvent event){
 		if(event.isCancelled()==true){return;}
+		
 		Entity mobE = event.getEntity();
 		String mobName = mobE.getType().getName();
 		mobName = plugin.mobMaster.getMobName(mobName);
 		mobMD = mobE.getMetadata("Darkness");
+		mobLevel = plugin.beaconMaster.getLevel(mobE.getLocation());
+		darkLevel = plugin.config.getDarkLevel(mobLevel);
+		mobs = (HashSet<String>) darkLevel.getMobs().keySet();
 		
-		mobDistance = plugin.beaconMaster.getDistanceFromNearestBeacon(mobE.getLocation());
-		mobLevel = plugin.config.getLevel(mobDistance);
-		mobs = plugin.config.getLevelMobTypes(mobLevel);
+		if(darkLevel.getMobs().containsKey(mobName)){
+			mobSettings = darkLevel.getMobs().get(mobName);
+		}else{
+			plugin.logSevere("no mob settings for "+mobName+" on level "+mobLevel+" can be found.");
+			return;
+		}
 		
 		if(mobs.contains("ALL")){
-			mobSettings = plugin.config.getMobSettings("ALL", mobLevel);
-			chance = mobSettings.get(0);
+			mobSettings = darkLevel.getMobs().get("ALL");
+			chance = mobSettings.getIntSetting(SettingEnum.MOBSPAWNCHANCE);
+			
 			if(passPercentChance(chance)){
 				return;
 			}else{
@@ -51,15 +63,16 @@ public class MobSpawnListener implements Listener{
 				return;
 			}
 		}
-		try{
-			chance = mobSettings.get(0);
-		}catch(NullPointerException e){
+		
+		//if mobs does not contain "ALL"
+		if(mobSettings.containsSetting(SettingEnum.MOBSPAWNCHANCE)){
+			chance = mobSettings.getIntSetting(SettingEnum.MOBSPAWNCHANCE);
+		}
+		else{
 			chance = 100;
 		}
 		
-		mobDistance = plugin.beaconMaster.getDistanceFromNearestBeacon(mobE.getLocation());
-		mobLevel = plugin.config.getLevel(mobDistance);
-		mobs = plugin.config.getLevelMobTypes(mobLevel);
+
 		
 		//debug
 		plugin.debug("mob: "+mobName+"   mob level: "+mobLevel);
@@ -73,7 +86,7 @@ public class MobSpawnListener implements Listener{
 			return;
 		}
 		if(mobs.contains(mobName)){
-			mobSettings = plugin.config.getMobSettings(mobName, mobLevel);
+			mobSettings = plugin.config.getDarkLevel(mobLevel).getMobs().get(mobName);
 			if(passPercentChance(chance)){
 				plugin.debug(mobName+" was allowed to spawn");
 			}else{

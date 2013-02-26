@@ -18,7 +18,12 @@ public class LocTools {
 	public LocTools(TheDarkness instance){
 		this.plugin = instance;
 	}
-	
+	/**
+	 * 
+	 * @param loc starting point
+	 * @param distance block radius
+	 * @return
+	 */
 	public Location getRandomGround(Location loc, int distance){
 		//plugin.debug("ground loc check*********************");
 		Random rand = new Random();

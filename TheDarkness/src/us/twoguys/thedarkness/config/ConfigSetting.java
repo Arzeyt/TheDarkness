@@ -62,6 +62,7 @@ public class ConfigSetting {
 				
 				return;
 			}
+			
 			settings.put(parts[0], parts[1]);
 			
 		}
@@ -78,7 +79,12 @@ public class ConfigSetting {
 	}
 	
 	public String getSetting(String setting){
-		String correctedSetting = SettingEnum.find(setting).getPreferredName();
+		String correctedSetting;
+		try{
+			correctedSetting = SettingEnum.find(setting).getPreferredName();
+		}catch(Exception e){
+			correctedSetting = null;
+		}
 		return settings.get(correctedSetting);
 		
 	}
@@ -89,10 +95,20 @@ public class ConfigSetting {
 	
 	public int getIntSetting(String setting){
 		return Integer.parseInt(getSetting(setting));
+		
 	}
 	
 	public int getIntSetting(SettingEnum setting){
 		return Integer.parseInt(settings.get(setting.getPreferredName()));
+	}
+	
+	public boolean containsSetting(SettingEnum setting){
+		for(String stringSetting: settings.keySet()){
+			if(getSetting(setting).equalsIgnoreCase(getSetting(stringSetting))){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private void debug(String msg){

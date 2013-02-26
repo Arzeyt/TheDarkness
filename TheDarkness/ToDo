@@ -14,4 +14,8 @@ ToDo:
 		
 		2.0
 		playerData is probably still used for beacon point stuff in various places (modifying a player's points)
+			sync playerData and DarkPlayer, specifically points
+		find out how to send the weather packet
+		correct config values onEnable.
+		
 		

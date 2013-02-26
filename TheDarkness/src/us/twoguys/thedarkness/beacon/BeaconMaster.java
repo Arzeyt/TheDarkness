@@ -115,6 +115,10 @@ public class BeaconMaster {
 		return plugin.config.getLevel(getDistanceFromNearestBeacon(player.getLocation()));
 	}
 	
+	public int getLevel(Location loc){
+		return plugin.config.getLevel(getDistanceFromNearestBeacon(loc));
+	}
+	
 	public boolean worldHasBeacon(World world){
 		for(BeaconData beacon: beacons){
 			if(beacon.getWorldName().equalsIgnoreCase(world.getName())){
